@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3jl2cm236pj4"]
+[gd_scene load_steps=7 format=3 uid="uid://d3jl2cm236pj4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ylgb0"]
+[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_light.tres" id="2_s5l6v"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8iuk3"]
+material = ExtResource("2_s5l6v")
 radius = 0.4
 height = 1.8
 
@@ -21,7 +23,6 @@ height = 1.0
 radius = 0.4
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 0
 collision_mask = 3
 platform_floor_layers = 4294967041
 platform_wall_layers = 2

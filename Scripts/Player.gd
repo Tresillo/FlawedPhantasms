@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 @export_category("Movement Properties")
 @export var _speed: float = 6.0
@@ -6,6 +7,7 @@ extends CharacterBody3D
 @export var _aerial_influence: float = 10.0
 @export var _grounded_acceleration: float = 0.21
 @export var _max_speed: float = 15
+@export var _disabled: bool
 
 @export_category("Crouching Properties")
 @export var _crouch_dist: float = 0.8
@@ -16,7 +18,7 @@ extends CharacterBody3D
 
 @export_category("Interacting Properties")
 @export var _mouse_sensitivity: float = 3
-@export var _interact_dist: float = 5
+@export var _interact_dist: float = 30
 
 var player_cam: Camera3D
 @onready var gravity: float = -ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -24,19 +26,17 @@ var player_cam: Camera3D
 var _crouching: bool = false
 var _crouch_tween: Tween
 
-var _disable_move: bool
-
 
 func _ready():
+	print(_disabled)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching = false
-	_disable_move = false
 	player_cam = null
 
 
 func _process(delta):
 	
-	if player_cam == null and get_node("MainCam"):
+	if player_cam == null and find_child("MainCam")!= null:
 		player_cam = get_node("MainCam")
 		var temp_cam_mark = $CameraMarker
 		player_cam.global_position = temp_cam_mark.global_position
@@ -49,16 +49,16 @@ func _process(delta):
 	
 	#get each input relative to mouse
 	var dir = Vector3()
-	if Input.is_action_pressed("move_right") and not _disable_move:
+	if Input.is_action_pressed("move_right") and not _disabled:
 		#Adds relative vector of the global normalized grid
 		dir += global_basis.x
-	if Input.is_action_pressed("move_left") and not _disable_move:
+	if Input.is_action_pressed("move_left") and not _disabled:
 		#Adds relative vector of the global normalized grid
 		dir += -global_basis.x
-	if Input.is_action_pressed("move_backward") and not _disable_move:
+	if Input.is_action_pressed("move_backward") and not _disabled:
 		#Adds relative vector of the global normalized grid
 		dir += global_basis.z
-	if Input.is_action_pressed("move_forward") and not _disable_move:
+	if Input.is_action_pressed("move_forward") and not _disabled:
 		#Adds relative vector of the global normalized grid
 		dir += -global_basis.z
 	
@@ -67,10 +67,10 @@ func _process(delta):
 	var hvel = dir * _speed
 	
 	#requirements to crouch
-	if Input.is_action_pressed("crouch") and is_on_floor() and not _crouching and not _disable_move:
+	if Input.is_action_pressed("crouch") and is_on_floor() and not _crouching and not _disabled:
 		_crouching = true
 		
-		var crouch_target = player_cam.position
+		var crouch_target = $CameraMarker.position
 		crouch_target.y = _crouch_dist - 1
 		_setup_crouch_tween(crouch_target)
 	
@@ -79,7 +79,7 @@ func _process(delta):
 			and is_on_floor() and not $UncrouchShapecast.is_colliding():
 		_crouching = false
 		
-		var stand_target = player_cam.position
+		var stand_target = $CameraMarker.position
 		stand_target.y = _stand_dist - 1
 		_setup_crouch_tween(stand_target)
 	
@@ -113,13 +113,13 @@ func _process(delta):
 	move_and_slide()
 	
 	#jumping
-	if is_on_floor() and Input.is_action_just_pressed("jump") and not _disable_move:
+	if is_on_floor() and Input.is_action_just_pressed("jump") and not _disabled:
 		velocity.y = _jump_height
 
 
 func _physics_process(delta):
 	var space_state = get_world_3d().direct_space_state
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact") and not _disabled:
 		#cast a ray from camera to find a burnable object
 		var screen_center = get_viewport().size * 0.5
 		var from = player_cam.project_ray_origin(screen_center)
@@ -127,11 +127,13 @@ func _physics_process(delta):
 		
 		#cast ray
 		var ray_query = PhysicsRayQueryParameters3D.create(to,from)
+		ray_query.exclude = [self]
 		var ray_result = space_state.intersect_ray(ray_query)
 		
 		if ray_result:
 			print("Hit " + str(ray_result.collider) + " at position " + str(ray_result.position))
-			#DO INTERACTION THINGS HERE
+			if ray_result.collider is Player:
+				_transfer_main_cam(ray_result.collider as Player)
 		else:
 			print("No object hit")
 
@@ -148,7 +150,6 @@ func _unhandled_input(event):
 		#Stop euler angles enabling player cam movement
 		$CameraMarker.rotation.y = 0
 		$CameraMarker.rotation.z = 0
-		#print(player_cam.rotation)
 
 
 func _setup_crouch_tween(target):
@@ -165,7 +166,7 @@ func _setup_crouch_tween(target):
 			$StandingCollider.disabled = _crouching
 	)
 	#Interpolate camera height
-	_crouch_tween.chain().tween_property(player_cam, "position", target, _crouch_speed)
+	_crouch_tween.chain().tween_property($CameraMarker, "position", target, _crouch_speed)
 	#When crouch is done, enable / disable raycasts and colliders
 	_crouch_tween.chain().tween_callback(func():
 		if _crouching:
@@ -174,3 +175,12 @@ func _setup_crouch_tween(target):
 		$UncrouchShapecast.enabled = _crouching
 	)
 
+
+func _transfer_main_cam(target:Player):
+	_disabled = true
+	if _crouch_tween is Tween:
+		if _crouch_tween.is_running():
+			await _crouch_tween.finished
+	
+	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
+	#transfer_tween.tween_callback(func():)
