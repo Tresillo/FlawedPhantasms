@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3jl2cm236pj4"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ylgb0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8iuk3"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_266ql"]
+margin = 0.0
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hox7t"]
+margin = 0.0
+radius = 0.4
+height = 0.8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sum3p"]
+height = 1.0
+radius = 0.4
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 3
+platform_floor_layers = 4294967041
+platform_wall_layers = 2
+script = ExtResource("1_ylgb0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_8iuk3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0.000184416, -5.2461e-05, -0.000184408, 1, 0.000151471, 5.24889e-05, -0.000151462, 1, 0, 0.6, 0)
+current = true
+
+[node name="StandingCollider" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_266ql")
+
+[node name="CrouchingCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000205398, -0.5, -0.00286388)
+shape = SubResource("CapsuleShape3D_hox7t")
+
+[node name="UncrouchShapecast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("CylinderShape3D_sum3p")
+target_position = Vector3(0, 0.5, 0)
+collision_mask = 3
