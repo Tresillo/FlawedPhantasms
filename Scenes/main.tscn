@@ -27,3 +27,5 @@ mesh = SubResource("QuadMesh_h6nuq")
 
 [node name="Player" parent="." instance=ExtResource("2_r76vy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02808, 0)
+
+[node name="MainCam" type="Camera3D" parent="Player"]

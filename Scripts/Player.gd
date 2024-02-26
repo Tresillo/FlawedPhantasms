@@ -18,7 +18,7 @@ extends CharacterBody3D
 @export var _mouse_sensitivity: float = 3
 @export var _interact_dist: float = 5
 
-@onready var player_cam = $Camera3D
+var player_cam: Camera3D
 @onready var gravity: float = -ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var _crouching: bool = false
@@ -31,9 +31,18 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching = false
 	_disable_move = false
+	player_cam = null
 
 
 func _process(delta):
+	
+	if player_cam == null and get_node("MainCam"):
+		player_cam = get_node("MainCam")
+		var temp_cam_mark = $CameraMarker
+		player_cam.global_position = temp_cam_mark.global_position
+		player_cam.global_rotation = temp_cam_mark.global_rotation
+		player_cam.reparent(temp_cam_mark, true);
+	
 	#Quit button NEEDS MOVING
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
@@ -134,11 +143,11 @@ func _unhandled_input(event):
 		#rotate whole player horizontally
 		rotate_y(-event.relative.x * _mouse_sensitivity * 0.001)
 		#rotate camera node vertically
-		player_cam.rotate_x(-event.relative.y * _mouse_sensitivity * 0.001)
-		player_cam.rotation.x = clamp(player_cam.rotation.x, -1.4, 1.4)
+		$CameraMarker.rotate_x(-event.relative.y * _mouse_sensitivity * 0.001)
+		$CameraMarker.rotation.x = clamp($CameraMarker.rotation.x, -1.4, 1.4)
 		#Stop euler angles enabling player cam movement
-		player_cam.rotation.y = 0
-		player_cam.rotation.z = 0
+		$CameraMarker.rotation.y = 0
+		$CameraMarker.rotation.z = 0
 		#print(player_cam.rotation)
 
 
