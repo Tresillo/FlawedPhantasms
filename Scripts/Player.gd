@@ -179,9 +179,9 @@ func _setup_crouch_tween(target):
 
 func _transfer_main_cam(target:Player):
 	_disabled = true
-	if _crouch_tween is Tween:
-		if _crouch_tween.is_running():
-			await _crouch_tween.finished
+	#if _crouch_tween is Tween:
+		#if _crouch_tween.is_running():
+			#await _crouch_tween.finished
 	var target_cam_marker:Marker3D = target.get_node("CameraMarker")
 	var target_pos = target_cam_marker.global_position
 	var target_rot = target_cam_marker.global_rotation
