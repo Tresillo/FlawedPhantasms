@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3jl2cm236pj4"]
+[gd_scene load_steps=8 format=3 uid="uid://d3jl2cm236pj4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ylgb0"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_light.tres" id="2_s5l6v"]
@@ -7,6 +7,11 @@
 material = ExtResource("2_s5l6v")
 radius = 0.4
 height = 1.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_birik"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_266ql"]
 margin = 0.0
@@ -33,6 +38,11 @@ mesh = SubResource("CapsuleMesh_8iuk3")
 
 [node name="CameraMarker" type="Marker3D" parent="."]
 transform = Transform3D(1, 0.000184416, -5.2461e-05, -0.000184408, 1, 0.000151471, 5.24889e-05, -0.000151462, 1, 0, 0.6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraMarker"]
+transform = Transform3D(1, 0, 2.43805e-12, -4.69225e-12, -4.3714e-08, -1, 0, 1, -4.3714e-08, 4.27922e-06, -1.23382e-05, -0.398475)
+mesh = SubResource("CylinderMesh_birik")
+skeleton = NodePath("../../MeshInstance3D")
 
 [node name="StandingCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_266ql")

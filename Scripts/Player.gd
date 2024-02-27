@@ -8,6 +8,7 @@ class_name Player
 @export var _grounded_acceleration: float = 0.21
 @export var _max_speed: float = 15
 @export var _disabled: bool
+@export var _staring_player: bool
 
 @export_category("Crouching Properties")
 @export var _crouch_dist: float = 0.8
@@ -32,16 +33,12 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching = false
 	player_cam = null
+	
+	if _staring_player:
+		adopt_main_cam(%MainCam)
 
 
 func _process(delta):
-	
-	if player_cam == null and find_child("MainCam")!= null:
-		player_cam = get_node("MainCam")
-		var temp_cam_mark = $CameraMarker
-		player_cam.global_position = temp_cam_mark.global_position
-		player_cam.global_rotation = temp_cam_mark.global_rotation
-		player_cam.reparent(temp_cam_mark, true);
 	
 	#Quit button NEEDS MOVING
 	if Input.is_action_just_pressed("quit"):
@@ -141,7 +138,7 @@ func _physics_process(delta):
 
 func _unhandled_input(event):
 	#Input for mouse
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and not _disabled:
 		#rotate whole player horizontally
 		rotate_y(-event.relative.x * _mouse_sensitivity * 0.001)
 		#rotate camera node vertically
@@ -181,6 +178,39 @@ func _transfer_main_cam(target:Player):
 	if _crouch_tween is Tween:
 		if _crouch_tween.is_running():
 			await _crouch_tween.finished
+	var target_cam_marker:Marker3D = target.get_node("CameraMarker")
+	var target_pos = target_cam_marker.global_position
+	var target_rot = target_cam_marker.global_rotation
 	
 	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
-	#transfer_tween.tween_callback(func():)
+	transfer_tween.tween_callback(func():
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			player_cam.reparent(get_parent(),true)
+			_disabled = true
+	)
+	transfer_tween.tween_property(player_cam,"global_position",target_pos,2.0)
+	transfer_tween.parallel().tween_property(player_cam,"global_rotation",target_rot,2.0)
+	transfer_tween.parallel().tween_callback(func():
+			$CameraMarker/MeshInstance3D.set_layer_mask_value(2,false)
+			$CameraMarker/MeshInstance3D.set_layer_mask_value(1,true)
+			target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
+			target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(2,true)
+	).set_delay(1.0)
+	transfer_tween.tween_callback(func():
+			target.adopt_main_cam(player_cam)
+			target._disabled = false
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			#target.player_cam = player_cam
+			player_cam = null
+	)
+
+
+func adopt_main_cam(main_cam):
+	player_cam = main_cam
+	print("Found new cam")
+	var temp_cam_mark = $CameraMarker
+	player_cam.global_position = temp_cam_mark.global_position
+	player_cam.global_rotation = temp_cam_mark.global_rotation
+	player_cam.reparent(temp_cam_mark, true);
+	$CameraMarker/MeshInstance3D.set_layer_mask_value(2,true)
+	$CameraMarker/MeshInstance3D.set_layer_mask_value(1,false)
