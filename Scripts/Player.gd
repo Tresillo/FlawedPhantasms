@@ -211,7 +211,6 @@ func _transfer_main_cam(target:Player):
 
 func adopt_main_cam(main_cam):
 	player_cam = main_cam
-	print("Found new cam")
 	var temp_cam_mark = $CameraMarker
 	player_cam.global_position = temp_cam_mark.global_position
 	player_cam.global_rotation = temp_cam_mark.global_rotation

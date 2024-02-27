@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4fldk18r2dqt"]
+
+[ext_resource type="Script" path="res://Scripts/Button.gd" id="1_12ake"]
+[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_green.tres" id="1_rqcjs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wqx1j"]
+material = ExtResource("1_rqcjs")
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n02dy"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_48uvy"]
+size = Vector3(0.9, 0.3, 0.9)
+
+[node name="Button" type="StaticBody3D"]
+script = ExtResource("1_12ake")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("BoxMesh_wqx1j")
+
+[node name="ButtonCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_n02dy")
+
+[node name="Activation" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Activation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011, 0.15, 0)
+shape = SubResource("BoxShape3D_48uvy")
