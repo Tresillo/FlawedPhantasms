@@ -7,8 +7,6 @@ class_name Player
 @export var _aerial_influence: float = 10.0
 @export var _grounded_acceleration: float = 0.21
 @export var _max_speed: float = 15
-@export var _disabled: bool
-@export var _staring_player: bool
 
 @export_category("Crouching Properties")
 @export var _crouch_dist: float = 0.8
@@ -21,6 +19,11 @@ class_name Player
 @export var _mouse_sensitivity: float = 3
 @export var _interact_dist: float = 30
 
+@export_category("Brain Change Properties")
+@export var _disabled: bool = true
+@export var _staring_player: bool
+@export var cam_material: Material
+
 var player_cam: Camera3D
 @onready var gravity: float = -ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -29,6 +32,7 @@ var _crouch_tween: Tween
 
 
 func _ready():
+	_disabled = not _staring_player
 	print(_disabled)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching = false

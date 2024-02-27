@@ -48,7 +48,6 @@ cull_mask = 1047553
 
 [node name="Player2" parent="." instance=ExtResource("2_r76vy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.930163, 6.05695)
-_disabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
