@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4nwd8easbfil"]
+[gd_scene load_steps=9 format=3 uid="uid://c4nwd8easbfil"]
 
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_dark.tres" id="1_fgs6r"]
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="2_r76vy"]
@@ -11,20 +11,32 @@ material = ExtResource("1_fgs6r")
 size = Vector2(20, 20)
 orientation = 1
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cqyl5"]
+
+[sub_resource type="Sky" id="Sky_qtouo"]
+sky_material = SubResource("ProceduralSkyMaterial_cqyl5")
+
+[sub_resource type="Environment" id="Environment_ikmig"]
+background_mode = 2
+sky = SubResource("Sky_qtouo")
+
 [node name="Main" type="Node3D"]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="World" type="Node3D" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.66377, -0.508227, 0.548739, 0, 0.733671, 0.679505, -0.747937, -0.451035, 0.486988, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_pa44s")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
 mesh = SubResource("QuadMesh_h6nuq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_ikmig")
 
 [node name="Player" parent="." instance=ExtResource("2_r76vy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02808, 0)
