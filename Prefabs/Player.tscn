@@ -40,7 +40,7 @@ mesh = SubResource("CapsuleMesh_8iuk3")
 transform = Transform3D(1, 0.000184416, -5.2461e-05, -0.000184408, 1, 0.000151471, 5.24889e-05, -0.000151462, 1, 0, 0.6, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraMarker"]
-transform = Transform3D(1, 0, 2.43805e-12, -4.69225e-12, -4.3714e-08, -1, 0, 1, -4.3714e-08, 4.27922e-06, -1.23382e-05, -0.398475)
+transform = Transform3D(1, 0, 2.43805e-12, -4.69225e-12, -4.3714e-08, -1, 0, 1, -4.3714e-08, 4.27923e-06, -1.23382e-05, -0.398475)
 mesh = SubResource("CylinderMesh_birik")
 skeleton = NodePath("../../MeshInstance3D")
 

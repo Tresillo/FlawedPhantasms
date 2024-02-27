@@ -21,7 +21,7 @@ func _ready():
 		if obj.has_method("close"):
 			button_activated.connect(obj.close)
 		else:
-			push_warning(str(obj) + " is connected to a button without an close() function")
+			push_warning(str(obj) + " is connected to a button without a close() function")
 
 
 func manage_button(activate:bool, body: Node3D):

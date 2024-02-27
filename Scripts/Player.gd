@@ -195,10 +195,8 @@ func _transfer_main_cam(target:Player):
 	transfer_tween.tween_property(player_cam,"global_position",target_pos,2.0)
 	transfer_tween.parallel().tween_property(player_cam,"global_rotation",target_rot,2.0)
 	transfer_tween.parallel().tween_callback(func():
-			$CameraMarker/MeshInstance3D.set_layer_mask_value(2,false)
 			$CameraMarker/MeshInstance3D.set_layer_mask_value(1,true)
 			target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
-			target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(2,true)
 	).set_delay(1.0)
 	transfer_tween.tween_callback(func():
 			target.adopt_main_cam(player_cam)
@@ -215,5 +213,4 @@ func adopt_main_cam(main_cam):
 	player_cam.global_position = temp_cam_mark.global_position
 	player_cam.global_rotation = temp_cam_mark.global_rotation
 	player_cam.reparent(temp_cam_mark, true);
-	$CameraMarker/MeshInstance3D.set_layer_mask_value(2,true)
 	$CameraMarker/MeshInstance3D.set_layer_mask_value(1,false)
