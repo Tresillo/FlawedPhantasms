@@ -1,6 +1,7 @@
 extends StaticBody3D
 
 @export var connected_objects: Array[Door]
+@export_flags_3d_render var visibility_flags
 
 var _pressed: bool
 
@@ -10,6 +11,8 @@ signal button_deactivated()
 
 func _ready():
 	_pressed = false
+	($MeshInstance3D as MeshInstance3D).layers = visibility_flags
+	
 	($Activation as Area3D).body_entered.connect(func(body): manage_button(true, body))
 	($Activation as Area3D).body_exited.connect(func(body): manage_button(false, body))
 	

@@ -15,7 +15,7 @@ class_name Door
 		display_material = val
 		if find_child("MeshInstance3D") != null:
 			$MeshInstance3D.mesh.material = val
-@export var visibility_layers: Array = [1]
+@export_flags_3d_render var visibility_flags
 
 @export_category("Movement Properties")
 @export var final_offset: Vector3 = Vector3(0,0,0):
@@ -45,6 +45,7 @@ func _ready():
 		$EditorVisualisation.visible = false
 		check_movement_by_lerp(0.0)
 		_init_pos = global_position
+		($MeshInstance3D as MeshInstance3D).layers = visibility_flags
 
 
 func _process(delta):

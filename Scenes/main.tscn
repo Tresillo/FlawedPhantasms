@@ -1,11 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4nwd8easbfil"]
+[gd_scene load_steps=21 format=3 uid="uid://c4nwd8easbfil"]
 
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_dark.tres" id="1_fgs6r"]
 [ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="1_sq1d0"]
+[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_green.tres" id="2_f3bkt"]
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="2_r76vy"]
-[ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/crosshair.png" id="3_g6ekm"]
+[ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="3_g6ekm"]
 [ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/Button.tscn" id="3_m1reu"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_red.tres" id="3_qn8pd"]
+[ext_resource type="Script" path="res://Scripts/MainCam.gd" id="6_4c7c8"]
+[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_purple.tres" id="6_bwavv"]
 [ext_resource type="Shader" path="res://Assets/Shaders/CameraLens.gdshader" id="6_sfcsg"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_pa44s"]
@@ -23,6 +26,14 @@ sky_material = SubResource("ProceduralSkyMaterial_cqyl5")
 [sub_resource type="Environment" id="Environment_ikmig"]
 background_mode = 2
 sky = SubResource("Sky_qtouo")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_amfmh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hgnt1"]
+material = ExtResource("2_f3bkt")
+
+[sub_resource type="BoxMesh" id="BoxMesh_l3ffo"]
+material = ExtResource("3_qn8pd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
 render_priority = 0
@@ -47,27 +58,49 @@ transform = Transform3D(0.66377, -0.508227, 0.548739, 0, 0.733671, 0.679505, -0.
 shape = SubResource("WorldBoundaryShape3D_pa44s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
+layers = 3
 mesh = SubResource("QuadMesh_h6nuq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_ikmig")
+
+[node name="VisibilityTest1" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.03424, 0.541813, -1.20058)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/VisibilityTest1"]
+shape = SubResource("BoxShape3D_amfmh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/VisibilityTest1"]
+mesh = SubResource("BoxMesh_hgnt1")
+
+[node name="VisibilityTest2" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.03424, 0.541813, -1.20058)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/VisibilityTest2"]
+shape = SubResource("BoxShape3D_amfmh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/VisibilityTest2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.71919)
+layers = 2
+mesh = SubResource("BoxMesh_l3ffo")
 
 [node name="Interactables" type="Node3D" parent="."]
 
 [node name="Button" parent="Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("3_m1reu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0515308, -3.71683)
 connected_objects = [NodePath("../Door"), NodePath("../Door2")]
+visibility_flags = 3
 
 [node name="Door" parent="Interactables" instance=ExtResource("1_sq1d0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82393, 1.35163, -6.63135)
 size = Vector3(1, 2, 1)
+visibility_flags = 3
 final_offset = Vector3(3, 0, 0)
-speed = 1.0
 
 [node name="Door2" parent="Interactables" instance=ExtResource("1_sq1d0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.88235, 0.151161, -4.16717)
 size = Vector3(3, 0.2, 3)
-display_material = ExtResource("3_qn8pd")
+display_material = ExtResource("6_bwavv")
 final_offset = Vector3(-2, 3, -1)
 speed = 3.0
 
@@ -77,7 +110,8 @@ _staring_player = true
 
 [node name="MainCam" type="Camera3D" parent="Player"]
 unique_name_in_owner = true
-cull_mask = 1047553
+cull_mask = 1
+script = ExtResource("6_4c7c8")
 
 [node name="CamLens" type="MeshInstance3D" parent="Player/MainCam"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02808, 0)
@@ -87,6 +121,7 @@ skeleton = NodePath("../../..")
 
 [node name="Player2" parent="." instance=ExtResource("2_r76vy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.930163, 6.05695)
+_vis_layer_id = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

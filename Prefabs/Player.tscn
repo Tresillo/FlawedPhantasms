@@ -34,6 +34,7 @@ platform_wall_layers = 2
 script = ExtResource("1_ylgb0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 1048575
 mesh = SubResource("CapsuleMesh_8iuk3")
 
 [node name="CameraMarker" type="Marker3D" parent="."]

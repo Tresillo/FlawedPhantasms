@@ -7,7 +7,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s64ro"]
 resource_local_to_scene = true
-size = Vector3(1, 2, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a435a"]
 resource_local_to_scene = true
@@ -17,7 +16,6 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_y3aqa"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_a435a")
-size = Vector3(1, 2, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j35qi"]
 resource_local_to_scene = true
@@ -27,7 +25,6 @@ shader_parameter/frame_color = Color(0.0980392, 0.819608, 0.65098, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_56by1"]
 resource_local_to_scene = true
-size = Vector3(1, 2, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mt6bf"]
 resource_local_to_scene = true
@@ -37,11 +34,11 @@ shader_parameter/frame_color = Color(0.0823529, 0.372549, 0.74902, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_eii0i"]
 resource_local_to_scene = true
-size = Vector3(1, 2, 1)
 
 [node name="Door" type="AnimatableBody3D"]
 script = ExtResource("1_2eu81")
 display_material = ExtResource("2_uuxgq")
+visibility_flags = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_s64ro")

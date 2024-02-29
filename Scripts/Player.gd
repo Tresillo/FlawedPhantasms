@@ -22,7 +22,8 @@ class_name Player
 @export_category("Brain Change Properties")
 @export var _disabled: bool = true
 @export var _staring_player: bool
-@export var cam_material: Material
+@export var _cam_material: Material
+@export_range(1,20,1) var _vis_layer_id: int
 
 var player_cam: Camera3D
 @onready var gravity: float = -ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -39,6 +40,7 @@ func _ready():
 	player_cam = null
 	
 	if _staring_player:
+		%MainCam.update_cull_mask(_vis_layer_id)
 		adopt_main_cam(%MainCam)
 
 
@@ -200,9 +202,9 @@ func _transfer_main_cam(target:Player):
 	).set_delay(1.0)
 	transfer_tween.tween_callback(func():
 			target.adopt_main_cam(player_cam)
+			player_cam.update_cull_mask(target._vis_layer_id)
 			target._disabled = false
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			#target.player_cam = player_cam
 			player_cam = null
 	)
 
