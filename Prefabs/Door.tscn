@@ -42,7 +42,6 @@ size = Vector3(1, 2, 1)
 [node name="Door" type="AnimatableBody3D"]
 script = ExtResource("1_2eu81")
 display_material = ExtResource("2_uuxgq")
-speed = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_s64ro")
