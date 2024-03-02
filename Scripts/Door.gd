@@ -46,6 +46,8 @@ func _ready():
 		check_movement_by_lerp(0.0)
 		_init_pos = global_position
 		($MeshInstance3D as MeshInstance3D).layers = visibility_flags
+		collision_layer = visibility_flags
+		set_collision_layer_value(1,true)
 
 
 func _process(delta):

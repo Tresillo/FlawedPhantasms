@@ -57,3 +57,18 @@ quit={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_render/layer_1="all"
+3d_render/layer_10="all_players"
+3d_render/layer_11="player_visibility_id_11"
+3d_render/layer_12="player_visibility_id_12"
+3d_render/layer_13="player_visibility_id_13"
+3d_render/layer_14="player_visibility_id_14"
+3d_render/layer_15="player_visibility_id_15"
+3d_render/layer_16="player_visibility_id_16"
+3d_render/layer_17="player_visibility_id_17"
+3d_render/layer_18="player_visibility_id_18"
+3d_render/layer_19="player_visibility_id_19"
+3d_render/layer_20="player_visibility_id_20"

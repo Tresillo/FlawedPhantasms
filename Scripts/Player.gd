@@ -23,7 +23,7 @@ class_name Player
 @export var _disabled: bool = true
 @export var _staring_player: bool
 @export var _cam_material: Material
-@export_range(1,20,1) var _vis_layer_id: int
+@export_range(11,20,1) var _vis_layer_id: int = 11
 
 var player_cam: Camera3D
 @onready var gravity: float = -ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -129,13 +129,16 @@ func _physics_process(delta):
 		var to = from + player_cam.project_ray_normal(screen_center) * _interact_dist
 		
 		#cast ray
-		var ray_query = PhysicsRayQueryParameters3D.create(to,from)
-		ray_query.exclude = [self]
+		var ray_query = PhysicsRayQueryParameters3D.create(from, to)
+		#create bitmask for collisions, for the player layer (10) and the player's visibility layer
+		ray_query.collision_mask = pow(2, _vis_layer_id-1) + pow(2, 10-1)
+		ray_query.exclude = [self] + get_tree().get_nodes_in_group("window")
 		var ray_result = space_state.intersect_ray(ray_query)
 		
 		if ray_result:
 			print("Hit " + str(ray_result.collider) + " at position " + str(ray_result.position))
 			if ray_result.collider is Player:
+				print("hit player")
 				_transfer_main_cam(ray_result.collider as Player)
 		else:
 			print("No object hit")

@@ -16,6 +16,9 @@ func _ready():
 	($Activation as Area3D).body_entered.connect(func(body): manage_button(true, body))
 	($Activation as Area3D).body_exited.connect(func(body): manage_button(false, body))
 	
+	collision_layer = visibility_flags
+	set_collision_layer_value(1,true)
+	
 	for obj in connected_objects:
 		if obj.has_method("open"):
 			button_activated.connect(obj.open)

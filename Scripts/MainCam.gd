@@ -15,6 +15,7 @@ func update_cull_mask(new_id: int):
 	if new_id >= 1 and new_id <= 20:
 		set_cull_mask_value(_cur_mask_id, false)
 		set_cull_mask_value(new_id, true)
+		set_cull_mask_value(1, true)
 		
 		_cur_mask_id = new_id
 	else:

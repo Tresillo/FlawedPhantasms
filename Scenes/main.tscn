@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4nwd8easbfil"]
+[gd_scene load_steps=19 format=3 uid="uid://c4nwd8easbfil"]
 
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_dark.tres" id="1_fgs6r"]
 [ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="1_sq1d0"]
+[ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/Rect_Wall.tscn" id="2_352a4"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_green.tres" id="2_f3bkt"]
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="2_r76vy"]
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="3_g6ekm"]
@@ -27,14 +28,6 @@ sky_material = SubResource("ProceduralSkyMaterial_cqyl5")
 background_mode = 2
 sky = SubResource("Sky_qtouo")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_amfmh"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_hgnt1"]
-material = ExtResource("2_f3bkt")
-
-[sub_resource type="BoxMesh" id="BoxMesh_l3ffo"]
-material = ExtResource("3_qn8pd")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
 render_priority = 0
 shader = ExtResource("6_sfcsg")
@@ -52,37 +45,29 @@ size = Vector2(2, 2)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.66377, -0.508227, 0.548739, 0, 0.733671, 0.679505, -0.747937, -0.451035, 0.486988, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World"]
+[node name="Floor" type="StaticBody3D" parent="World"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor"]
 shape = SubResource("WorldBoundaryShape3D_pa44s")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
-layers = 3
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor"]
+layers = 3072
 mesh = SubResource("QuadMesh_h6nuq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = SubResource("Environment_ikmig")
 
-[node name="VisibilityTest1" type="StaticBody3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.03424, 0.541813, -1.20058)
+[node name="VisTest1" parent="World" instance=ExtResource("2_352a4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.51449, 1.00861, -1.78081)
+size = Vector3(1, 2, 0.5)
+display_material = ExtResource("2_f3bkt")
+visibility_flags = 1024
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/VisibilityTest1"]
-shape = SubResource("BoxShape3D_amfmh")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/VisibilityTest1"]
-mesh = SubResource("BoxMesh_hgnt1")
-
-[node name="VisibilityTest2" type="StaticBody3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.03424, 0.541813, -1.20058)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/VisibilityTest2"]
-shape = SubResource("BoxShape3D_amfmh")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/VisibilityTest2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.71919)
-layers = 2
-mesh = SubResource("BoxMesh_l3ffo")
+[node name="VisTest2" parent="World" instance=ExtResource("2_352a4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.12839, 0.551196, 1.69702)
+size = Vector3(2, 2, 1)
+display_material = ExtResource("3_qn8pd")
+visibility_flags = 2048
 
 [node name="Interactables" type="Node3D" parent="."]
 
@@ -94,13 +79,13 @@ visibility_flags = 3
 [node name="Door" parent="Interactables" instance=ExtResource("1_sq1d0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82393, 1.35163, -6.63135)
 size = Vector3(1, 2, 1)
-visibility_flags = 3
 final_offset = Vector3(3, 0, 0)
 
 [node name="Door2" parent="Interactables" instance=ExtResource("1_sq1d0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.88235, 0.151161, -4.16717)
 size = Vector3(3, 0.2, 3)
 display_material = ExtResource("6_bwavv")
+visibility_flags = 1024
 final_offset = Vector3(-2, 3, -1)
 speed = 3.0
 
@@ -121,7 +106,7 @@ skeleton = NodePath("../../..")
 
 [node name="Player2" parent="." instance=ExtResource("2_r76vy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.930163, 6.05695)
-_vis_layer_id = 2
+_vis_layer_id = 12
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
