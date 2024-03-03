@@ -1,5 +1,5 @@
 shader_type spatial;
-//render_mode cull_disabled, specular_toon;
+render_mode cull_disabled, specular_schlick_ggx;
 
 group_uniforms color_properties;
 uniform vec3 window_color: source_color;
@@ -47,4 +47,8 @@ void fragment()
 	
 	ALBEDO = mix(window_color, grid_color, grid_mask);
 	ALPHA = mix(window_transparency, grid_transparency, grid_mask);
+	ROUGHNESS = 0.0;
+	CLEARCOAT = 1.0;
+	METALLIC = 0.2;
+	//CLEARCOAT_ROUGHNESS = 0.0;
 }

@@ -6,8 +6,8 @@
 render_priority = 1
 shader = ExtResource("1_rv13j")
 shader_parameter/window_color = Color(0.839216, 0.941176, 1, 1)
-shader_parameter/grid_color = Color(0.192157, 0.196078, 0.2, 1)
-shader_parameter/window_transparency = 0.06
-shader_parameter/grid_transparency = 0.8
-shader_parameter/grid_scale = Vector2(100, 50)
-shader_parameter/line_scale = 0.081
+shader_parameter/grid_color = Color(0.286275, 0.294118, 0.298039, 1)
+shader_parameter/window_transparency = 0.04
+shader_parameter/grid_transparency = 0.52
+shader_parameter/grid_scale = Vector2(60, 30)
+shader_parameter/line_scale = 0.048
