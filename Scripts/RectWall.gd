@@ -7,7 +7,7 @@ class_name RectWall
 		size = val
 		$CollisionShape3D.shape.size = val
 		$MeshInstance3D.mesh.size = val
-@export var display_material: StandardMaterial3D:
+@export var display_material: Material:
 	set(val):
 		display_material = val
 		if find_child("MeshInstance3D") != null:

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b6gim6qke3je7"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/Window.gdshader" id="1_rv13j"]
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_rv13j")
+shader_parameter/window_color = Color(0.839216, 0.941176, 1, 1)
+shader_parameter/grid_color = Color(0.192157, 0.196078, 0.2, 1)
+shader_parameter/window_transparency = 0.06
+shader_parameter/grid_transparency = 0.8
+shader_parameter/grid_scale = Vector2(100, 50)
+shader_parameter/line_scale = 0.081

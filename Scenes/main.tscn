@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c4nwd8easbfil"]
+[gd_scene load_steps=20 format=3 uid="uid://c4nwd8easbfil"]
 
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_dark.tres" id="1_fgs6r"]
 [ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="1_sq1d0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="3_g6ekm"]
 [ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/Button.tscn" id="3_m1reu"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_red.tres" id="3_qn8pd"]
+[ext_resource type="Material" uid="uid://b6gim6qke3je7" path="res://Assets/Mat/window_mat.tres" id="5_lfhmf"]
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="6_4c7c8"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_purple.tres" id="6_bwavv"]
 [ext_resource type="Shader" path="res://Assets/Shaders/CameraLens.gdshader" id="6_sfcsg"]
@@ -68,6 +69,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.12839, 0.551196, 1.69702)
 size = Vector3(2, 2, 1)
 display_material = ExtResource("3_qn8pd")
 visibility_flags = 2048
+
+[node name="WindowTest" parent="World" instance=ExtResource("2_352a4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.39972, 1.1356, 5.33983)
+size = Vector3(4, 2, 0.2)
+display_material = ExtResource("5_lfhmf")
+visibility_flags = 3072
+is_window = true
 
 [node name="Interactables" type="Node3D" parent="."]
 
