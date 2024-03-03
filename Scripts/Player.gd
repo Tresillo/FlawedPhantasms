@@ -205,7 +205,7 @@ func _transfer_main_cam(target:Player):
 			$CameraMarker/MeshInstance3D.set_layer_mask_value(1,true)
 			target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
 	).set_delay(1.0)
-	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.6).set_delay(1.3)
+	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.35).set_delay(1.6)
 	transfer_tween.tween_callback(func():
 			target.adopt_main_cam(player_cam)
 			player_cam.update_cull_mask(target._vis_layer_id)
