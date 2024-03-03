@@ -33,5 +33,5 @@ void fragment() {
 	//ALBEDO = vec3(linear_depth); 	// showing depth texture
 	//ALBEDO = normal; 				// showing normal texture
 	//ALBEDO = vec3(roughness); 	// showing roughness texture
-	ALBEDO = screen_color;		// showing screen texture
+	ALBEDO = screen_color.rgb;		// showing screen texture
 }

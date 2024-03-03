@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4nwd8easbfil"]
+[gd_scene load_steps=23 format=3 uid="uid://c4nwd8easbfil"]
 
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_dark.tres" id="1_fgs6r"]
 [ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="1_sq1d0"]
@@ -11,7 +11,9 @@
 [ext_resource type="Material" uid="uid://b6gim6qke3je7" path="res://Assets/Mat/window_mat.tres" id="5_lfhmf"]
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="6_4c7c8"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_purple.tres" id="6_bwavv"]
+[ext_resource type="Material" uid="uid://d0y4s84b7xweu" path="res://Assets/Mat/wall_mat.tres" id="6_fs4co"]
 [ext_resource type="Shader" path="res://Assets/Shaders/CameraLens.gdshader" id="6_sfcsg"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="12_lfdml"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_pa44s"]
 
@@ -38,6 +40,13 @@ shader_parameter/depth_range = null
 material = SubResource("ShaderMaterial_twcwy")
 flip_faces = true
 size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7h2r"]
+shader = ExtResource("12_lfdml")
+shader_parameter/lid_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+shader_parameter/lid_transparency = 0.0
+shader_parameter/close_amount = 0.39
+shader_parameter/lid_width = 0.3
 
 [node name="Main" type="Node3D"]
 
@@ -76,6 +85,12 @@ size = Vector3(4, 2, 0.2)
 display_material = ExtResource("5_lfhmf")
 visibility_flags = 3072
 is_window = true
+
+[node name="WallMatTest" parent="World" instance=ExtResource("2_352a4")]
+transform = Transform3D(-0.289717, 0, 0.957113, 0, 1, 0, -0.957113, 0, -0.289717, 4.35348, 1.74384, 6.93368)
+size = Vector3(5, 3, 1)
+display_material = ExtResource("6_fs4co")
+visibility_flags = 513
 
 [node name="Interactables" type="Node3D" parent="."]
 
@@ -126,3 +141,13 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_g6ekm")
 stretch_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_u7h2r")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
