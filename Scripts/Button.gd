@@ -32,10 +32,8 @@ func _ready():
 
 func manage_button(activate:bool, body: Node3D):
 	if activate and not _pressed and $Activation.has_overlapping_bodies():
-		print("press")
 		_pressed = true
 		button_activated.emit()
 	elif not activate and _pressed and not $Activation.has_overlapping_bodies():
-		print("release")
 		_pressed = false
 		button_deactivated.emit()

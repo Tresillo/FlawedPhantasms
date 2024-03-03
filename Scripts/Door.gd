@@ -69,10 +69,8 @@ func check_movement_by_lerp(amount: float):
 
 
 func open():
-	print("open")
 	_cur_state = DOOR_STATE.OPENING
 
 
 func close():
-	print("closed")
 	_cur_state = DOOR_STATE.CLOSING
