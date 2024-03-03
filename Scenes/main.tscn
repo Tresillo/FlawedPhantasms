@@ -44,8 +44,8 @@ size = Vector2(2, 2)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u7h2r"]
 shader = ExtResource("12_lfdml")
 shader_parameter/lid_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
-shader_parameter/lid_transparency = 0.0
-shader_parameter/close_amount = 0.39
+shader_parameter/lid_transparency = 1.0
+shader_parameter/close_amount = 0.0
 shader_parameter/lid_width = 0.3
 
 [node name="Main" type="Node3D"]
@@ -133,16 +133,8 @@ _vis_layer_id = 12
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Crosshair" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_g6ekm")
-stretch_mode = 3
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="CamEyelids" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_u7h2r")
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,3 +143,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_g6ekm")
+stretch_mode = 3

@@ -190,6 +190,7 @@ func _transfer_main_cam(target:Player):
 	var target_cam_marker:Marker3D = target.get_node("CameraMarker")
 	var target_pos = target_cam_marker.global_position
 	var target_rot = target_cam_marker.global_rotation
+	var transition_mat = (%CamEyelids as ColorRect).material
 	
 	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	transfer_tween.tween_callback(func():
@@ -200,15 +201,22 @@ func _transfer_main_cam(target:Player):
 	transfer_tween.tween_property(player_cam,"global_position",target_pos,2.0)
 	transfer_tween.parallel().tween_property(player_cam,"global_rotation",target_rot,2.0)
 	transfer_tween.parallel().tween_callback(func():
+			#just head mesh visibility
 			$CameraMarker/MeshInstance3D.set_layer_mask_value(1,true)
 			target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
 	).set_delay(1.0)
+	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.6).set_delay(1.3)
 	transfer_tween.tween_callback(func():
 			target.adopt_main_cam(player_cam)
 			player_cam.update_cull_mask(target._vis_layer_id)
 			target._disabled = false
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			player_cam = null
+	)
+	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/close_amount",1.0,0.4)
+	transfer_tween.tween_callback(func():
+			transition_mat.set_shader_parameter("close_amount", 0.0)
+			transition_mat.set_shader_parameter("lid_transparency", 1.0)
 	)
 
 
