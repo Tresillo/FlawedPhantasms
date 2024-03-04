@@ -22,7 +22,7 @@ class_name Player
 @export_category("Brain Change Properties")
 @export var _disabled: bool = true
 @export var _staring_player: bool
-@export var _cam_material: Material
+@export var _cam_material: ShaderMaterial
 @export_range(11,20,1) var _vis_layer_id: int = 11
 
 var player_cam: Camera3D
@@ -138,11 +138,9 @@ func _physics_process(delta):
 		if ray_result:
 			print("Hit " + str(ray_result.collider) + " at position " + str(ray_result.position))
 			if ray_result.collider is Player:
-				print("hit player")
 				_transfer_main_cam(ray_result.collider as Player)
 		else:
 			print("No object hit")
-
 
 
 func _unhandled_input(event):
@@ -205,7 +203,7 @@ func _transfer_main_cam(target:Player):
 			$CameraMarker/MeshInstance3D.set_layer_mask_value(1,true)
 			target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
 	).set_delay(1.0)
-	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.35).set_delay(1.6)
+	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.4).set_delay(1.55)
 	transfer_tween.tween_callback(func():
 			target.adopt_main_cam(player_cam)
 			player_cam.update_cull_mask(target._vis_layer_id)
@@ -226,4 +224,7 @@ func adopt_main_cam(main_cam):
 	player_cam.global_position = temp_cam_mark.global_position
 	player_cam.global_rotation = temp_cam_mark.global_rotation
 	player_cam.reparent(temp_cam_mark, true);
+	
+	(player_cam.get_node("CamLens") as MeshInstance3D).material_override = _cam_material
+	
 	$CameraMarker/MeshInstance3D.set_layer_mask_value(1,false)
