@@ -158,7 +158,7 @@ func _unhandled_input(event):
 		#rotate the player model's head
 		var model_skeleton: Skeleton3D = $PlayerModel/RootNode/Skeleton3D as Skeleton3D
 		var head_bone_idx: int = model_skeleton.find_bone("mixamorig_Head")
-		model_skeleton.set_bone_pose_rotation(head_bone_idx,Quaternion.from_euler($CameraMarker.rotation))
+		model_skeleton.set_bone_pose_rotation(head_bone_idx,Quaternion.from_euler($CameraMarker.rotation * -1))
 
 
 func _setup_crouch_tween(target):
@@ -205,13 +205,17 @@ func _transfer_main_cam(target:Player):
 	transfer_tween.parallel().tween_property(player_cam,"global_rotation",target_rot,2.0)
 	transfer_tween.parallel().tween_callback(func():
 			#just head mesh visibility
-			$CameraMarker/MeshInstance3D.set_layer_mask_value(1,true)
-			target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
+			#$CameraMarker/MeshInstance3D.set_layer_mask_value(1,true)
+			#target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
+			pass
 	).set_delay(1.0)
 	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.4).set_delay(1.55)
 	transfer_tween.tween_callback(func():
 			target.adopt_main_cam(player_cam)
 			player_cam.update_cull_mask(target._vis_layer_id)
+			
+			($PlayerModel as Node3D).visible = true
+			
 			target._disabled = false
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			player_cam = null
@@ -230,6 +234,7 @@ func adopt_main_cam(main_cam):
 	player_cam.global_rotation = temp_cam_mark.global_rotation
 	player_cam.reparent(temp_cam_mark, true);
 	
+	($PlayerModel as Node3D).visible = false
 	(player_cam.get_node("CamLens") as MeshInstance3D).material_override = _cam_material
 	
 	$CameraMarker/MeshInstance3D.set_layer_mask_value(1,false)
