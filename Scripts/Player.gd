@@ -154,6 +154,11 @@ func _unhandled_input(event):
 		#Stop euler angles enabling player cam movement
 		$CameraMarker.rotation.y = 0
 		$CameraMarker.rotation.z = 0
+		
+		#rotate the player model's head
+		var model_skeleton: Skeleton3D = $PlayerModel/RootNode/Skeleton3D as Skeleton3D
+		var head_bone_idx: int = model_skeleton.find_bone("mixamorig_Head")
+		model_skeleton.set_bone_pose_rotation(head_bone_idx,Quaternion.from_euler($CameraMarker.rotation))
 
 
 func _setup_crouch_tween(target):

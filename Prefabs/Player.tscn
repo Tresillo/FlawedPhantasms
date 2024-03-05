@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3jl2cm236pj4"]
+[gd_scene load_steps=9 format=3 uid="uid://d3jl2cm236pj4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ylgb0"]
-[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_light.tres" id="2_s5l6v"]
+[ext_resource type="Material" uid="uid://bsln6u4ch67xk" path="res://Assets/Placeholder/ph_mat_light.tres" id="2_s5l6v"]
+[ext_resource type="PackedScene" uid="uid://cjqancj47m4tq" path="res://Assets/Models/mixamo female/MixamoFemaleScn.tscn" id="3_4lyct"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8iuk3"]
 material = ExtResource("2_s5l6v")
@@ -35,14 +36,16 @@ platform_wall_layers = 2
 script = ExtResource("1_ylgb0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 layers = 1048575
 mesh = SubResource("CapsuleMesh_8iuk3")
 
 [node name="CameraMarker" type="Marker3D" parent="."]
-transform = Transform3D(1, 0.000184416, -5.2461e-05, -0.000184408, 1, 0.000151471, 5.24889e-05, -0.000151462, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0.000184416, -5.2461e-05, -0.000184408, 1, 0.000151471, 5.24889e-05, -0.000151462, 1, 0, 0.8, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraMarker"]
 transform = Transform3D(1, 0, 2.43805e-12, -4.69225e-12, -4.3714e-08, -1, 0, 1, -4.3714e-08, 4.27923e-06, -1.23382e-05, -0.398475)
+visible = false
 mesh = SubResource("CylinderMesh_birik")
 skeleton = NodePath("../../MeshInstance3D")
 
@@ -58,3 +61,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("CylinderShape3D_sum3p")
 target_position = Vector3(0, 0.5, 0)
 collision_mask = 3
+
+[node name="PlayerModel" parent="." instance=ExtResource("3_4lyct")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.9, 0)
