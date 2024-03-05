@@ -236,5 +236,3 @@ func adopt_main_cam(main_cam):
 	
 	($PlayerModel as Node3D).visible = false
 	(player_cam.get_node("CamLens") as MeshInstance3D).material_override = _cam_material
-	
-	$CameraMarker/MeshInstance3D.set_layer_mask_value(1,false)
