@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjqancj47m4tq"]
+
+[ext_resource type="PackedScene" uid="uid://n0w817lwgrb1" path="res://Assets/Models/mixamo female/character.fbx" id="1_u7j1g"]
+
+[node name="PlayerModel" instance=ExtResource("1_u7j1g")]
+
+[node name="Skeleton3D" parent="RootNode" index="0"]
+bones/8/rotation = Quaternion(0.600475, 0.066475, -0.085525, 0.792475)
+bones/9/rotation = Quaternion(0.074475, 0.000474975, 0.000474975, 0.997475)
+bones/32/rotation = Quaternion(0.600475, -0.066525, 0.085475, 0.792475)
+bones/33/rotation = Quaternion(0.075475, 0.000474975, 0.000474975, 0.997475)
