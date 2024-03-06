@@ -49,6 +49,7 @@ void fragment()
 	ALPHA = mix(window_transparency, grid_transparency, grid_mask);
 	ROUGHNESS = 0.0;
 	CLEARCOAT = 1.0;
-	METALLIC = 0.2;
+	METALLIC = 0.5;
+	SPECULAR = 0.5;
 	//CLEARCOAT_ROUGHNESS = 0.0;
 }
