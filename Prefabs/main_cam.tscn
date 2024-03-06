@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://diry562y362eu"]
+
+[ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/CameraLensTemplate.gdshader" id="2_itnd6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
+render_priority = 0
+shader = ExtResource("2_itnd6")
+shader_parameter/depth_range = null
+
+[sub_resource type="QuadMesh" id="QuadMesh_1idc1"]
+material = SubResource("ShaderMaterial_twcwy")
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="MainCam" type="Camera3D"]
+cull_mask = 1
+script = ExtResource("1_1iapf")
+
+[node name="CamLens" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02808, 0)
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_1idc1")
+skeleton = NodePath("../../..")
