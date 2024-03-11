@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="2_r76vy"]
 [ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/Button.tscn" id="3_m1reu"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_red.tres" id="3_qn8pd"]
-[ext_resource type="Material" uid="uid://b6gim6qke3je7" path="res://Assets/Mat/window_mat.tres" id="5_lfhmf"]
+[ext_resource type="Material" uid="uid://4rkcncgl3f6x" path="res://Assets/Mat/window_tex_mat.tres" id="5_vknxl"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_purple.tres" id="6_bwavv"]
 [ext_resource type="Material" uid="uid://d0y4s84b7xweu" path="res://Assets/Mat/wall_mat.tres" id="6_fs4co"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/DefaultLens.gdshader" id="11_wc00v"]
@@ -72,7 +72,7 @@ visibility_flags = 2048
 [node name="WindowTest" parent="World" instance=ExtResource("2_352a4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.39972, 1.1356, 5.33983)
 size = Vector3(4, 2, 0.2)
-display_material = ExtResource("5_lfhmf")
+display_material = ExtResource("5_vknxl")
 visibility_flags = 3072
 is_window = true
 
@@ -104,7 +104,7 @@ speed = 3.0
 
 [node name="Player" parent="." instance=ExtResource("2_r76vy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02808, 0)
-_staring_player = true
+_starting_player = true
 _cam_material = SubResource("ShaderMaterial_647jv")
 
 [node name="MainCam" parent="Player" instance=ExtResource("12_m6nl0")]

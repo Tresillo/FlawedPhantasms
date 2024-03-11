@@ -21,7 +21,7 @@ class_name Player
 
 @export_category("Brain Change Properties")
 @export var _disabled: bool = true
-@export var _staring_player: bool
+@export var _starting_player: bool
 @export var _cam_material: ShaderMaterial
 @export_range(11,20,1) var _vis_layer_id: int = 11
 
@@ -33,13 +33,13 @@ var _crouch_tween: Tween
 
 
 func _ready():
-	_disabled = not _staring_player
+	_disabled = not _starting_player
 	print(_disabled)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching = false
 	player_cam = null
 	
-	if _staring_player:
+	if _starting_player:
 		%MainCam.update_cull_mask(_vis_layer_id)
 		adopt_main_cam(%MainCam)
 
@@ -130,9 +130,10 @@ func _physics_process(delta):
 		
 		#cast ray
 		var ray_query = PhysicsRayQueryParameters3D.create(from, to)
-		#create bitmask for collisions, for the player layer (10) and the player's visibility layer
+		#create bitmask for collisions, for the player's visibility layer, player layer (10) and the default layer (1) 
 		ray_query.collision_mask = pow(2, _vis_layer_id-1) + pow(2, 10-1)
 		ray_query.exclude = [self] + get_tree().get_nodes_in_group("window")
+		print(get_tree().get_nodes_in_group("window"))
 		var ray_result = space_state.intersect_ray(ray_query)
 		
 		if ray_result:
