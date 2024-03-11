@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://diry562y362eu"]
+[gd_scene load_steps=8 format=3 uid="uid://diry562y362eu"]
 
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/CameraLensTemplate.gdshader" id="2_itnd6"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="3_8ce8t"]
+[ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="4_gt4h6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
 render_priority = 0
@@ -13,6 +15,13 @@ material = SubResource("ShaderMaterial_twcwy")
 flip_faces = true
 size = Vector2(2, 2)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7yoyx"]
+shader = ExtResource("3_8ce8t")
+shader_parameter/lid_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+shader_parameter/lid_transparency = 1.0
+shader_parameter/close_amount = 0.0
+shader_parameter/lid_width = 0.3
+
 [node name="MainCam" type="Camera3D"]
 cull_mask = 1
 script = ExtResource("1_1iapf")
@@ -22,3 +31,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02808, 0)
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_1idc1")
 skeleton = NodePath("../../..")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CamEyelids" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_7yoyx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Crosshair" type="TextureRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_gt4h6")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true

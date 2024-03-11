@@ -193,7 +193,7 @@ func _transfer_main_cam(target:Player):
 	var target_cam_marker:Marker3D = target.get_node("CameraMarker")
 	var target_pos = target_cam_marker.global_position
 	var target_rot = target_cam_marker.global_rotation
-	var transition_mat = (%CamEyelids as ColorRect).material
+	var transition_mat = player_cam.cam_eyelids_node.material
 	
 	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	transfer_tween.tween_callback(func():
@@ -235,4 +235,4 @@ func adopt_main_cam(main_cam):
 	player_cam.reparent(temp_cam_mark, true);
 	
 	($PlayerModel as Node3D).visible = false
-	(player_cam.get_node("CamLens") as MeshInstance3D).material_override = _cam_material
+	player_cam.lens_shader_material = _cam_material

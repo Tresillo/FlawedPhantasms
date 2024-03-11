@@ -1,20 +1,17 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4nwd8easbfil"]
+[gd_scene load_steps=21 format=3 uid="uid://c4nwd8easbfil"]
 
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_dark.tres" id="1_fgs6r"]
 [ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="1_sq1d0"]
 [ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/Rect_Wall.tscn" id="2_352a4"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_green.tres" id="2_f3bkt"]
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="2_r76vy"]
-[ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="3_g6ekm"]
 [ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/Button.tscn" id="3_m1reu"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_red.tres" id="3_qn8pd"]
 [ext_resource type="Material" uid="uid://b6gim6qke3je7" path="res://Assets/Mat/window_mat.tres" id="5_lfhmf"]
-[ext_resource type="Script" path="res://Scripts/MainCam.gd" id="6_4c7c8"]
 [ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_purple.tres" id="6_bwavv"]
 [ext_resource type="Material" uid="uid://d0y4s84b7xweu" path="res://Assets/Mat/wall_mat.tres" id="6_fs4co"]
-[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/CameraLensTemplate.gdshader" id="6_sfcsg"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/DefaultLens.gdshader" id="11_wc00v"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="12_lfdml"]
+[ext_resource type="PackedScene" uid="uid://diry562y362eu" path="res://Prefabs/main_cam.tscn" id="12_m6nl0"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/ColorChannelShuffleLens.gdshader" id="14_fcnnk"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_pa44s"]
@@ -37,26 +34,9 @@ sky = SubResource("Sky_qtouo")
 render_priority = 0
 shader = ExtResource("11_wc00v")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
-render_priority = 0
-shader = ExtResource("6_sfcsg")
-shader_parameter/depth_range = null
-
-[sub_resource type="QuadMesh" id="QuadMesh_1idc1"]
-material = SubResource("ShaderMaterial_twcwy")
-flip_faces = true
-size = Vector2(2, 2)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3l45h"]
 render_priority = 0
 shader = ExtResource("14_fcnnk")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7h2r"]
-shader = ExtResource("12_lfdml")
-shader_parameter/lid_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
-shader_parameter/lid_transparency = 1.0
-shader_parameter/close_amount = 0.0
-shader_parameter/lid_width = 0.3
 
 [node name="Main" type="Node3D"]
 
@@ -127,40 +107,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02808, 0)
 _staring_player = true
 _cam_material = SubResource("ShaderMaterial_647jv")
 
-[node name="MainCam" type="Camera3D" parent="Player"]
+[node name="MainCam" parent="Player" instance=ExtResource("12_m6nl0")]
 unique_name_in_owner = true
-cull_mask = 1
-script = ExtResource("6_4c7c8")
-
-[node name="CamLens" type="MeshInstance3D" parent="Player/MainCam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02808, 0)
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_1idc1")
-skeleton = NodePath("../../..")
 
 [node name="Player2" parent="." instance=ExtResource("2_r76vy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.930163, 6.05695)
 _cam_material = SubResource("ShaderMaterial_3l45h")
 _vis_layer_id = 12
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="CamEyelids" type="ColorRect" parent="CanvasLayer"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_u7h2r")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Crosshair" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_g6ekm")
-stretch_mode = 3
