@@ -5,17 +5,21 @@
 [ext_resource type="Material" uid="uid://63m2ubwuans8" path="res://Assets/Mat/wall_mat_secondary.tres" id="2_6ysbo"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wqx1j"]
+resource_local_to_scene = true
 material = ExtResource("2_6ysbo")
 size = Vector3(2, 0.05, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_gc8lq"]
+resource_local_to_scene = true
 material = ExtResource("1_rqcjs")
 size = Vector3(1.8, 0.1, 1.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n02dy"]
+resource_local_to_scene = true
 size = Vector3(2, 0.1, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_48uvy"]
+resource_local_to_scene = true
 size = Vector3(1.8, 0.112, 1.8)
 
 [node name="Button" type="StaticBody3D"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://br1lw8gytb55s"]
+[gd_scene load_steps=29 format=3 uid="uid://br1lw8gytb55s"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_qvjk3"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_jjh8r"]
@@ -6,7 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="4_ftpkg"]
 [ext_resource type="PackedScene" uid="uid://diry562y362eu" path="res://Prefabs/main_cam.tscn" id="5_1120v"]
 [ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/Rect_Wall.tscn" id="5_kedxa"]
+[ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="6_cfsyw"]
 [ext_resource type="Material" uid="uid://4rkcncgl3f6x" path="res://Assets/Mat/window_tex_mat.tres" id="6_jddag"]
+[ext_resource type="Material" uid="uid://66he2eugh5ys" path="res://Assets/Mat/PuzzleObjects/PurpleTileMat.tres" id="7_o0ri6"]
+[ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/Button.tscn" id="8_j7f0o"]
+[ext_resource type="Material" uid="uid://cm0s4hba0oxml" path="res://Assets/Mat/PuzzleObjects/PurpleSingleMat.tres" id="9_086tw"]
 
 [sub_resource type="Resource" id="Resource_ylf2o"]
 script = ExtResource("2_jjh8r")
@@ -530,6 +534,28 @@ display_material = ExtResource("6_jddag")
 is_window = true
 
 [node name="Interactables" type="Node3D" parent="."]
+
+[node name="RightStartDoor" parent="Interactables" instance=ExtResource("6_cfsyw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 2.5, 5.75)
+size = Vector3(2, 3, 0.5)
+display_material = ExtResource("7_o0ri6")
+final_offset = Vector3(0, -3.1, 0)
+
+[node name="LeftStartDoor" parent="Interactables" instance=ExtResource("6_cfsyw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.98504, 2.5, 5.74016)
+size = Vector3(2, 3, 0.5)
+display_material = ExtResource("7_o0ri6")
+final_offset = Vector3(0, -3.1, 0)
+
+[node name="Button" parent="Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 12.5)
+connected_objects = [NodePath("../RightStartDoor"), NodePath("../LeftStartDoor")]
+button_material = ExtResource("9_086tw")
+
+[node name="Button2" parent="Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59277, 1, 2.2438)
+connected_objects = [NodePath("../RightStartDoor"), NodePath("../LeftStartDoor")]
+button_material = ExtResource("9_086tw")
 
 [node name="Walls" type="Node3D" parent="."]
 
