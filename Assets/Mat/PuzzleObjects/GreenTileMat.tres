@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://chk35svqp2s6x"]
+
+[ext_resource type="Texture2D" uid="uid://bkhfsoa22coip" path="res://Assets/Sprites/GreenTess.png" id="1_h6vxt"]
+
+[resource]
+albedo_texture = ExtResource("1_h6vxt")
+metallic = 0.3
+roughness = 0.51
+clearcoat = 0.0
+clearcoat_roughness = 0.63
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true

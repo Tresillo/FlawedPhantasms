@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bmkwwak1psb1t"]
+
+[ext_resource type="Texture2D" uid="uid://cp5bbko60l0cy" path="res://Assets/Sprites/TealSngl.png" id="1_afq54"]
+
+[resource]
+albedo_texture = ExtResource("1_afq54")
+metallic = 0.3
+roughness = 0.51
+clearcoat = 0.0
+clearcoat_roughness = 0.63
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
