@@ -1,15 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpmygljbgpk3o"]
+[gd_scene load_steps=5 format=3 uid="uid://dpmygljbgpk3o"]
 
 [ext_resource type="Script" path="res://Scripts/RectWall.gd" id="1_hsibf"]
+[ext_resource type="Material" uid="uid://bl3cwqkla5mdv" path="res://Assets/Placeholder/ph_mat_orange.tres" id="2_4g3tf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rxg3y"]
 resource_local_to_scene = true
+material = ExtResource("2_4g3tf")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kajk3"]
 resource_local_to_scene = true
 
 [node name="RectWall" type="StaticBody3D"]
 script = ExtResource("1_hsibf")
+display_material = ExtResource("2_4g3tf")
 visibility_flags = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
