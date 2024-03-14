@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://br1lw8gytb55s"]
+[gd_scene load_steps=40 format=3 uid="uid://br1lw8gytb55s"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_qvjk3"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_jjh8r"]
@@ -12,6 +12,7 @@
 [ext_resource type="Material" uid="uid://cm0s4hba0oxml" path="res://Assets/Mat/PuzzleObjects/PurpleSingleMat.tres" id="9_086tw"]
 [ext_resource type="Material" uid="uid://dd2serghojdfx" path="res://Assets/Mat/PuzzleObjects/OrangeTileMat.tres" id="9_jv3vx"]
 [ext_resource type="Material" uid="uid://dx65r3364xrf1" path="res://Assets/Mat/PuzzleObjects/OrangeSingleMat.tres" id="10_7sctj"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/GreyscaleLens.gdshader" id="13_32wit"]
 
 [sub_resource type="Resource" id="Resource_e4fvs"]
 script = ExtResource("2_jjh8r")
@@ -613,6 +614,10 @@ face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
 active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5mlj"]
+render_priority = 0
+shader = ExtResource("13_32wit")
+
 [node name="Level1" type="Node3D"]
 
 [node name="StaticGeometry" type="Node3D" parent="."]
@@ -826,6 +831,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.930
 
 [node name="Player2" parent="Players" instance=ExtResource("4_ftpkg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7615, 2, 10.754)
+_cam_material = SubResource("ShaderMaterial_t5mlj")
 _vis_layer_id = 12
 
 [node name="Lighting" type="Node3D" parent="."]
