@@ -133,7 +133,6 @@ func _physics_process(delta):
 		#create bitmask for collisions, for the player's visibility layer, player layer (10) and the default layer (1) 
 		ray_query.collision_mask = pow(2, _vis_layer_id-1) + pow(2, 10-1)
 		ray_query.exclude = [self] + get_tree().get_nodes_in_group("window")
-		print(get_tree().get_nodes_in_group("window"))
 		var ray_result = space_state.intersect_ray(ray_query)
 		
 		if ray_result:

@@ -36,6 +36,7 @@ enum DOOR_STATE{
 var _cur_state: DOOR_STATE = DOOR_STATE.IDLE
 var _interp_val: float = 0.0
 var _init_pos: Vector3
+var _open_count: int = 0
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -48,6 +49,7 @@ func _ready():
 		($MeshInstance3D as MeshInstance3D).layers = visibility_flags
 		collision_layer = visibility_flags
 		set_collision_layer_value(1,true)
+		_open_count = 0
 
 
 func _process(delta):
@@ -69,8 +71,12 @@ func check_movement_by_lerp(amount: float):
 
 
 func open():
-	_cur_state = DOOR_STATE.OPENING
+	_open_count += 1
+	if _open_count > 0:
+		_cur_state = DOOR_STATE.OPENING
 
 
 func close():
-	_cur_state = DOOR_STATE.CLOSING
+	_open_count -= 1
+	if _open_count <= 0:
+		_cur_state = DOOR_STATE.CLOSING
