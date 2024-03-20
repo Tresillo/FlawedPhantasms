@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://br1lw8gytb55s"]
+[gd_scene load_steps=41 format=3 uid="uid://br1lw8gytb55s"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_qvjk3"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_jjh8r"]
 [ext_resource type="Material" uid="uid://d0y4s84b7xweu" path="res://Assets/Mat/wall_mat.tres" id="3_7olof"]
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="4_ftpkg"]
+[ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/Rect_Wall.tscn" id="5_2a4d0"]
 [ext_resource type="PackedScene" uid="uid://diry562y362eu" path="res://Prefabs/main_cam.tscn" id="5_1120v"]
 [ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="6_cfsyw"]
 [ext_resource type="Material" uid="uid://4rkcncgl3f6x" path="res://Assets/Mat/window_tex_mat.tres" id="6_jddag"]
@@ -771,6 +772,12 @@ materials = Array[Material]([ExtResource("3_7olof")])
 
 [node name="StaticPuzzleGeometry" type="Node3D" parent="."]
 
+[node name="RectWall" parent="StaticPuzzleGeometry" instance=ExtResource("5_2a4d0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -3, -11)
+size = Vector3(8, 8, 11)
+display_material = ExtResource("3_7olof")
+visibility_flags = 2048
+
 [node name="Interactables" type="Node3D" parent="."]
 
 [node name="RightStartDoor" parent="Interactables" instance=ExtResource("6_cfsyw")]
@@ -798,11 +805,11 @@ connected_objects = [NodePath("../RightStartDoor"), NodePath("../LeftStartDoor")
 button_material = ExtResource("9_086tw")
 
 [node name="Bridge" parent="Interactables" instance=ExtResource("6_cfsyw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 0.5, -11)
-size = Vector3(1, 1, 11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, -11)
+size = Vector3(8, 1, 11)
 display_material = ExtResource("9_jv3vx")
 visibility_flags = 2048
-final_offset = Vector3(-1.5, 0, 0)
+final_offset = Vector3(0, 1.5, 0)
 speed = 1.5
 
 [node name="BridgeButton" parent="Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
