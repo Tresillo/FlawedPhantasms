@@ -17,7 +17,7 @@ height = 0.8
 height = 1.0
 radius = 0.4
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 513
 collision_mask = 1047555
 platform_floor_layers = 4294967041
@@ -31,7 +31,7 @@ transform = Transform3D(1, 0.000184416, -5.2461e-05, -0.000184408, 1, 0.00015147
 shape = SubResource("CapsuleShape3D_266ql")
 
 [node name="CrouchingCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000205398, -0.5, -0.00286388)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("CapsuleShape3D_hox7t")
 
 [node name="UncrouchShapecast" type="ShapeCast3D" parent="."]
@@ -42,3 +42,25 @@ collision_mask = 3
 
 [node name="PlayerModel" parent="." instance=ExtResource("3_4lyct")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.9, 0)
+
+[node name="EdgeRaycasts" type="Node3D" parent="."]
+
+[node name="CenterCast" type="RayCast3D" parent="EdgeRaycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="RightCast" type="RayCast3D" parent="EdgeRaycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="LeftCast" type="RayCast3D" parent="EdgeRaycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="BackCast" type="RayCast3D" parent="EdgeRaycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+target_position = Vector3(0, -0.6, 0)
+
+[node name="FrontCast" type="RayCast3D" parent="EdgeRaycasts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+target_position = Vector3(0, -0.6, 0)

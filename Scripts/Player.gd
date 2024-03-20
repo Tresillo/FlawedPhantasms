@@ -25,11 +25,17 @@ class_name Player
 @export var _cam_material: ShaderMaterial
 @export_range(11,20,1) var _vis_layer_id: int = 11
 
+@export_category("Void Out Properties")
+@export_range(0.2,1.5,0.05) var edge_margin:float = 0.5
+@export_range(0,0.5,0.01) var max_safe_height:float = 0.1
+
 var player_cam: Camera3D
 @onready var gravity: float = -ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var _crouching: bool = false
 var _crouch_tween: Tween
+
+var last_safe_pos: Vector3
 
 
 func _ready():
@@ -38,6 +44,20 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching = false
 	player_cam = null
+	
+	#ground detection properties
+	var raycast_dist = max_safe_height * -1.0 - 0.5
+	$EdgeRaycasts/CenterCast.target_position = raycast_dist
+	$EdgeRaycasts/RightCast.target_position = raycast_dist
+	$EdgeRaycasts/LeftCast.target_position = raycast_dist
+	$EdgeRaycasts/BackCast.target_position = raycast_dist
+	$EdgeRaycasts/FrontCast.target_position = raycast_dist
+	
+	$EdgeRaycasts/RightCast.position.x = edge_margin
+	$EdgeRaycasts/LeftCast.position.x = edge_margin * -1.0
+	$EdgeRaycasts/BackCast.position.z = edge_margin
+	$EdgeRaycasts/FrontCast.position.z = edge_margin * -1.0
+	
 	
 	if _starting_player:
 		%MainCam.update_cull_mask(_vis_layer_id)
@@ -236,3 +256,7 @@ func adopt_main_cam(main_cam):
 	
 	($PlayerModel as Node3D).visible = false
 	player_cam.lens_shader_material = _cam_material
+
+
+func void_out():
+	pass
