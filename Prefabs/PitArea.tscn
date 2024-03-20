@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dh5sip5bof2p7"]
+[gd_scene load_steps=8 format=3 uid="uid://dh5sip5bof2p7"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/Fog.gdshader" id="1_lgujx"]
+[ext_resource type="Script" path="res://Scripts/PitArea.gd" id="1_qptp6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w4htt"]
-size = Vector3(1, 0.2, 1)
+resource_local_to_scene = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_eucv3"]
 frequency = 0.005
@@ -25,13 +26,16 @@ shader_parameter/depth_range = 1.1
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_sq745")
 
 [sub_resource type="BoxMesh" id="BoxMesh_er5bm"]
+resource_local_to_scene = true
 
 [node name="Pit" type="Area3D"]
+script = ExtResource("1_qptp6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_w4htt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 material_override = SubResource("ShaderMaterial_2m0am")
 mesh = SubResource("BoxMesh_er5bm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
