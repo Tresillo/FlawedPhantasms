@@ -152,6 +152,7 @@ func _physics_process(delta):
 		var ray_query = PhysicsRayQueryParameters3D.create(from, to)
 		#create bitmask for collisions, for the player's visibility layer, player layer (10) and the default layer (1) 
 		ray_query.collision_mask = pow(2, _vis_layer_id-1) + pow(2, 10-1)
+		#Able to hit objects through windows
 		ray_query.exclude = [self] + get_tree().get_nodes_in_group("window")
 		var ray_result = space_state.intersect_ray(ray_query)
 		
@@ -207,9 +208,8 @@ func _setup_crouch_tween(target):
 
 func _transfer_main_cam(target:Player):
 	_disabled = true
-	#if _crouch_tween is Tween:
-		#if _crouch_tween.is_running():
-			#await _crouch_tween.finished
+	
+	#Target variables for the animation
 	var target_cam_marker:Marker3D = target.get_node("CameraMarker")
 	var target_pos = target_cam_marker.global_position
 	var target_rot = target_cam_marker.global_rotation
@@ -217,7 +217,9 @@ func _transfer_main_cam(target:Player):
 	
 	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	transfer_tween.tween_callback(func():
+			#Disable Came movement
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			#Put cam on the same parent-child heirarchy as all of ther player objects
 			player_cam.reparent(get_parent(),true)
 			_disabled = true
 	)
@@ -229,8 +231,10 @@ func _transfer_main_cam(target:Player):
 			#target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
 			pass
 	).set_delay(1.0)
+	#Start the eyelids closing after a time
 	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.4).set_delay(1.55)
 	transfer_tween.tween_callback(func():
+			#Transfer controll to new player object
 			target.adopt_main_cam(player_cam)
 			player_cam.update_cull_mask(target._vis_layer_id)
 			
@@ -240,6 +244,7 @@ func _transfer_main_cam(target:Player):
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			player_cam = null
 	)
+	#Open Eyelids
 	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/close_amount",1.0,0.4)
 	transfer_tween.tween_callback(func():
 			transition_mat.set_shader_parameter("close_amount", 0.0)
@@ -248,6 +253,7 @@ func _transfer_main_cam(target:Player):
 
 
 func adopt_main_cam(main_cam):
+	#Setup functionality for taking control of camer
 	player_cam = main_cam
 	var temp_cam_mark = $CameraMarker
 	player_cam.global_position = temp_cam_mark.global_position
