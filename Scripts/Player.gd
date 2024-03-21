@@ -39,8 +39,8 @@ var last_safe_pos: Vector3
 
 
 func _ready():
-	_disabled = not _starting_player
-	print(_disabled)
+	disable_control(not _starting_player)
+	#print(_disabled)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching = false
 	player_cam = null
@@ -162,6 +162,46 @@ func _physics_process(delta):
 				_transfer_main_cam(ray_result.collider as Player)
 		else:
 			print("No object hit")
+	
+	#looking for last safe location to respawn player
+	var is_safe: bool = true
+	var center_floor_col = $EdgeRaycasts/CenterCast.get_collider()
+	var right_floor_col = $EdgeRaycasts/RightCast.get_collider()
+	var left_floor_col = $EdgeRaycasts/LeftCast.get_collider()
+	var back_floor_col = $EdgeRaycasts/BackCast.get_collider()
+	var front_floor_col = $EdgeRaycasts/FrontCast.get_collider()
+	
+	if center_floor_col != null:
+		if center_floor_col is Door:
+			is_safe = false
+	else: 
+		is_safe = false
+	if right_floor_col != null:
+		if right_floor_col is Door:
+			is_safe = false
+	else: 
+		is_safe = false
+	if left_floor_col != null :
+		if left_floor_col is Door:
+			is_safe = false
+	else: 
+		is_safe = false
+	if back_floor_col != null:
+		if back_floor_col is Door:
+			is_safe = false
+	else: 
+		is_safe = false
+	if front_floor_col != null:
+		if front_floor_col is Door:
+			is_safe = false
+	else: 
+		is_safe = false
+	
+	if not is_on_floor() or not is_on_wall():
+		is_safe = false
+	
+	if is_safe:
+		last_safe_pos = global_position
 
 
 func _unhandled_input(event):
@@ -207,8 +247,6 @@ func _setup_crouch_tween(target):
 
 
 func _transfer_main_cam(target:Player):
-	_disabled = true
-	
 	#Target variables for the animation
 	var target_cam_marker:Marker3D = target.get_node("CameraMarker")
 	var target_pos = target_cam_marker.global_position
@@ -221,7 +259,7 @@ func _transfer_main_cam(target:Player):
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 			#Put cam on the same parent-child heirarchy as all of ther player objects
 			player_cam.reparent(get_parent(),true)
-			_disabled = true
+			disable_control(true)
 	)
 	transfer_tween.tween_property(player_cam,"global_position",target_pos,2.0)
 	transfer_tween.parallel().tween_property(player_cam,"global_rotation",target_rot,2.0)
@@ -240,7 +278,7 @@ func _transfer_main_cam(target:Player):
 			
 			($PlayerModel as Node3D).visible = true
 			
-			target._disabled = false
+			target.disable_control(false)
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			player_cam = null
 	)
@@ -262,6 +300,19 @@ func adopt_main_cam(main_cam):
 	
 	($PlayerModel as Node3D).visible = false
 	player_cam.lens_shader_material = _cam_material
+
+
+func disable_control(disable: bool):
+	_disabled = disable
+	#checking for off of safe platforms dissabled when not moving
+	$EdgeRaycasts/CenterCast.enabled = not disable
+	$EdgeRaycasts/RightCast.enabled = not disable
+	$EdgeRaycasts/LeftCast.enabled = not disable
+	$EdgeRaycasts/BackCast.enabled = not disable
+	$EdgeRaycasts/FrontCast.enabled = not disable
+	
+	if not disable:
+		last_safe_pos = global_position
 
 
 func void_out():
