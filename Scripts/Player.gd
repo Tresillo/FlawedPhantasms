@@ -310,10 +310,13 @@ func disable_control(disable: bool):
 	$EdgeRaycasts/LeftCast.enabled = not disable
 	$EdgeRaycasts/BackCast.enabled = not disable
 	$EdgeRaycasts/FrontCast.enabled = not disable
-	
-	if not disable:
-		last_safe_pos = global_position
 
 
 func void_out():
-	pass
+	disable_control(true)
+	print("hit fog void, add animation")
+	
+	velocity = Vector3(0,0,0)
+	global_position = last_safe_pos
+	
+	disable_control(false)
