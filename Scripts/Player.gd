@@ -40,7 +40,6 @@ var last_safe_pos: Vector3
 
 func _ready():
 	disable_control(not _starting_player)
-	#print(_disabled)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_crouching = false
 	player_cam = null
@@ -316,7 +315,6 @@ func disable_control(disable: bool):
 
 
 func void_out():
-	
 	var transition_mat = player_cam.cam_eyelids_node.material
 	
 	var respawn_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
@@ -336,3 +334,21 @@ func void_out():
 	respawn_tween.parallel().tween_callback(func():
 			disable_control(false)
 	).set_delay(0.2)
+
+
+func starting_player_start_animation():
+	var transition_mat = player_cam.cam_eyelids_node.material
+	
+	var start_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
+	start_tween.tween_callback(func():
+			disable_control(true)
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			
+			transition_mat.set_shader_parameter("close_amount", 0.0)
+			transition_mat.set_shader_parameter("lid_transparency", 0.0)
+	)
+	start_tween.tween_property(transition_mat,"shader_parameter/close_amount",1.0,0.6).set_delay(0.4)
+	start_tween.tween_callback(func():
+			disable_control(false)
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	)

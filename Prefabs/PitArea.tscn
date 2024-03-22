@@ -22,10 +22,11 @@ seamless = true
 noise = SubResource("FastNoiseLite_eucv3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2m0am"]
+resource_local_to_scene = true
 render_priority = 2
 next_pass = SubResource("ShaderMaterial_2p6c7")
 shader = ExtResource("1_lgujx")
-shader_parameter/scroll_speed = 0.04
+shader_parameter/scroll_speed = 3.0
 shader_parameter/noise_alpha_weight = 0.1
 shader_parameter/noise_color_weight = 0.14
 shader_parameter/void_color = Color(0.101961, 0.0980392, 0.0941176, 1)

@@ -10,3 +10,4 @@ func _ready():
 
 func end_level():
 	print("hit end level trigger")
+	get_tree().quit()
