@@ -160,6 +160,9 @@ func _physics_process(delta):
 			print("Hit " + str(ray_result.collider) + " at position " + str(ray_result.position))
 			if ray_result.collider is Player:
 				_transfer_main_cam(ray_result.collider as Player)
+			elif ray_result.collider is LevelGoal:
+				print("hit end level")
+				_transfer_main_cam(ray_result.collider as LevelGoal)
 		else:
 			print("No object hit")
 	
@@ -247,7 +250,7 @@ func _setup_crouch_tween(target):
 	)
 
 
-func _transfer_main_cam(target:Player):
+func _transfer_main_cam(target):
 	#Target variables for the animation
 	var target_cam_marker:Marker3D = target.get_node("CameraMarker")
 	var target_pos = target_cam_marker.global_position
@@ -269,22 +272,25 @@ func _transfer_main_cam(target:Player):
 	transfer_tween.parallel().tween_property(player_cam,"global_rotation",target_rot,2.0)
 	#Start the eyelids closing after a time
 	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.4).set_delay(1.55)
-	transfer_tween.tween_callback(func():
-			#Transfer controll to new player object
-			target.adopt_main_cam(player_cam)
-			player_cam.update_cull_mask(target._vis_layer_id)
-			
-			($PlayerModel as Node3D).visible = true
-			
-			target.disable_control(false)
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			player_cam = null
-	)
-	#Open Eyelids
-	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/close_amount",1.0,0.4)
-	transfer_tween.tween_callback(func():
-			pass
-	)
+	
+	if target is Player:
+		transfer_tween.tween_callback(func():
+				#Transfer controll to new player object
+				target.adopt_main_cam(player_cam)
+				player_cam.update_cull_mask(target._vis_layer_id)
+				
+				($PlayerModel as Node3D).visible = true
+				
+				target.disable_control(false)
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+				player_cam = null
+		)
+		#Open Eyelids
+		transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/close_amount",1.0,0.4)
+	elif target is LevelGoal:
+		transfer_tween.tween_callback(func():
+				target.end_level()
+		)
 
 
 func adopt_main_cam(main_cam):
