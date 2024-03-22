@@ -1,16 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://diry562y362eu"]
 
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
+[ext_resource type="Environment" uid="uid://e3i1ntpju1jv" path="res://Prefabs/World_Environment.tres" id="1_ep4qw"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/CameraLensTemplate.gdshader" id="2_itnd6"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="3_8ce8t"]
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="4_gt4h6"]
-
-[sub_resource type="Environment" id="Environment_aucmg"]
-background_mode = 1
-background_color = Color(1, 0.972549, 0.858824, 1)
-ambient_light_source = 2
-ambient_light_color = Color(1, 0.945098, 0.929412, 1)
-ambient_light_energy = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
 render_priority = 0
@@ -31,7 +25,7 @@ shader_parameter/lid_width = 0.3
 
 [node name="MainCam" type="Camera3D"]
 cull_mask = 1
-environment = SubResource("Environment_aucmg")
+environment = ExtResource("1_ep4qw")
 script = ExtResource("1_1iapf")
 
 [node name="CamLens" type="MeshInstance3D" parent="."]

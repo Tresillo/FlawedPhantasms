@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://dh5sip5bof2p7"]
+[gd_scene load_steps=10 format=3 uid="uid://dh5sip5bof2p7"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/Fog.gdshader" id="1_lgujx"]
 [ext_resource type="Script" path="res://Scripts/PitArea.gd" id="1_qptp6"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PitArea_BackFaces.gdshader" id="2_2i3cc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w4htt"]
 resource_local_to_scene = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2p6c7"]
+render_priority = 0
+shader = ExtResource("2_2i3cc")
+shader_parameter/void_color = Color(0.0666667, 0.0392157, 0.0392157, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_eucv3"]
 frequency = 0.005
@@ -16,7 +22,8 @@ seamless = true
 noise = SubResource("FastNoiseLite_eucv3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2m0am"]
-render_priority = 0
+render_priority = 2
+next_pass = SubResource("ShaderMaterial_2p6c7")
 shader = ExtResource("1_lgujx")
 shader_parameter/scroll_speed = 0.04
 shader_parameter/noise_alpha_weight = 0.1

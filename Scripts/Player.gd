@@ -46,7 +46,7 @@ func _ready():
 	player_cam = null
 	
 	#ground detection properties
-	var raycast_dist = max_safe_height * -1.0 - 0.5
+	var raycast_dist = Vector3(0.0, max_safe_height * -1.0 - 0.5, 0.0)
 	$EdgeRaycasts/CenterCast.target_position = raycast_dist
 	$EdgeRaycasts/RightCast.target_position = raycast_dist
 	$EdgeRaycasts/LeftCast.target_position = raycast_dist
@@ -197,11 +197,12 @@ func _physics_process(delta):
 	else: 
 		is_safe = false
 	
-	if not is_on_floor() or not is_on_wall():
+	if not is_on_floor() and not is_on_wall():
 		is_safe = false
 	
 	if is_safe:
 		last_safe_pos = global_position
+		#print(last_safe_pos)
 
 
 func _unhandled_input(event):
@@ -260,15 +261,12 @@ func _transfer_main_cam(target:Player):
 			#Put cam on the same parent-child heirarchy as all of ther player objects
 			player_cam.reparent(get_parent(),true)
 			disable_control(true)
+			
+			transition_mat.set_shader_parameter("close_amount", 0.0)
+			transition_mat.set_shader_parameter("lid_transparency", 1.0)
 	)
 	transfer_tween.tween_property(player_cam,"global_position",target_pos,2.0)
 	transfer_tween.parallel().tween_property(player_cam,"global_rotation",target_rot,2.0)
-	transfer_tween.parallel().tween_callback(func():
-			#just head mesh visibility
-			#$CameraMarker/MeshInstance3D.set_layer_mask_value(1,true)
-			#target.get_node("CameraMarker/MeshInstance3D").set_layer_mask_value(1,false)
-			pass
-	).set_delay(1.0)
 	#Start the eyelids closing after a time
 	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/lid_transparency",0.0,0.4).set_delay(1.55)
 	transfer_tween.tween_callback(func():
@@ -285,8 +283,7 @@ func _transfer_main_cam(target:Player):
 	#Open Eyelids
 	transfer_tween.parallel().tween_property(transition_mat,"shader_parameter/close_amount",1.0,0.4)
 	transfer_tween.tween_callback(func():
-			transition_mat.set_shader_parameter("close_amount", 0.0)
-			transition_mat.set_shader_parameter("lid_transparency", 1.0)
+			pass
 	)
 
 
@@ -313,10 +310,23 @@ func disable_control(disable: bool):
 
 
 func void_out():
-	disable_control(true)
-	print("hit fog void, add animation")
 	
-	velocity = Vector3(0,0,0)
-	global_position = last_safe_pos
+	var transition_mat = player_cam.cam_eyelids_node.material
 	
-	disable_control(false)
+	var respawn_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
+	respawn_tween.tween_callback(func():
+			disable_control(true)
+			print("hit fog void")
+			
+			transition_mat.set_shader_parameter("close_amount", 1.0)
+			transition_mat.set_shader_parameter("lid_transparency", 0.0)
+	)
+	respawn_tween.tween_property(transition_mat,"shader_parameter/close_amount",0.0,0.7)
+	respawn_tween.tween_callback(func():
+			velocity = Vector3(0,0,0)
+			global_position = last_safe_pos
+	)
+	respawn_tween.tween_property(transition_mat,"shader_parameter/close_amount",1.0,0.7).set_delay(0.4)
+	respawn_tween.parallel().tween_callback(func():
+			disable_control(false)
+	).set_delay(0.2)
