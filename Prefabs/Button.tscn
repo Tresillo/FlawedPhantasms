@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d4fldk18r2dqt"]
 
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="1_12ake"]
-[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_green.tres" id="1_rqcjs"]
+[ext_resource type="Material" uid="uid://kitg4vmf5ofh" path="res://Assets/Placeholder/ph_mat_green.tres" id="1_rqcjs"]
 [ext_resource type="Material" uid="uid://63m2ubwuans8" path="res://Assets/Mat/wall_mat_secondary.tres" id="2_6ysbo"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wqx1j"]

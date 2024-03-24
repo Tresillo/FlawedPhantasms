@@ -27,15 +27,23 @@ class_name Door
 	set(val):
 		test_interpolation = val
 		check_movement_by_lerp(val)
+@export var opening_logic: DOOR_LOGIC = DOOR_LOGIC.OR
 
 enum DOOR_STATE{
 	OPENING,
 	CLOSING,
 	IDLE
 }
+enum DOOR_LOGIC{
+	OR,
+	AND
+}
+
 var _cur_state: DOOR_STATE = DOOR_STATE.IDLE
 var _interp_val: float = 0.0
 var _init_pos: Vector3
+
+var _open_limit: int = -1
 var _open_count: int = 0
 
 func _ready():
@@ -70,13 +78,24 @@ func check_movement_by_lerp(amount: float):
 	$MeshInstance3D.position = lerp(Vector3(0,0,0),Vector3(0,0,0) + final_offset, amount)
 
 
+func button_handshake():
+	#runs every time a button connects its signals to this door
+	match opening_logic:
+		DOOR_LOGIC.OR:
+			_open_limit = 0
+		DOOR_LOGIC.AND:
+			_open_limit += 1
+		_:
+			_open_limit = 0
+
+
 func open():
 	_open_count += 1
-	if _open_count > 0:
+	if _open_count > _open_limit:
 		_cur_state = DOOR_STATE.OPENING
 
 
 func close():
 	_open_count -= 1
-	if _open_count <= 0:
+	if _open_count <= _open_limit:
 		_cur_state = DOOR_STATE.CLOSING

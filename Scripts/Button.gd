@@ -30,16 +30,23 @@ func _ready():
 		collision_layer = visibility_flags
 		set_collision_layer_value(1,true)
 		
+		#Waits for the scene root to finish running before continuing
+		await owner.ready
+		
 		#Attaches all objects that are to be controlled by this button
 		for obj in connected_objects:
 			if obj.has_method("open"):
 				button_activated.connect(obj.open)
 			else:
 				push_warning(str(obj) + " is connected to a button without an open() function")
+			
 			if obj.has_method("close"):
 				button_deactivated.connect(obj.close)
 			else:
 				push_warning(str(obj) + " is connected to a button without a close() function")
+			
+			if obj.has_method("button_handshake"):
+				obj.button_handshake()
 
 
 func manage_button(activate:bool, body: Node3D):
