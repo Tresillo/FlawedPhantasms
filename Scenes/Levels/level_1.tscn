@@ -1,8 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://br1lw8gytb55s"]
+[gd_scene load_steps=48 format=3 uid="uid://br1lw8gytb55s"]
 
 [ext_resource type="Script" path="res://Scripts/LevelController.gd" id="1_h3nn0"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_qvjk3"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_jjh8r"]
+[ext_resource type="Script" path="res://Scripts/GeometryManager.gd" id="2_lnrg8"]
 [ext_resource type="Material" uid="uid://d0y4s84b7xweu" path="res://Assets/Mat/wall_mat.tres" id="3_7olof"]
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="4_ftpkg"]
 [ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/Rect_Wall.tscn" id="5_2a4d0"]
@@ -651,206 +652,209 @@ shader = ExtResource("13_32wit")
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_h3nn0")
 
-[node name="StaticGeometry" type="Node3D" parent="."]
+[node name="LevelGeometry" type="Node3D" parent="."]
+script = ExtResource("2_lnrg8")
 
-[node name="block0" type="Node3D" parent="StaticGeometry"]
+[node name="StaticGeometry" type="Node3D" parent="LevelGeometry"]
+
+[node name="block0" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_e4fvs")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_0" type="Node3D" parent="StaticGeometry"]
+[node name="Block_0" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -27)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_pojja")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_1" type="Node3D" parent="StaticGeometry"]
+[node name="Block_1" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 14)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_23yaw")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_2" type="Node3D" parent="StaticGeometry"]
+[node name="Block_2" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -7)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_trhfm")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_3" type="Node3D" parent="StaticGeometry"]
+[node name="Block_3" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_bt4kr")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_4" type="Node3D" parent="StaticGeometry"]
+[node name="Block_4" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 10, -7)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_hikbk")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_5" type="Node3D" parent="StaticGeometry"]
+[node name="Block_5" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 10, -7)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_46tsl")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_6" type="Node3D" parent="StaticGeometry"]
+[node name="Block_6" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -27)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_y6mfw")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_7" type="Node3D" parent="StaticGeometry"]
+[node name="Block_7" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_3v7su")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_8" type="Node3D" parent="StaticGeometry"]
+[node name="Block_8" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 14)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_yeaid")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_10" type="Node3D" parent="StaticGeometry" groups=["window"]]
+[node name="Block_10" type="Node3D" parent="LevelGeometry/StaticGeometry" groups=["window"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_mfxou")
 materials = Array[Material]([ExtResource("6_jddag")])
 
-[node name="Block_11" type="Node3D" parent="StaticGeometry"]
+[node name="Block_11" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_3oqum")
 materials = Array[Material]([ExtResource("3_7olof")])
 collision_layer = 3073
 
-[node name="Block_12" type="Node3D" parent="StaticGeometry" groups=["window"]]
+[node name="Block_12" type="Node3D" parent="LevelGeometry/StaticGeometry" groups=["window"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_rmld5")
 materials = Array[Material]([ExtResource("6_jddag")])
 
-[node name="Block_13" type="Node3D" parent="StaticGeometry" groups=["window"]]
+[node name="Block_13" type="Node3D" parent="LevelGeometry/StaticGeometry" groups=["window"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_8361h")
 materials = Array[Material]([ExtResource("6_jddag")])
 
-[node name="Block_14" type="Node3D" parent="StaticGeometry" groups=["window"]]
+[node name="Block_14" type="Node3D" parent="LevelGeometry/StaticGeometry" groups=["window"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1, 5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_x1rot")
 materials = Array[Material]([ExtResource("6_jddag")])
 
-[node name="Block_15" type="Node3D" parent="StaticGeometry" groups=["window"]]
+[node name="Block_15" type="Node3D" parent="LevelGeometry/StaticGeometry" groups=["window"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1, 5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_28jw3")
 materials = Array[Material]([ExtResource("6_jddag")])
 
-[node name="Block_16" type="Node3D" parent="StaticGeometry" groups=["window"]]
+[node name="Block_16" type="Node3D" parent="LevelGeometry/StaticGeometry" groups=["window"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1, 5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_twsi5")
 materials = Array[Material]([ExtResource("6_jddag")])
 
-[node name="Block_9" type="Node3D" parent="StaticGeometry" groups=["window"]]
+[node name="Block_9" type="Node3D" parent="LevelGeometry/StaticGeometry" groups=["window"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.79687, 1.09741, -3.73736)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_u71mb")
 materials = Array[Material]([ExtResource("6_jddag")])
 
-[node name="Block_17" type="Node3D" parent="StaticGeometry"]
+[node name="Block_17" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_lbppu")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_18" type="Node3D" parent="StaticGeometry"]
+[node name="Block_18" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_gj6wh")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_19" type="Node3D" parent="StaticGeometry"]
+[node name="Block_19" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_pb63s")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_21" type="Node3D" parent="StaticGeometry"]
+[node name="Block_21" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -17.5)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_1uihm")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_20" type="Node3D" parent="StaticGeometry"]
+[node name="Block_20" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -27)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_4fcqb")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_22" type="Node3D" parent="StaticGeometry"]
+[node name="Block_22" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -27)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_cv2c6")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="Block_23" type="Node3D" parent="StaticGeometry"]
+[node name="Block_23" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -29)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_wykta")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="block1" parent="StaticGeometry" instance=ExtResource("6_d6ux5")]
+[node name="block1" parent="LevelGeometry/StaticGeometry" instance=ExtResource("6_d6ux5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -34)
 
-[node name="Block_24" type="Node3D" parent="StaticGeometry"]
+[node name="Block_24" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -37)
 script = ExtResource("1_qvjk3")
 block_data = SubResource("Resource_pykwt")
 materials = Array[Material]([ExtResource("3_7olof")])
 
-[node name="StaticPuzzleGeometry" type="Node3D" parent="."]
+[node name="StaticPuzzleGeometry" type="Node3D" parent="LevelGeometry"]
 
-[node name="RectWall" parent="StaticPuzzleGeometry" instance=ExtResource("5_2a4d0")]
+[node name="RectWall" parent="LevelGeometry/StaticPuzzleGeometry" instance=ExtResource("5_2a4d0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -3, -11)
 size = Vector3(8, 8, 11)
 display_material = ExtResource("3_7olof")
 visibility_flags = 2048
 
-[node name="LevelGoal" parent="StaticPuzzleGeometry" instance=ExtResource("7_hv7np")]
+[node name="LevelGoal" parent="LevelGeometry/StaticPuzzleGeometry" instance=ExtResource("7_hv7np")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 44, 2, -34)
 
-[node name="Pit" parent="StaticPuzzleGeometry" instance=ExtResource("6_ab0tv")]
+[node name="Pit" parent="LevelGeometry/StaticPuzzleGeometry" instance=ExtResource("6_ab0tv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21652, -9.5754, -9.49671)
 size = Vector3(19, 15, 20)
 
-[node name="Interactables" type="Node3D" parent="."]
+[node name="Interactables" type="Node3D" parent="LevelGeometry"]
 
-[node name="RightStartDoor" parent="Interactables" instance=ExtResource("6_cfsyw")]
+[node name="RightStartDoor" parent="LevelGeometry/Interactables" instance=ExtResource("6_cfsyw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 2.5, 5.75)
 size = Vector3(2, 3, 0.5)
 display_material = ExtResource("7_o0ri6")
 visibility_flags = 3073
 final_offset = Vector3(0, -3.1, 0)
 
-[node name="LeftStartDoor" parent="Interactables" instance=ExtResource("6_cfsyw")]
+[node name="LeftStartDoor" parent="LevelGeometry/Interactables" instance=ExtResource("6_cfsyw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.98504, 2.5, 5.74016)
 size = Vector3(2, 3, 0.5)
 display_material = ExtResource("7_o0ri6")
 visibility_flags = 3073
 final_offset = Vector3(0, -3.1, 0)
 
-[node name="Button" parent="Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
+[node name="Button" parent="LevelGeometry/Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, 12.5)
 connected_objects = [NodePath("../RightStartDoor"), NodePath("../LeftStartDoor")]
 button_material = ExtResource("9_086tw")
 
-[node name="Button2" parent="Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
+[node name="Button2" parent="LevelGeometry/Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.59277, 1, 2.2438)
 connected_objects = [NodePath("../RightStartDoor"), NodePath("../LeftStartDoor")]
 button_material = ExtResource("9_086tw")
 
-[node name="Bridge" parent="Interactables" instance=ExtResource("6_cfsyw")]
+[node name="Bridge" parent="LevelGeometry/Interactables" instance=ExtResource("6_cfsyw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, -11)
 size = Vector3(8, 1, 11)
 display_material = ExtResource("9_jv3vx")
@@ -858,12 +862,12 @@ visibility_flags = 2048
 final_offset = Vector3(0, 1.5, 0)
 speed = 1.5
 
-[node name="BridgeButton" parent="Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
+[node name="BridgeButton" parent="LevelGeometry/Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_j7f0o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0677, 0.980782, -21.1265)
 connected_objects = [NodePath("../Bridge"), NodePath("../EndDoor")]
 button_material = ExtResource("10_7sctj")
 
-[node name="EndDoor" parent="Interactables" instance=ExtResource("6_cfsyw")]
+[node name="EndDoor" parent="LevelGeometry/Interactables" instance=ExtResource("6_cfsyw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.039, 3.088, -31.5)
 size = Vector3(4, 5, 1)
 display_material = ExtResource("9_jv3vx")
