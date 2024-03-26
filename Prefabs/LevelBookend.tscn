@@ -318,7 +318,7 @@ face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
 active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
-[node name="block0" type="Node3D"]
+[node name="Bookend" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 script = ExtResource("1_wdvbb")
 block_data = SubResource("Resource_tg14a")

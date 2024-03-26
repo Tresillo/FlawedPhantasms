@@ -17,7 +17,7 @@ class_name Player
 
 @export_category("Interacting Properties")
 @export var _mouse_sensitivity: float = 3
-@export var _interact_dist: float = 30
+@export var _interact_dist: float = 100
 
 @export_category("Brain Change Properties")
 @export var _disabled: bool = true
@@ -40,7 +40,7 @@ var last_safe_pos: Vector3
 
 func _ready():
 	disable_control(not _starting_player)
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	_crouching = false
 	player_cam = null
 	

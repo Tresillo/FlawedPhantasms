@@ -22,7 +22,7 @@ class_name Door
 	set(val):
 		final_offset = val
 		$EditorVisualisation/EndMesh.position = val
-@export_range(0.5,3.0,0.1) var speed: float = 1.0
+@export_range(0.1,3.0,0.1) var speed: float = 1.0
 @export_range(0,1.0,0.01) var test_interpolation: float = 0.0:
 	set(val):
 		test_interpolation = val

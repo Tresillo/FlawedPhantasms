@@ -14,10 +14,16 @@ func _ready():
 				var temp_block: CyclopsBlock = c as CyclopsBlock
 				var found: bool = false
 				for m in temp_block.materials:
-					if not found and (m == window_materials[0] or m == window_materials[1]):
+					if not found and window_materials.find(m) > -1:
 						temp_block.add_to_group("window")
 						found = true
 			
 			if c is RectWall:
 				var temp_wall: RectWall = c as RectWall
-				
+				if window_materials.find(temp_wall.display_material) > -1:
+					temp_wall.add_to_group("window")
+			
+			if c is Door:
+				var temp_door: Door = c as Door
+				if window_materials.find(temp_door.display_material) > -1:
+					temp_door.add_to_group("window")
