@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bgsdqvc4p04m4"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/DebugWireframe.gdshader" id="1_rtgij"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_rtgij")
+shader_parameter/frame_color = Color(0.768627, 0.4, 0.4, 1)
