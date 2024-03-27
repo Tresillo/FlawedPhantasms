@@ -2153,7 +2153,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 5, -29.5)
 size = Vector3(9, 4, 1)
 display_material = ExtResource("10_mjovd")
 final_offset = Vector3(0, 4, 0)
-speed = 3.0
+speed = 2.0
 opening_logic = 1
 
 [node name="HiddenLB1" parent="LevelGeometry/Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_qxpwl")]
@@ -2291,14 +2291,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.5, 10, 28.5)
 omni_range = 11.969
 
 [node name="OmniLight3D6" parent="Lighting" instance=ExtResource("22_o3e32")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 7, -11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 7, -13)
 omni_range = 18.472
-
-[node name="OmniLight3D8" parent="Lighting" instance=ExtResource("22_o3e32")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 4.5, 5.5)
-
-[node name="OmniLight3D9" parent="Lighting" instance=ExtResource("22_o3e32")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 4.5, -4.5)
 
 [node name="OmniLight3D10" parent="Lighting" instance=ExtResource("22_o3e32")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, 8.5, -23.5)

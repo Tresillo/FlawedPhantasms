@@ -4,7 +4,7 @@
 
 [resource]
 albedo_texture = ExtResource("1_afq54")
-metallic = 0.3
+metallic = 0.1
 roughness = 0.51
 clearcoat = 0.0
 clearcoat_roughness = 0.63
