@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="6_cfsyw"]
 [ext_resource type="PackedScene" uid="uid://bm16un4wgox6r" path="res://Prefabs/LevelBookend.tscn" id="6_d6ux5"]
 [ext_resource type="Material" uid="uid://4rkcncgl3f6x" path="res://Assets/Mat/window_tex_mat.tres" id="6_jddag"]
-[ext_resource type="PackedScene" uid="uid://ovvq3mxuty4v" path="res://Prefabs/EndLevelInteractable.tscn" id="7_hv7np"]
+[ext_resource type="PackedScene" uid="uid://ovvq3mxuty4v" path="res://Prefabs/LevelGoal.tscn" id="7_hv7np"]
 [ext_resource type="Material" uid="uid://66he2eugh5ys" path="res://Assets/Mat/PuzzleObjects/PurpleTileMat.tres" id="7_o0ri6"]
 [ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/Button.tscn" id="8_j7f0o"]
 [ext_resource type="Material" uid="uid://cm0s4hba0oxml" path="res://Assets/Mat/PuzzleObjects/PurpleSingleMat.tres" id="9_086tw"]
