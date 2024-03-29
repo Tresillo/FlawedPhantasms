@@ -6,5 +6,4 @@ background_color = Color(1, 0.972549, 0.858824, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 0.945098, 0.929412, 1)
 ambient_light_energy = 0.5
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.0

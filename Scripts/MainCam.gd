@@ -16,12 +16,12 @@ func _ready():
 	set_cull_mask_value(1, true)
 	_cur_mask_id = 1
 	cam_eyelids_node = $UI/CamEyelids
-	$CameraFog.visible = false
+	$UI/CameraFog.visible = false
 
 
 func fog_cam_view(fog: bool):
-	if $CameraFog != null:
-		$CameraFog.visible = fog
+	if $UI/CameraFog != null:
+		$UI/CameraFog.visible = fog
 		view_fogged = fog
 
 

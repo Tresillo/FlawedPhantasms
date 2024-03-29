@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, cull_back, depth_draw_always;
+render_mode unshaded, cull_disabled, depth_draw_always;
 
 uniform sampler2D DEPTH_TEXTURE : source_color, hint_depth_texture;
 uniform sampler2D noise_texture;
@@ -19,8 +19,12 @@ void fragment() {
 	view.xyz /= view.w;
 	float linear_depth = clamp(-view.z / depth_range,0.0,1.0);
 	
-	ALBEDO = clamp(void_color + noise * 0.1 * noise_color_weight,vec3(0.0),vec3(1.0));
-	ALPHA = clamp(linear_depth + noise * noise_alpha_weight,0.7,1.0);
+	vec3 fog_color = clamp(void_color + noise * 0.1 * noise_color_weight,vec3(0.0),vec3(1.0));
+	float fog_alpha = clamp(linear_depth - noise * noise_alpha_weight,0.7,1.0);
+	
+	FOG = vec4(fog_color, fog_alpha);
+	ALBEDO = fog_color;
+	ALPHA = fog_alpha;
 	
 }
 

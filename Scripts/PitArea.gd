@@ -6,7 +6,7 @@ extends Area3D
 		size = val
 		$CollisionShape3D.shape.size = val
 		$MeshInstance3D.mesh.size = val
-		($MeshInstance3D as MeshInstance3D).material_override.set_shader_parameter("scroll_speed", 3.0 * pow(val.x,-1))
+		#($MeshInstance3D as MeshInstance3D).material_override.set_shader_parameter("scroll_speed", 3.0 * pow(val.x,-1))
 
 
 func _on_body_entered(body):
