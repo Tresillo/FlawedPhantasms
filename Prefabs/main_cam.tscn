@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://diry562y362eu"]
+[gd_scene load_steps=14 format=3 uid="uid://diry562y362eu"]
 
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
 [ext_resource type="Environment" uid="uid://e3i1ntpju1jv" path="res://Prefabs/World_Environment.tres" id="1_ep4qw"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/CameraLensTemplate.gdshader" id="2_itnd6"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="3_8ce8t"]
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="4_gt4h6"]
+[ext_resource type="Shader" path="res://Assets/Shaders/CamFog.gdshader" id="4_kqdoh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
 render_priority = 0
@@ -13,6 +14,29 @@ shader_parameter/depth_range = null
 
 [sub_resource type="QuadMesh" id="QuadMesh_1idc1"]
 material = SubResource("ShaderMaterial_twcwy")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eucv3"]
+frequency = 0.005
+domain_warp_enabled = true
+domain_warp_frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_30t66"]
+seamless = true
+noise = SubResource("FastNoiseLite_eucv3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_enfh1"]
+render_priority = 0
+shader = ExtResource("4_kqdoh")
+shader_parameter/scroll_speed = 3.0
+shader_parameter/noise_alpha_weight = 1.3
+shader_parameter/noise_color_weight = 0.14
+shader_parameter/void_color = Color(0.101961, 0.0980392, 0.0941176, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_30t66")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ivy8p"]
+material = SubResource("ShaderMaterial_enfh1")
 flip_faces = true
 size = Vector2(2, 2)
 
@@ -33,6 +57,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.02808, 0)
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_1idc1")
 skeleton = NodePath("../../..")
+
+[node name="CameraFog" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("QuadMesh_ivy8p")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

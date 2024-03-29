@@ -7,6 +7,7 @@ var lens_shader_material: ShaderMaterial:
 		if get_node("CamLens") != null:
 			(get_node("CamLens") as MeshInstance3D).material_override = lens_shader_material
 var cam_eyelids_node: ColorRect
+var view_fogged:bool = false
 
 func _ready():
 	for i in range(1,21):
@@ -15,6 +16,13 @@ func _ready():
 	set_cull_mask_value(1, true)
 	_cur_mask_id = 1
 	cam_eyelids_node = $UI/CamEyelids
+	$CameraFog.visible = false
+
+
+func fog_cam_view(fog: bool):
+	if $CameraFog != null:
+		$CameraFog.visible = fog
+		view_fogged = fog
 
 
 func update_cull_mask(new_id: int):

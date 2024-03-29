@@ -27,7 +27,7 @@ render_priority = 2
 next_pass = SubResource("ShaderMaterial_2p6c7")
 shader = ExtResource("1_lgujx")
 shader_parameter/scroll_speed = 3.0
-shader_parameter/noise_alpha_weight = 0.1
+shader_parameter/noise_alpha_weight = 0.2
 shader_parameter/noise_color_weight = 0.14
 shader_parameter/void_color = Color(0.101961, 0.0980392, 0.0941176, 1)
 shader_parameter/depth_range = 1.1
@@ -43,6 +43,7 @@ script = ExtResource("1_qptp6")
 shape = SubResource("BoxShape3D_w4htt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00430191, -0.00461152, -0.00229466)
 material_override = SubResource("ShaderMaterial_2m0am")
 mesh = SubResource("BoxMesh_er5bm")
 

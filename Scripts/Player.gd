@@ -320,15 +320,18 @@ func void_out():
 	var respawn_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	respawn_tween.tween_callback(func():
 			disable_control(true)
+			player_cam.fog_cam_view(true)
 			print("hit fog void")
 			
 			transition_mat.set_shader_parameter("close_amount", 1.0)
 			transition_mat.set_shader_parameter("lid_transparency", 0.0)
 	)
-	respawn_tween.tween_property(transition_mat,"shader_parameter/close_amount",0.0,0.7)
+	respawn_tween.tween_property(transition_mat,"shader_parameter/close_amount",0.0,1.2)
 	respawn_tween.tween_callback(func():
 			velocity = Vector3(0,0,0)
 			global_position = last_safe_pos
+			
+			player_cam.fog_cam_view(false)
 	)
 	respawn_tween.tween_property(transition_mat,"shader_parameter/close_amount",1.0,0.7).set_delay(0.4)
 	respawn_tween.parallel().tween_callback(func():
