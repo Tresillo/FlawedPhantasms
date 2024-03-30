@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://wyukmmyvjmvm"]
+[gd_scene load_steps=130 format=3 uid="uid://wyukmmyvjmvm"]
 
 [ext_resource type="Script" path="res://Scripts/LevelController.gd" id="1_t76rh"]
 [ext_resource type="Script" path="res://Scripts/GeometryManager.gd" id="2_gadi2"]
@@ -21,6 +21,7 @@
 [ext_resource type="Material" uid="uid://bmkwwak1psb1t" path="res://Assets/Mat/PuzzleObjects/TealSingleMat.tres" id="15_njdt4"]
 [ext_resource type="Material" uid="uid://chk35svqp2s6x" path="res://Assets/Mat/PuzzleObjects/GreenTileMat.tres" id="17_7mtwh"]
 [ext_resource type="Material" uid="uid://dba8nj7bqrwtb" path="res://Assets/Mat/PuzzleObjects/GreenSingleMat.tres" id="18_cvocs"]
+[ext_resource type="PackedScene" uid="uid://dyxgu75j1khsg" path="res://Prefabs/defaultIndoorLight.tscn" id="22_d0f1m"]
 
 [sub_resource type="Resource" id="Resource_my233"]
 script = ExtResource("4_dacsf")
@@ -526,14 +527,14 @@ face_selected = PackedByteArray(0, 0, 0, 1, 0, 0)
 active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
-[sub_resource type="Resource" id="Resource_esl4q"]
+[sub_resource type="Resource" id="Resource_sb4di"]
 script = ExtResource("4_dacsf")
 selected = false
 active = false
 collsion = true
 physics_layer = 0
 physics_mask = 0
-vertex_points = PackedVector3Array(7, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 1, 0, 17, 1, 0, 17, 0, 7, 17, 0, 7, 17, 1)
+vertex_points = PackedVector3Array(7, 17, 1, -1, 17, 1, -1, 17, 0, 7, 17, 0, 7, 0, 0, -1, 0, 0, -1, 0, 1, 7, 0, 1)
 vertex_selected = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0)
 active_vertex = -1
 edge_vertex_indices = PackedInt32Array(0, 1, 1, 2, 2, 3, 3, 0, 4, 3, 2, 5, 5, 4, 6, 5, 1, 6, 4, 7, 7, 0, 6, 7)
@@ -546,8 +547,8 @@ face_material_indices = PackedInt32Array(0, 0, 0, 0, 0, 0)
 face_uv_transform = Array[Transform2D]([Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0), Transform2D(1, 0, 0, 1, 0, 0)])
 face_visible = PackedByteArray(1, 1, 1, 1, 1, 1)
 face_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-face_selected = PackedByteArray(0, 0, 0, 1, 0, 0)
-active_face = 3
+face_selected = PackedByteArray(0, 0, 1, 0, 0, 0)
+active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
 [sub_resource type="Resource" id="Resource_vacs6"]
@@ -2723,7 +2724,7 @@ materials = Array[Material]([ExtResource("5_jmuys")])
 [node name="Block_28" type="Node3D" parent="LevelGeometry/StaticGeometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5.5)
 script = ExtResource("3_djg77")
-block_data = SubResource("Resource_esl4q")
+block_data = SubResource("Resource_sb4di")
 materials = Array[Material]([ExtResource("5_jmuys")])
 
 [node name="Block_29" type="Node3D" parent="LevelGeometry/StaticGeometry"]
@@ -3397,3 +3398,27 @@ _vis_layer_id = 19
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
 transform = Transform3D(0.965926, -0.224144, 0.12941, 0, 0.5, 0.866025, -0.258819, -0.836516, 0.482963, 0, 0, 0)
+visible = false
+
+[node name="Starterights" type="Node3D" parent="Lighting"]
+
+[node name="OmniLight3D" parent="Lighting/Starterights" instance=ExtResource("22_d0f1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 11, 2.5)
+omni_range = 8.81
+
+[node name="OmniLight3D2" parent="Lighting/Starterights" instance=ExtResource("22_d0f1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 4.5, 11.5)
+omni_range = 4.925
+
+[node name="OmniLight3D3" parent="Lighting/Starterights" instance=ExtResource("22_d0f1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 15.5, 9)
+omni_range = 10.535
+
+[node name="OmniLight3D4" parent="Lighting/Starterights" instance=ExtResource("22_d0f1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 5, 4)
+omni_range = 7.367
+
+[node name="OmniLight3D5" parent="Lighting/Starterights" instance=ExtResource("22_d0f1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 6, 9.5)
+
+[node name="EndLights" type="Node3D" parent="Lighting"]
