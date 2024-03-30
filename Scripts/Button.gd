@@ -8,7 +8,7 @@ extends StaticBody3D
 		button_material = val
 		if find_child("ButtonMesh") != null:
 			$ButtonMesh.mesh.material = val
-@export_range(1.0,3.0,0.25) var button_size: float = 2.0:
+@export_range(1.0,3.0,0.2) var button_size: float = 2.0:
 	set(val):
 		button_size = val
 		update_button_size()
