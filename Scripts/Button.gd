@@ -6,7 +6,7 @@ extends StaticBody3D
 @export var button_material: Material:
 	set(val):
 		button_material = val
-		if find_child("ButtonMesh") != null:
+		if find_child("ButtonMesh") != null and Engine.is_editor_hint():
 			$ButtonMesh.mesh.material = val
 @export_range(1.0,3.0,0.2) var button_size: float = 2.0:
 	set(val):
@@ -68,38 +68,46 @@ func manage_button(activate:bool, body: Node3D):
 
 
 func update_button_size():
+	var valid = true
+	
 	var base_mesh
 	if find_child("BaseMesh") != null:
 		base_mesh = ((find_child("BaseMesh")\
 				 as MeshInstance3D).mesh as BoxMesh)
+		valid = false
 	
 	var collision_box
 	if find_child("ButtonCollision") != null:
 		collision_box = ((find_child("ButtonCollision")\
 				 as CollisionShape3D).shape as BoxShape3D)
+		valid = false
 	
 	var button_mesh
 	if find_child("ButtonMesh") != null:
 		button_mesh = ((find_child("ButtonMesh")\
 				 as MeshInstance3D).mesh as BoxMesh)
+		valid = false
 	
 	var activation_box
 	if find_child("Activation/CollisionShape3D") != null:
 		activation_box = ((find_child("Activation/CollisionShape3D")\
 				as CollisionShape3D).shape as BoxShape3D)
+		valid = false
 	
-	var inner_size = button_size - margin_size - margin_size
-	if inner_size <= 0.1:
-		inner_size = 0.1
+	if valid:
+		var inner_size = button_size - margin_size - margin_size
+		if inner_size <= 0.1:
+			inner_size = 0.1
+		
+		base_mesh.size.x = button_size
+		base_mesh.size.z = button_size
+		
+		collision_box.size.x = button_size
+		collision_box.size.z = button_size
+		
+		button_mesh.size.x = inner_size
+		button_mesh.size.z = inner_size
+		
+		activation_box.size.x = inner_size
+		activation_box.size.z = inner_size
 	
-	base_mesh.size.x = button_size
-	base_mesh.size.z = button_size
-	
-	collision_box.size.x = button_size
-	collision_box.size.z = button_size
-	
-	button_mesh.size.x = inner_size
-	button_mesh.size.z = inner_size
-	
-	activation_box.size.x = inner_size
-	activation_box.size.z = inner_size
