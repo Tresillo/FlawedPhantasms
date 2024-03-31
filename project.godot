@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="PhantasmalPerspectives"
-run/main_scene="res://Scenes/Levels/level_4.tscn"
+run/main_scene="res://Scenes/Levels/level_1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Assets/Sprites/icon.svg"
 
 [autoload]
 
 CyclopsAutoload="*res://addons/cyclops_level_builder/cyclops_global_scene.tscn"
+SceneLoaderAutoload="*res://Scripts/GlobalSceneLoader.gd"
 
 [display]
 

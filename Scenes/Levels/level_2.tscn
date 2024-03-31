@@ -2246,6 +2246,7 @@ opening_logic = 1
 
 [node name="LevelGoal" parent="LevelGeometry/Interactables" instance=ExtResource("23_7p12u")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -60, 8, 0.5)
+next_level_path = "res://Scenes/Levels/level_4.tscn"
 
 [node name="Players" type="Node3D" parent="."]
 

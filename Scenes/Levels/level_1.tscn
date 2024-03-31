@@ -853,7 +853,8 @@ display_material = ExtResource("3_7olof")
 visibility_flags = 2048
 
 [node name="LevelGoal" parent="LevelGeometry/StaticPuzzleGeometry" instance=ExtResource("7_hv7np")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 44, 2, -34)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 44, 2, -34)
+next_level_path = "res://Scenes/Levels/level_2.tscn"
 
 [node name="Pit" parent="LevelGeometry/StaticPuzzleGeometry" instance=ExtResource("6_ab0tv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, -9, -11)
