@@ -15,6 +15,7 @@ func _ready():
 	for p in get_tree().get_nodes_in_group("player"):
 		if p._starting_player:
 			p.starting_player_start_animation()
+			break
 
 
 func col_fnd():

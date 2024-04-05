@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4fldk18r2dqt"]
+[gd_scene load_steps=9 format=3 uid="uid://d4fldk18r2dqt"]
 
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="1_12ake"]
 [ext_resource type="Material" uid="uid://kitg4vmf5ofh" path="res://Assets/Placeholder/ph_mat_green.tres" id="1_rqcjs"]
 [ext_resource type="Material" uid="uid://63m2ubwuans8" path="res://Assets/Mat/wall_mat_secondary.tres" id="2_6ysbo"]
+[ext_resource type="AudioStream" uid="uid://c14xeymcp1gyb" path="res://Assets/Audio/SFX/switch_004.ogg" id="4_0a7m7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wqx1j"]
 resource_local_to_scene = true
@@ -25,6 +26,7 @@ size = Vector3(1.8, 0.112, 1.8)
 [node name="Button" type="StaticBody3D"]
 script = ExtResource("1_12ake")
 visibility_flags = 1
+pitch_shift = null
 
 [node name="BaseMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
@@ -43,3 +45,7 @@ shape = SubResource("BoxShape3D_n02dy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Activation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011, 0.165168, 0)
 shape = SubResource("BoxShape3D_48uvy")
+
+[node name="PressAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_0a7m7")
+bus = &"DiegeticSFX"

@@ -16,7 +16,8 @@ extends StaticBody3D
 	set(val):
 		margin_size = val
 		update_button_size()
-	
+@export var pitch_shift: float = 0.2
+
 var _pressed: bool
 
 signal button_activated()
@@ -58,12 +59,24 @@ func _ready():
 
 
 func manage_button(activate:bool, body: Node3D):
-	#cutton functionality
+	#button functionality
 	if activate and not _pressed and $Activation.has_overlapping_bodies():
 		_pressed = true
+		
+		if $PressAudio.playing:
+			$PressAudio.stop()
+		$PressAudio.pitch_scale = 1.0
+		$PressAudio.play()
+		
 		button_activated.emit()
 	elif not activate and _pressed and not $Activation.has_overlapping_bodies():
 		_pressed = false
+		
+		if $PressAudio.playing:
+			$PressAudio.stop()
+		$PressAudio.pitch_scale = 1.0 - pitch_shift
+		$PressAudio.play()
+		
 		button_deactivated.emit()
 
 
