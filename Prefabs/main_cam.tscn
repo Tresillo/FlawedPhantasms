@@ -74,4 +74,5 @@ current = true
 
 [node name="PlayerChange" type="AudioStreamPlayer" parent="AudioStreams"]
 stream = ExtResource("6_th20f")
+volume_db = -5.0
 bus = &"SFX"

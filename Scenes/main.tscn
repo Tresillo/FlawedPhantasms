@@ -1,14 +1,14 @@
 [gd_scene load_steps=21 format=3 uid="uid://c4nwd8easbfil"]
 
-[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_dark.tres" id="1_fgs6r"]
+[ext_resource type="Material" uid="uid://wuw05l1a3qba" path="res://Assets/Placeholder/ph_mat_dark.tres" id="1_fgs6r"]
 [ext_resource type="PackedScene" uid="uid://di71bbsg7rxa0" path="res://Prefabs/Door.tscn" id="1_sq1d0"]
 [ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/Rect_Wall.tscn" id="2_352a4"]
-[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_green.tres" id="2_f3bkt"]
+[ext_resource type="Material" uid="uid://kitg4vmf5ofh" path="res://Assets/Placeholder/ph_mat_green.tres" id="2_f3bkt"]
 [ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="2_r76vy"]
 [ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/Button.tscn" id="3_m1reu"]
-[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_red.tres" id="3_qn8pd"]
+[ext_resource type="Material" uid="uid://c1iloxv73exv4" path="res://Assets/Placeholder/ph_mat_red.tres" id="3_qn8pd"]
 [ext_resource type="Material" uid="uid://4rkcncgl3f6x" path="res://Assets/Mat/window_tex_mat.tres" id="5_vknxl"]
-[ext_resource type="Material" path="res://Assets/Placeholder/ph_mat_purple.tres" id="6_bwavv"]
+[ext_resource type="Material" uid="uid://cm8uikvqbdik2" path="res://Assets/Placeholder/ph_mat_purple.tres" id="6_bwavv"]
 [ext_resource type="Material" uid="uid://d0y4s84b7xweu" path="res://Assets/Mat/wall_mat.tres" id="6_fs4co"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/DefaultLens.gdshader" id="11_wc00v"]
 [ext_resource type="PackedScene" uid="uid://diry562y362eu" path="res://Prefabs/main_cam.tscn" id="12_m6nl0"]
@@ -88,6 +88,7 @@ visibility_flags = 513
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0515308, -3.71683)
 connected_objects = [NodePath("../Door"), NodePath("../Door2")]
 visibility_flags = 3
+pitch_shift = 0.2
 
 [node name="Door" parent="Interactables" instance=ExtResource("1_sq1d0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82393, 1.35163, -6.63135)

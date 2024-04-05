@@ -5,7 +5,7 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
-	var interactible_level_objs = find_child("LevelGeometry/Interactables")
+	var interactible_level_objs = get_node("LevelGeometry/Interactables")
 	
 	#connect to collectible
 	for c in interactible_level_objs.get_children():

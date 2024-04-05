@@ -7,7 +7,7 @@ class_name Player
 @export var _aerial_influence: float = 10.0
 @export var _grounded_acceleration: float = 0.21
 @export var _max_speed: float = 15
-@export var _footstep_gait: float = 0.6
+@export var _footstep_gait: float = 2.5
 
 @export_category("Crouching Properties")
 @export var _crouch_dist: float = 0.8
@@ -38,6 +38,8 @@ var _crouch_tween: Tween
 
 var last_safe_pos: Vector3
 var last_step: Vector3
+
+var dist_travelled: float = 0.0
 
 
 func _ready():
@@ -134,11 +136,6 @@ func _process(delta):
 	if velocity.length() > _max_speed:
 		velocity = velocity.normalized() * _max_speed
 	
-	#play footstep sound
-	if is_on_floor() and global_position.distance_to(last_step) > _footstep_gait and not _disabled:
-		find_child("Audio/Footstep").play()
-		last_step = global_position
-	
 	#run collision built into CharacterBody3D
 	move_and_slide()
 	
@@ -213,6 +210,14 @@ func _physics_process(delta):
 	if is_safe:
 		last_safe_pos = global_position
 		#print(last_safe_pos)
+	
+	#play footstep sound
+	if is_on_floor() and not _disabled:
+		dist_travelled += last_step.distance_to(global_position)
+		last_step = global_position
+		if dist_travelled > _footstep_gait:
+			get_node("Audio/Footstep").play()
+			dist_travelled = 0.0
 
 
 func _unhandled_input(event):
@@ -263,7 +268,7 @@ func _transfer_main_cam(target):
 	var target_pos = target_cam_marker.global_position
 	var target_rot = target_cam_marker.global_rotation
 	var transition_mat = player_cam.cam_eyelids_node.material
-	var transition_sound = player_cam.find_child("AudioStreams/PlayerChange")
+	var transition_sound = player_cam.get_node("AudioStreams/PlayerChange")
 	
 	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	transfer_tween.tween_callback(func():
