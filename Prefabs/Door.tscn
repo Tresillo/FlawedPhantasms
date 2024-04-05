@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://di71bbsg7rxa0"]
+[gd_scene load_steps=13 format=3 uid="uid://di71bbsg7rxa0"]
 
 [ext_resource type="Script" path="res://Scripts/Door.gd" id="1_2eu81"]
 [ext_resource type="Shader" path="res://Assets/Shaders/DebugWireframe.gdshader" id="2_mg280"]
 [ext_resource type="Material" uid="uid://bl3cwqkla5mdv" path="res://Assets/Placeholder/ph_mat_orange.tres" id="2_uuxgq"]
 [ext_resource type="Texture2D" uid="uid://cm8vomnsunuli" path="res://Assets/Placeholder/ph_tex_orange.png" id="3_fo6kn"]
+[ext_resource type="AudioStream" uid="uid://7bq5wknm2fub" path="res://Assets/Audio/SFX/stone-push-loop.mp3" id="5_l2opy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s64ro"]
 resource_local_to_scene = true
@@ -55,3 +56,9 @@ mesh = SubResource("BoxMesh_56by1")
 [node name="EndMesh" type="MeshInstance3D" parent="EditorVisualisation"]
 material_override = SubResource("ShaderMaterial_mt6bf")
 mesh = SubResource("BoxMesh_eii0i")
+
+[node name="OpeningSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_l2opy")
+volume_db = -20.0
+unit_size = 25.0
+bus = &"SFX"

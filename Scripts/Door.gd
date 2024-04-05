@@ -67,6 +67,10 @@ func _process(delta):
 			position_mod = delta * speed
 		elif _cur_state == DOOR_STATE.CLOSING and _interp_val > 0.0:
 			position_mod = delta * -speed
+		else:
+			_cur_state = DOOR_STATE.IDLE
+			if $OpeningSound.playing:
+				$OpeningSound.stop()
 		
 		if position_mod != 0.0:
 			_interp_val = clamp(_interp_val + position_mod, 0.0, 1.0)
@@ -93,9 +97,14 @@ func open():
 	_open_count += 1
 	if _open_count > _open_limit:
 		_cur_state = DOOR_STATE.OPENING
-
+		
+		if not $OpeningSound.playing:
+			$OpeningSound.play()
 
 func close():
 	_open_count -= 1
 	if _open_count <= _open_limit:
 		_cur_state = DOOR_STATE.CLOSING
+		
+		if not $OpeningSound.playing:
+			$OpeningSound.play()

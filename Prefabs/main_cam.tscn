@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://diry562y362eu"]
+[gd_scene load_steps=10 format=3 uid="uid://diry562y362eu"]
 
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
 [ext_resource type="Environment" uid="uid://e3i1ntpju1jv" path="res://Prefabs/World_Environment.tres" id="1_ep4qw"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/CameraLensTemplate.gdshader" id="2_itnd6"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="3_8ce8t"]
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="4_gt4h6"]
+[ext_resource type="AudioStream" uid="uid://dcrx5kogdc21e" path="res://Assets/Audio/SFX/Paper2.ogg" id="6_th20f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
 render_priority = 0
@@ -65,3 +66,12 @@ grow_vertical = 2
 texture = ExtResource("4_gt4h6")
 stretch_mode = 3
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+current = true
+
+[node name="AudioStreams" type="Node3D" parent="."]
+
+[node name="PlayerChange" type="AudioStreamPlayer" parent="AudioStreams"]
+stream = ExtResource("6_th20f")
+bus = &"SFX"

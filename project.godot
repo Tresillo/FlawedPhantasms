@@ -8,12 +8,21 @@
 
 config_version=5
 
+[addons]
+
+instance_dock/scene_data_file="res://InstanceDockSceneData.txt"
+instance_dock/preview_resolution=Vector2i(64, 64)
+
 [application]
 
 config/name="PhantasmalPerspectives"
 run/main_scene="res://Scenes/Levels/level_1.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Assets/Sprites/icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://Assets/Audio/default_bus_layout.tres"
 
 [autoload]
 
@@ -28,7 +37,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/cyclops_level_builder/plugin.cfg")
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/cyclops_level_builder/plugin.cfg")
 
 [input]
 

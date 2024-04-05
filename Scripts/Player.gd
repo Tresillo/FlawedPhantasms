@@ -7,6 +7,7 @@ class_name Player
 @export var _aerial_influence: float = 10.0
 @export var _grounded_acceleration: float = 0.21
 @export var _max_speed: float = 15
+@export var _footstep_gait: float = 0.6
 
 @export_category("Crouching Properties")
 @export var _crouch_dist: float = 0.8
@@ -36,6 +37,7 @@ var _crouching: bool = false
 var _crouch_tween: Tween
 
 var last_safe_pos: Vector3
+var last_step: Vector3
 
 
 func _ready():
@@ -57,6 +59,7 @@ func _ready():
 	$EdgeRaycasts/BackCast.position.z = edge_margin
 	$EdgeRaycasts/FrontCast.position.z = edge_margin * -1.0
 	
+	last_step = global_position
 	
 	if _starting_player:
 		%MainCam.update_cull_mask(_vis_layer_id)
@@ -130,6 +133,11 @@ func _process(delta):
 		velocity.z = capped_hvel.y
 	if velocity.length() > _max_speed:
 		velocity = velocity.normalized() * _max_speed
+	
+	#play footstep sound
+	if is_on_floor() and global_position.distance_to(last_step) > _footstep_gait and not _disabled:
+		find_child("Audio/Footstep").play()
+		last_step = global_position
 	
 	#run collision built into CharacterBody3D
 	move_and_slide()
@@ -255,6 +263,7 @@ func _transfer_main_cam(target):
 	var target_pos = target_cam_marker.global_position
 	var target_rot = target_cam_marker.global_rotation
 	var transition_mat = player_cam.cam_eyelids_node.material
+	var transition_sound = player_cam.find_child("AudioStreams/PlayerChange")
 	
 	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	transfer_tween.tween_callback(func():
@@ -263,6 +272,8 @@ func _transfer_main_cam(target):
 			#Put cam on the same parent-child heirarchy as all of ther player objects
 			player_cam.reparent(get_parent(),true)
 			disable_control(true)
+			
+			transition_sound.play()
 			
 			transition_mat.set_shader_parameter("close_amount", 0.0)
 			transition_mat.set_shader_parameter("lid_transparency", 1.0)

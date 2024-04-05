@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3jl2cm236pj4"]
+[gd_scene load_steps=8 format=3 uid="uid://d3jl2cm236pj4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ylgb0"]
+[ext_resource type="AudioStream" uid="uid://bbd4rny5m3flf" path="res://Assets/Audio/SFX/footstep_concrete_001.ogg" id="3_1ie5m"]
 [ext_resource type="PackedScene" uid="uid://cjqancj47m4tq" path="res://Assets/Models/mixamo female/MixamoFemaleScn.tscn" id="3_4lyct"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_266ql"]
@@ -16,6 +17,13 @@ height = 0.8
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_sum3p"]
 height = 1.0
 radius = 0.4
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nycqr"]
+playback_mode = 1
+random_pitch = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("3_1ie5m")
+stream_0/weight = 1.0
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 513
@@ -64,3 +72,9 @@ target_position = Vector3(0, -0.6, 0)
 [node name="FrontCast" type="RayCast3D" parent="EdgeRaycasts"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
 target_position = Vector3(0, -0.6, 0)
+
+[node name="Audio" type="Node3D" parent="."]
+
+[node name="Footstep" type="AudioStreamPlayer3D" parent="Audio"]
+stream = SubResource("AudioStreamRandomizer_nycqr")
+bus = &"DiegeticSFX"
