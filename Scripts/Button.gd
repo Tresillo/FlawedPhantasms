@@ -6,7 +6,7 @@ extends StaticBody3D
 @export var button_material: Material:
 	set(val):
 		button_material = val
-		if find_child("ButtonMesh") != null and Engine.is_editor_hint():
+		if get_node("ButtonMesh") != null and Engine.is_editor_hint():
 			$ButtonMesh.mesh.material = val
 @export_range(1.0,3.0,0.2) var button_size: float = 2.0:
 	set(val):
@@ -81,33 +81,41 @@ func manage_button(activate:bool, body: Node3D):
 
 
 func update_button_size():
-	var valid = true
+	var invalid = false
 	
 	var base_mesh
-	if find_child("BaseMesh") != null:
-		base_mesh = ((find_child("BaseMesh")\
+	if get_node("BaseMesh") != null:
+		base_mesh = ((get_node("BaseMesh")\
 				 as MeshInstance3D).mesh as BoxMesh)
-		valid = false
+	else:
+		print("BaseMesh not found")
+		invalid = true
 	
 	var collision_box
-	if find_child("ButtonCollision") != null:
-		collision_box = ((find_child("ButtonCollision")\
+	if get_node("ButtonCollision") != null:
+		collision_box = ((get_node("ButtonCollision")\
 				 as CollisionShape3D).shape as BoxShape3D)
-		valid = false
+	else:
+		print("Collisionbox not found")
+		invalid = true
 	
 	var button_mesh
-	if find_child("ButtonMesh") != null:
-		button_mesh = ((find_child("ButtonMesh")\
+	if get_node("ButtonMesh") != null:
+		button_mesh = ((get_node("ButtonMesh")\
 				 as MeshInstance3D).mesh as BoxMesh)
-		valid = false
+	else:
+		print("ButtonMesh not found")
+		invalid = true
 	
 	var activation_box
-	if find_child("Activation/CollisionShape3D") != null:
-		activation_box = ((find_child("Activation/CollisionShape3D")\
+	if get_node("Activation/CollisionShape3D") != null:
+		activation_box = ((get_node("Activation/CollisionShape3D")\
 				as CollisionShape3D).shape as BoxShape3D)
-		valid = false
+	else:
+		print("Activation Box not found")
+		invalid = true
 	
-	if valid:
+	if not invalid:
 		var inner_size = button_size - margin_size - margin_size
 		if inner_size <= 0.1:
 			inner_size = 0.1
