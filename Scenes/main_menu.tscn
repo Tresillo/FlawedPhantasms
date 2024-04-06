@@ -1,15 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://4ndigpixild7"]
+[gd_scene load_steps=19 format=3 uid="uid://4ndigpixild7"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_ie8h4"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_w2pkc"]
 [ext_resource type="Material" uid="uid://d0y4s84b7xweu" path="res://Assets/Mat/wall_mat.tres" id="3_opkgt"]
 [ext_resource type="PackedScene" uid="uid://dyxgu75j1khsg" path="res://Prefabs/defaultIndoorLight.tscn" id="4_x15ew"]
 [ext_resource type="Environment" uid="uid://e3i1ntpju1jv" path="res://Prefabs/World_Environment.tres" id="5_67j28"]
-[ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="5_wffry"]
-[ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/Rect_Wall.tscn" id="6_ymw0p"]
+[ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/PuzzlePrefabs/Player.tscn" id="5_wffry"]
+[ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/PuzzlePrefabs/Rect_Wall.tscn" id="6_ymw0p"]
 [ext_resource type="Material" uid="uid://dd2serghojdfx" path="res://Assets/Mat/PuzzleObjects/OrangeTileMat.tres" id="7_uxxnf"]
-[ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/Button.tscn" id="8_e0l7j"]
+[ext_resource type="PackedScene" uid="uid://d4fldk18r2dqt" path="res://Prefabs/PuzzlePrefabs/Button.tscn" id="8_e0l7j"]
 [ext_resource type="Material" uid="uid://dx65r3364xrf1" path="res://Assets/Mat/PuzzleObjects/OrangeSingleMat.tres" id="9_0o6dn"]
+[ext_resource type="Script" path="res://Scripts/MenuScripts/CamRig.gd" id="10_0nig7"]
 
 [sub_resource type="Resource" id="Resource_p5x60"]
 script = ExtResource("2_w2pkc")
@@ -133,9 +134,7 @@ face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hraa"]
 transparency = 1
-no_depth_test = true
 albedo_color = Color(0.0196078, 0.0196078, 0.0196078, 0.67451)
-billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_cfk0i"]
 material = SubResource("StandardMaterial3D_8hraa")
@@ -197,7 +196,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, -3)
 omni_range = 10.0
 
 [node name="CamRig" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 2.5, 1)
+script = ExtResource("10_0nig7")
+rig_limit_1 = Vector2(3.5, 2.5)
+rig_limit_2 = Vector2(17.5, 10.5)
+menu_layer_size = Vector2(4, 2.5)
+menu_layer_offset = Vector3(2, 1, -1)
+menu_layer_anim_time = 0.4
+cam_move_weight = 0.3
 
 [node name="MenuCam" type="Camera3D" parent="CamRig"]
 environment = ExtResource("5_67j28")

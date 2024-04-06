@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://Scripts/GeometryManager.gd" id="2_cqpqv"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="3_cap7r"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="4_kopti"]
-[ext_resource type="PackedScene" uid="uid://bm16un4wgox6r" path="res://Prefabs/LevelBookend.tscn" id="5_c3cfa"]
+[ext_resource type="PackedScene" uid="uid://bm16un4wgox6r" path="res://Prefabs/PuzzlePrefabs/LevelBookend.tscn" id="5_c3cfa"]
 [ext_resource type="PackedScene" uid="uid://diry562y362eu" path="res://Prefabs/main_cam.tscn" id="5_ruvns"]
-[ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/Player.tscn" id="5_tubk0"]
+[ext_resource type="PackedScene" uid="uid://d3jl2cm236pj4" path="res://Prefabs/PuzzlePrefabs/Player.tscn" id="5_tubk0"]
 [ext_resource type="Material" uid="uid://4rkcncgl3f6x" path="res://Assets/Mat/window_tex_mat.tres" id="7_0xg3j"]
-[ext_resource type="PackedScene" uid="uid://ovvq3mxuty4v" path="res://Prefabs/LevelGoal.tscn" id="7_ud0pc"]
+[ext_resource type="PackedScene" uid="uid://ovvq3mxuty4v" path="res://Prefabs/PuzzlePrefabs/LevelGoal.tscn" id="7_ud0pc"]
 
 [sub_resource type="Resource" id="Resource_3o2yv"]
 script = ExtResource("4_kopti")

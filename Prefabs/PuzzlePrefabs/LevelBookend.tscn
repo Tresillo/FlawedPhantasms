@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_kx8mg"]
 [ext_resource type="Material" uid="uid://d0y4s84b7xweu" path="res://Assets/Mat/wall_mat.tres" id="3_6qp7l"]
 [ext_resource type="PackedScene" uid="uid://dyxgu75j1khsg" path="res://Prefabs/defaultIndoorLight.tscn" id="4_m4ccp"]
-[ext_resource type="PackedScene" uid="uid://dh5sip5bof2p7" path="res://Prefabs/PitArea.tscn" id="5_aalpa"]
+[ext_resource type="PackedScene" uid="uid://dh5sip5bof2p7" path="res://Prefabs/PuzzlePrefabs/PitArea.tscn" id="5_aalpa"]
 [ext_resource type="Material" uid="uid://bcsbqwxnsedai" path="res://Assets/Mat/black_wall.tres" id="6_fo284"]
 
 [sub_resource type="Resource" id="Resource_tg14a"]
