@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://cjh7mh5t3irn7"]
 
-[ext_resource type="Script" path="res://Scripts/LevelController.gd" id="1_rrgyg"]
+[ext_resource type="Script" path="res://Scripts/LevelScripts/LevelController.gd" id="1_rrgyg"]
 [ext_resource type="Script" path="res://Scripts/GeometryManager.gd" id="2_cqpqv"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="3_cap7r"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="4_kopti"]

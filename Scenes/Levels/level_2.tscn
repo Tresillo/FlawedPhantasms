@@ -1,6 +1,6 @@
 [gd_scene load_steps=93 format=3 uid="uid://bk0j7cdf203es"]
 
-[ext_resource type="Script" path="res://Scripts/LevelController.gd" id="1_nmryy"]
+[ext_resource type="Script" path="res://Scripts/LevelScripts/LevelController.gd" id="1_nmryy"]
 [ext_resource type="PackedScene" uid="uid://bm16un4wgox6r" path="res://Prefabs/LevelBookend.tscn" id="2_ewhyk"]
 [ext_resource type="Script" path="res://Scripts/GeometryManager.gd" id="2_kl8bo"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="3_dj4xt"]

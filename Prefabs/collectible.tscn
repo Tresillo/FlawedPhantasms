@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlqltd5o1hhpr"]
 
-[ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_k8a5k"]
+[ext_resource type="Script" path="res://Scripts/LevelScripts/collectible.gd" id="1_k8a5k"]
 [ext_resource type="PackedScene" uid="uid://bsbyqarxsmjub" path="res://Assets/Models/sushi/OMG_SUSHIII(1).glb" id="1_p5xep"]
 [ext_resource type="AudioStream" uid="uid://b6doepfud5kwa" path="res://Assets/Audio/SFX/jingles_SAX10.ogg" id="3_u64dc"]
 

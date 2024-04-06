@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dpmygljbgpk3o"]
 
-[ext_resource type="Script" path="res://Scripts/RectWall.gd" id="1_hsibf"]
+[ext_resource type="Script" path="res://Scripts/LevelScripts/RectWall.gd" id="1_hsibf"]
 [ext_resource type="Material" uid="uid://bl3cwqkla5mdv" path="res://Assets/Placeholder/ph_mat_orange.tres" id="2_4g3tf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rxg3y"]

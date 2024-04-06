@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d3jl2cm236pj4"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ylgb0"]
+[ext_resource type="Script" path="res://Scripts/LevelScripts/Player.gd" id="1_ylgb0"]
 [ext_resource type="AudioStream" uid="uid://bbd4rny5m3flf" path="res://Assets/Audio/SFX/footstep_concrete_001.ogg" id="3_1ie5m"]
 [ext_resource type="PackedScene" uid="uid://cjqancj47m4tq" path="res://Assets/Models/mixamo female/MixamoFemaleScn.tscn" id="3_4lyct"]
 

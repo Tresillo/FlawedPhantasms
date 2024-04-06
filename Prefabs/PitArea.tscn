@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dh5sip5bof2p7"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/Fog.gdshader" id="1_lgujx"]
-[ext_resource type="Script" path="res://Scripts/PitArea.gd" id="1_qptp6"]
+[ext_resource type="Script" path="res://Scripts/LevelScripts/PitArea.gd" id="1_qptp6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w4htt"]
 resource_local_to_scene = true

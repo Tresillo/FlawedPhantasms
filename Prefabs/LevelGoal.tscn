@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ovvq3mxuty4v"]
 
-[ext_resource type="Script" path="res://Scripts/EndLevelInteractable.gd" id="1_jws5p"]
+[ext_resource type="Script" path="res://Scripts/LevelScripts/EndLevelInteractable.gd" id="1_jws5p"]
 [ext_resource type="PackedScene" uid="uid://cjqancj47m4tq" path="res://Assets/Models/mixamo female/MixamoFemaleScn.tscn" id="2_4sgjc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_266ql"]
