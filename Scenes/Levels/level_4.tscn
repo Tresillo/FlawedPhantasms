@@ -3283,11 +3283,13 @@ speed = 0.8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, 3)
 connected_objects = [NodePath("../StartPuzzleExitLift"), NodePath("../StartIntermediateLift")]
 button_material = ExtResource("10_nvr8v")
+pitch_shift = 0.2
 
 [node name="StartPurpleButton" parent="LevelGeometry/Interactables/StartPuzzleObjects" node_paths=PackedStringArray("connected_objects") instance=ExtResource("9_tvuaj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1, 1.5)
 connected_objects = [NodePath("../StartPuzzleRightLift")]
 button_material = ExtResource("11_vflqq")
+pitch_shift = 0.2
 
 [node name="StartPuzzleExitLift" parent="LevelGeometry/Interactables/StartPuzzleObjects" instance=ExtResource("6_cx025")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, 9.25)
@@ -3315,7 +3317,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 8, 16.5)
 size = Vector3(2, 8, 7)
 display_material = ExtResource("12_w0mky")
 final_offset = Vector3(0, 6, 0)
-speed = 0.2
+speed = 1.3
 
 [node name="TealButton" parent="LevelGeometry/Interactables/EndPuzzleObject" node_paths=PackedStringArray("connected_objects") instance=ExtResource("9_tvuaj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 18, 18)
@@ -3323,6 +3325,7 @@ connected_objects = [NodePath("../FinalLift"), NodePath("../TealLift1"), NodePat
 button_material = ExtResource("15_njdt4")
 button_size = 1.2
 margin_size = 0.05
+pitch_shift = 0.2
 
 [node name="TealLift1" parent="LevelGeometry/Interactables/EndPuzzleObject" instance=ExtResource("6_cx025")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 8, -4.5)
@@ -3343,6 +3346,7 @@ speed = 0.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 12, 4.5)
 connected_objects = [NodePath("../GreenLft")]
 button_material = ExtResource("18_cvocs")
+pitch_shift = 0.2
 
 [node name="TealLift2" parent="LevelGeometry/Interactables/EndPuzzleObject" instance=ExtResource("6_cx025")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 8, 10)
@@ -3383,11 +3387,11 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 2
 _vis_layer_id = 16
 
 [node name="Player17" parent="Players" instance=ExtResource("6_qgogw")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -9, 13, 13.5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 13, 13.5)
 _vis_layer_id = 17
 
 [node name="Player18" parent="Players" instance=ExtResource("6_qgogw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 13, 19.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 13, 19.5)
 _vis_layer_id = 18
 
 [node name="Player19" parent="Players" instance=ExtResource("6_qgogw")]
