@@ -41,6 +41,8 @@ var last_step: Vector3
 
 var dist_travelled: float = 0.0
 
+signal body_swapped
+
 
 func _ready():
 	disable_control(not _starting_player)
@@ -295,6 +297,8 @@ func _transfer_main_cam(target):
 				player_cam.update_cull_mask(target._vis_layer_id)
 				
 				($PlayerModel as Node3D).visible = true
+				
+				body_swapped.emit()
 				
 				target.disable_control(false)
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

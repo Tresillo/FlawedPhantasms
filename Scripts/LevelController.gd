@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var collectible_found: bool = false
+@onready var num_times_swapped: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,9 +14,10 @@ func _ready():
 			(c as Collectible).pickup_collected.connect(col_fnd)
 	
 	for p in get_tree().get_nodes_in_group("player"):
+		(p as Player).body_swapped.connect(func(): num_times_swapped += 1)
 		if p._starting_player:
 			p.starting_player_start_animation()
-			break
+			
 
 
 func col_fnd():
