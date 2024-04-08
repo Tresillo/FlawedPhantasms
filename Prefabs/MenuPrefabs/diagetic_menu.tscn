@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcti6kgpa7qrn"]
+
+[ext_resource type="Script" path="res://Prefabs/MenuPrefabs/diagetic_menu.gd" id="1_hiiga"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gvy43"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eu70g"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_gvy43")
+
+[sub_resource type="QuadMesh" id="QuadMesh_onity"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_eu70g")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4wl6m"]
+resource_local_to_scene = true
+size = Vector3(1, 1, 0.1)
+
+[node name="DiageticMenu" type="Node3D"]
+script = ExtResource("1_hiiga")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Control" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="ColorRect" parent="SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.0117647, 0.0117647, 0.0117647, 0.607843)
+
+[node name="Button" type="Button" parent="SubViewport/Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -15.5
+offset_right = 34.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gaming"
+
+[node name="Button2" type="Button" parent="SubViewport/Control/Panel"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "button 1"
+
+[node name="Button3" type="Button" parent="SubViewport/Control/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "button 2"
+
+[node name="Button4" type="Button" parent="SubViewport/Control/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 74.0
+grow_vertical = 0
+text = "button 3"
+
+[node name="Quad" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_onity")
+
+[node name="Area3D" type="Area3D" parent="Quad"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Quad/Area3D"]
+shape = SubResource("BoxShape3D_4wl6m")
+
+[connection signal="pressed" from="SubViewport/Control/Panel/Button" to="." method="_on_button_pressed_gaming"]
+[connection signal="pressed" from="SubViewport/Control/Panel/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="SubViewport/Control/Panel/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="SubViewport/Control/Panel/Button4" to="." method="_on_button_4_pressed"]
