@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://4ndigpixild7"]
+[gd_scene load_steps=23 format=3 uid="uid://4ndigpixild7"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_ie8h4"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_w2pkc"]
@@ -14,6 +14,8 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="12_5jn8o"]
 [ext_resource type="Theme" uid="uid://o04ao5b7484q" path="res://Assets/UI_Theme.tres" id="12_75kmq"]
 [ext_resource type="Script" path="res://Scenes/MainMenuPanel.gd" id="13_aalfo"]
+[ext_resource type="Script" path="res://Scripts/MenuScripts/SettingsPanel.gd" id="15_uto0o"]
+[ext_resource type="Script" path="res://Scripts/MenuScripts/LevelSelectPage.gd" id="16_e8shy"]
 
 [sub_resource type="Resource" id="Resource_p5x60"]
 script = ExtResource("2_w2pkc")
@@ -206,7 +208,7 @@ menu_layer_size = Vector2(4, 2.5)
 menu_layer_offset = Vector3(2, -1, -1)
 menu_layer_anim_time = 0.25
 cam_move_weight = 0.3
-menu_panels = [NodePath("MainMenuUI/MainMenuPanel")]
+menu_panels = [NodePath("MainMenuUI/MainMenuPanel"), NodePath("MainMenuUI/SettingsPage"), NodePath("MainMenuUI/LevelSelectPage")]
 
 [node name="MenuCam" type="Camera3D" parent="CamRig"]
 environment = ExtResource("5_67j28")
@@ -293,6 +295,7 @@ layout_mode = 2
 text = "Quit"
 
 [node name="SettingsPage" type="ColorRect" parent="CamRig/MainMenuUI"]
+visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -304,6 +307,7 @@ offset_left = -200.0
 offset_right = 200.0
 mouse_filter = 2
 color = Color(0.117647, 0.117647, 0.117647, 0.788235)
+script = ExtResource("15_uto0o")
 
 [node name="MarginContainer" type="MarginContainer" parent="CamRig/MainMenuUI/SettingsPage"]
 layout_mode = 1
@@ -322,7 +326,7 @@ theme_override_constants/margin_bottom = 20
 [node name="TitleLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Main Menu"
+text = "Settings"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer"]
@@ -330,8 +334,60 @@ layout_mode = 2
 theme = ExtResource("12_75kmq")
 alignment = 1
 
+[node name="BackButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="LevelSelectPage" type="ColorRect" parent="CamRig/MainMenuUI"]
+visible = false
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.15
+anchor_right = 0.333
+anchor_bottom = 0.85
+offset_left = -200.0
+offset_right = 200.0
+mouse_filter = 2
+color = Color(0.117647, 0.117647, 0.117647, 0.788235)
+script = ExtResource("16_e8shy")
+
+[node name="MarginContainer" type="MarginContainer" parent="CamRig/MainMenuUI/LevelSelectPage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("12_75kmq")
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 20
+
+[node name="TitleLabel" type="Label" parent="CamRig/MainMenuUI/LevelSelectPage/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Level Select"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/LevelSelectPage/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_75kmq")
+alignment = 1
+
+[node name="BackButton" type="Button" parent="CamRig/MainMenuUI/LevelSelectPage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
 [connection signal="change_menu_layer" from="CamRig/MainMenuUI/MainMenuPanel" to="CamRig" method="_on_menu_panel_change_menu_layer"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton" to="CamRig" method="_on_play_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/LevelButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_level_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/OptionsButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_options_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/QuitButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_quit_button_pressed"]
+[connection signal="change_menu_layer" from="CamRig/MainMenuUI/SettingsPage" to="CamRig" method="_on_menu_panel_change_menu_layer"]
+[connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/BackButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_back_button_pressed"]
+[connection signal="change_menu_layer" from="CamRig/MainMenuUI/LevelSelectPage" to="CamRig" method="_on_menu_panel_change_menu_layer"]
+[connection signal="pressed" from="CamRig/MainMenuUI/LevelSelectPage/MarginContainer/VBoxContainer/BackButton" to="CamRig/MainMenuUI/LevelSelectPage" method="_on_back_button_pressed"]

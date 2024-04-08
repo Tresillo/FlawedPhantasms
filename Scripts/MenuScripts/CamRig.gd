@@ -53,12 +53,18 @@ func _process(delta):
 		position = Vector3(next_pos.x, next_pos.y, position.z)
 
 
+func _on_menu_panel_change_menu_layer(layer_index):
+	change_menu_layer(layer_index)
+
+
 func change_menu_layer(next_menu_layer: int):
 	var target_layer_position = menu_layer_offset * next_menu_layer + Vector3(rig_limit_1.x, rig_limit_1.y, 1)
 	var initial_menu_size = menu_ui_node.size
 	var hidden_menu_size = Vector2(initial_menu_size.x, 0)
-	var cur_panel_node = menu_panels[0]
+	var cur_panel_node = menu_panels[_cur_menu_layer]
 	var new_panel_node = menu_panels[next_menu_layer]
+	
+	print(cur_panel_node)
 	
 	var tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(menu_ui_node,"size",hidden_menu_size,0.5)
@@ -68,6 +74,8 @@ func change_menu_layer(next_menu_layer: int):
 			
 			new_panel_node.set_inputs_disabled(false)
 			new_panel_node.visible = true
+			
+			_cur_menu_layer = next_menu_layer
 	)
 	tween.tween_property(menu_ui_node,"size",initial_menu_size,0.5)
 
@@ -94,6 +102,3 @@ func _on_play_button_pressed():
 			_level_loader.goto_scene("res://Scenes/Levels/level_1.tscn")
 	)
 
-
-func _on_menu_panel_change_menu_layer(layer_index):
-	change_menu_layer(layer_index)
