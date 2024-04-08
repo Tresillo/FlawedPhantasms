@@ -2591,8 +2591,10 @@ face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
 active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
-[node name="level_0" type="Node3D"]
+[node name="level_4" type="Node3D"]
 script = ExtResource("1_t76rh")
+level_index = 2
+level_name = "The Game of Telephone"
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 script = ExtResource("2_gadi2")

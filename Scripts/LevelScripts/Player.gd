@@ -42,6 +42,7 @@ var last_step: Vector3
 var dist_travelled: float = 0.0
 
 signal body_swapped
+signal finished_start_animation
 
 
 func _ready():
@@ -374,4 +375,5 @@ func starting_player_start_animation():
 	start_tween.tween_callback(func():
 			disable_control(false)
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			finished_start_animation.emit()
 	)

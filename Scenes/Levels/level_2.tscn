@@ -1682,6 +1682,8 @@ face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
 [node name="level_2" type="Node3D"]
 script = ExtResource("1_nmryy")
+level_index = 1
+level_name = "Multi-tasking"
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 script = ExtResource("2_kl8bo")
@@ -2142,13 +2144,11 @@ opening_logic = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 3, -35.5)
 connected_objects = [NodePath("../RightBigDoor"), NodePath("../PurpleLift"), NodePath("../FourthGuyDoor")]
 button_material = ExtResource("9_bgcqo")
-pitch_shift = 0.2
 
 [node name="BRDoorButton2" parent="LevelGeometry/Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_qxpwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 3, -23.5)
 connected_objects = [NodePath("../RightBigDoor"), NodePath("../PurpleLift"), NodePath("../FourthGuyDoor")]
 button_material = ExtResource("9_bgcqo")
-pitch_shift = 0.2
 
 [node name="RightBigDoor" parent="LevelGeometry/Interactables" instance=ExtResource("6_nfywl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 5, -29.5)
@@ -2162,7 +2162,6 @@ opening_logic = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9936, 3, 31.6374)
 connected_objects = [NodePath("../LeftDoor2")]
 button_material = ExtResource("10_n6oox")
-pitch_shift = 0.2
 
 [node name="LeftDoor2" parent="LevelGeometry/Interactables" instance=ExtResource("6_nfywl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2424, 5.01051, 29.0822)
@@ -2174,7 +2173,6 @@ final_offset = Vector3(0, 6, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.6021, 3, 31.3879)
 connected_objects = [NodePath("../TealLift"), NodePath("../TealDoor"), NodePath("../CollectibleDoor"), NodePath("../ColliectibleDoorDoor")]
 button_material = ExtResource("13_emw5w")
-pitch_shift = 0.2
 
 [node name="TealLift" parent="LevelGeometry/Interactables" instance=ExtResource("6_nfywl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 2.75, 26.5)
@@ -2187,13 +2185,11 @@ speed = 0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7, -36)
 connected_objects = [NodePath("../MainLift")]
 button_material = ExtResource("16_odwm0")
-pitch_shift = 0.2
 
 [node name="LeftLiftButton" parent="LevelGeometry/Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_qxpwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 8, 22)
 connected_objects = [NodePath("../MainLift")]
 button_material = ExtResource("16_odwm0")
-pitch_shift = 0.2
 
 [node name="PurpleLift" parent="LevelGeometry/Interactables" instance=ExtResource("6_nfywl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.75, -34)
@@ -2212,7 +2208,6 @@ final_offset = Vector3(0, 6, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, 31.5)
 connected_objects = [NodePath("../TealDoor"), NodePath("../TealLift"), NodePath("../CollectibleDoor"), NodePath("../ColliectibleDoorDoor")]
 button_material = ExtResource("13_emw5w")
-pitch_shift = 0.2
 
 [node name="Collectible" parent="LevelGeometry/Interactables" instance=ExtResource("21_8rxqr")]
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -33, 3.18555, -36)
@@ -2238,13 +2233,11 @@ opening_logic = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7, -31)
 connected_objects = [NodePath("../TealDoor"), NodePath("../TealLift"), NodePath("../CollectibleDoor"), NodePath("../ColliectibleDoorDoor")]
 button_material = ExtResource("13_emw5w")
-pitch_shift = 0.2
 
 [node name="RightGreenButton2" parent="LevelGeometry/Interactables" node_paths=PackedStringArray("connected_objects") instance=ExtResource("8_qxpwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 3, -31.5)
 connected_objects = [NodePath("../MainLift")]
 button_material = ExtResource("16_odwm0")
-pitch_shift = 0.2
 
 [node name="FourthGuyDoor" parent="LevelGeometry/Interactables" instance=ExtResource("6_nfywl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 10, -33.5)

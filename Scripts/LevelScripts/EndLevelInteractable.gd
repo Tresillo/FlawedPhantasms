@@ -5,6 +5,8 @@ class_name LevelGoal
 
 @onready var _level_loader: LevelLoader = get_node("/root/SceneLoaderAutoload")
 
+signal level_finished
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,6 +14,7 @@ func _ready():
 
 func end_level():
 	print("hit end level trigger")
+	level_finished.emit()
 	
 	if next_level_path != "" and next_level_path != null:
 		_level_loader.goto_scene(next_level_path)

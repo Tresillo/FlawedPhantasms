@@ -238,6 +238,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="MainMenuPanel" type="ColorRect" parent="CamRig/MainMenuUI"]
+visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -295,7 +296,6 @@ layout_mode = 2
 text = "Quit"
 
 [node name="SettingsPage" type="ColorRect" parent="CamRig/MainMenuUI"]
-visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -323,19 +323,38 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 70
 theme_override_constants/margin_bottom = 20
 
-[node name="TitleLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer"]
+[node name="VBoxContainer" type="ScrollContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("12_75kmq")
-alignment = 1
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VideoSettingsTitle" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Video Settings"
+
+[node name="AudioSettingsLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Audio Settings"
 
 [node name="BackButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 text = "Back"
 
 [node name="LevelSelectPage" type="ColorRect" parent="CamRig/MainMenuUI"]
