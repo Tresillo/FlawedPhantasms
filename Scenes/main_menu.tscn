@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://4ndigpixild7"]
+[gd_scene load_steps=24 format=3 uid="uid://4ndigpixild7"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_ie8h4"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_w2pkc"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/MenuScripts/CamRig.gd" id="10_0nig7"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="12_5jn8o"]
 [ext_resource type="Theme" uid="uid://o04ao5b7484q" path="res://Assets/UI_Theme.tres" id="12_75kmq"]
+[ext_resource type="Script" path="res://Scripts/MenuScripts/menu_controller.gd" id="13_1ksrj"]
 [ext_resource type="Script" path="res://Scenes/MainMenuPanel.gd" id="13_aalfo"]
 [ext_resource type="Script" path="res://Scripts/MenuScripts/SettingsPanel.gd" id="15_uto0o"]
 [ext_resource type="Script" path="res://Scripts/MenuScripts/LevelSelectPage.gd" id="16_e8shy"]
@@ -236,6 +237,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("13_1ksrj")
 
 [node name="MainMenuPanel" type="ColorRect" parent="CamRig/MainMenuUI"]
 visible = false
@@ -333,24 +335,74 @@ size_flags_vertical = 0
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="ScrollContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
+[node name="Scroll" type="ScrollContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("12_75kmq")
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VideoSettingsTitle" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="VideoSettingsTitle" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
 layout_mode = 2
 text = "Video Settings"
 
-[node name="AudioSettingsLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="AudioSettingsLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
 layout_mode = 2
 text = "Audio Settings"
+
+[node name="MusicVolume" type="HBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music Volume:"
+
+[node name="LeftButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+text = "<"
+
+[node name="VolumeAmount" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
+layout_mode = 2
+text = "10"
+horizontal_alignment = 1
+visible_characters = 2
+
+[node name="RightButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
+layout_mode = 2
+mouse_filter = 1
+text = ">"
+
+[node name="SFXVolume" type="HBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sound Effect Volume:"
+
+[node name="LeftButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+text = "<"
+
+[node name="VolumeAmount" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
+layout_mode = 2
+text = "10"
+horizontal_alignment = 1
+visible_characters = 2
+
+[node name="RightButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
+layout_mode = 2
+mouse_filter = 1
+text = ">"
 
 [node name="BackButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
