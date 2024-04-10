@@ -16,7 +16,7 @@ instance_dock/preview_resolution=Vector2i(64, 64)
 [application]
 
 config/name="PhantasmalPerspectives"
-run/main_scene="res://Scenes/Levels/level_1.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Assets/Sprites/icon.svg"
 
@@ -28,7 +28,7 @@ buses/default_bus_layout="res://Assets/Audio/default_bus_layout.tres"
 
 CyclopsAutoload="*res://addons/cyclops_level_builder/cyclops_global_scene.tscn"
 SceneLoaderAutoload="*res://Scripts/GlobalSceneLoader.gd"
-DataLoaderAutoload="*res://Scripts/DataLoader.gd"
+DataLoaderAutoload="*res://Scripts/MenuScripts/DataLoader.gd"
 
 [display]
 

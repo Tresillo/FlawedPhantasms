@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://4ndigpixild7"]
+[gd_scene load_steps=23 format=3 uid="uid://4ndigpixild7"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_ie8h4"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_w2pkc"]
@@ -13,10 +13,9 @@
 [ext_resource type="Script" path="res://Scripts/MenuScripts/CamRig.gd" id="10_0nig7"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="12_5jn8o"]
 [ext_resource type="Theme" uid="uid://o04ao5b7484q" path="res://Assets/UI_Theme.tres" id="12_75kmq"]
-[ext_resource type="Script" path="res://Scripts/MenuScripts/menu_controller.gd" id="13_1ksrj"]
-[ext_resource type="Script" path="res://Scenes/MainMenuPanel.gd" id="13_aalfo"]
-[ext_resource type="Script" path="res://Scripts/MenuScripts/SettingsPanel.gd" id="15_uto0o"]
-[ext_resource type="Script" path="res://Scripts/MenuScripts/LevelSelectPage.gd" id="16_e8shy"]
+[ext_resource type="Script" path="res://Scripts/MenuScripts/MainMenuPanels/MainMenuPanel.gd" id="13_aalfo"]
+[ext_resource type="Script" path="res://Scripts/MenuScripts/MainMenuPanels/SettingsPanel.gd" id="15_uto0o"]
+[ext_resource type="Script" path="res://Scripts/MenuScripts/MainMenuPanels/LevelSelectPanel.gd" id="16_e8shy"]
 
 [sub_resource type="Resource" id="Resource_p5x60"]
 script = ExtResource("2_w2pkc")
@@ -209,7 +208,7 @@ menu_layer_size = Vector2(4, 2.5)
 menu_layer_offset = Vector3(2, -1, -1)
 menu_layer_anim_time = 0.25
 cam_move_weight = 0.3
-menu_panels = [NodePath("MainMenuUI/MainMenuPanel"), NodePath("MainMenuUI/SettingsPage"), NodePath("MainMenuUI/LevelSelectPage")]
+menu_panels = [NodePath("MainMenuUI/MainMenuPanel"), NodePath("MainMenuUI/SettingsPage"), NodePath("MainMenuUI/CreditsPage")]
 
 [node name="MenuCam" type="Camera3D" parent="CamRig"]
 environment = ExtResource("5_67j28")
@@ -237,10 +236,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("13_1ksrj")
 
 [node name="MainMenuPanel" type="ColorRect" parent="CamRig/MainMenuUI"]
-visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -284,20 +281,21 @@ layout_mode = 2
 mouse_filter = 1
 text = "Play"
 
-[node name="LevelButton" type="Button" parent="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Level Select"
-
 [node name="OptionsButton" type="Button" parent="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 text = "Options"
+
+[node name="CreditsButton" type="Button" parent="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
 
 [node name="QuitButton" type="Button" parent="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
 [node name="SettingsPage" type="ColorRect" parent="CamRig/MainMenuUI"]
+visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -345,11 +343,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VideoSettingsTitle" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
-layout_mode = 2
-text = "Video Settings"
-
-[node name="AudioSettingsLabel" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
+[node name="AudioSettingsTitle" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
 layout_mode = 2
 text = "Audio Settings"
 
@@ -362,19 +356,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Music Volume:"
 
-[node name="LeftButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
+[node name="MusicLeftButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 1
 text = "<"
 
-[node name="VolumeAmount" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
+[node name="MusicVolumeAmount" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 text = "10"
 horizontal_alignment = 1
 visible_characters = 2
 
-[node name="RightButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
+[node name="MusicRightButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume"]
 layout_mode = 2
 mouse_filter = 1
 text = ">"
@@ -387,29 +383,74 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Sound Effect Volume:"
 
-[node name="LeftButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
+[node name="SFXLeftButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
 layout_mode = 2
 size_flags_horizontal = 8
 mouse_filter = 1
 text = "<"
 
-[node name="VolumeAmount" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
+[node name="SFXVolumeAmount" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 text = "10"
 horizontal_alignment = 1
 visible_characters = 2
 
-[node name="RightButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
+[node name="SFXRightButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume"]
 layout_mode = 2
 mouse_filter = 1
 text = ">"
+
+[node name="GameplaySettingsTitle" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
+layout_mode = 2
+text = "Gameplay Settings"
+
+[node name="CamSensitivity" type="VBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/CamSensitivity"]
+layout_mode = 2
+
+[node name="CamSensitivityTitle" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/CamSensitivity/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Camera Sensitivity:"
+
+[node name="CamSensitivityAmount" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/CamSensitivity/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "1.00"
+horizontal_alignment = 2
+visible_characters = 4
+
+[node name="CamSensitivitySlider" type="HSlider" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/CamSensitivity"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 50.0
+max_value = 1000.0
+value = 50.0
+scrollable = false
+
+[node name="ReducedMotion" type="HBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
+layout_mode = 2
+
+[node name="ReducedMotionTitle" type="Label" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/ReducedMotion"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reduced Motion:"
+
+[node name="ReducedMotionBox" type="CheckBox" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/ReducedMotion"]
+layout_mode = 2
 
 [node name="BackButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Back"
 
-[node name="LevelSelectPage" type="ColorRect" parent="CamRig/MainMenuUI"]
+[node name="CreditsPage" type="ColorRect" parent="CamRig/MainMenuUI"]
 visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
@@ -424,7 +465,7 @@ mouse_filter = 2
 color = Color(0.117647, 0.117647, 0.117647, 0.788235)
 script = ExtResource("16_e8shy")
 
-[node name="MarginContainer" type="MarginContainer" parent="CamRig/MainMenuUI/LevelSelectPage"]
+[node name="MarginContainer" type="MarginContainer" parent="CamRig/MainMenuUI/CreditsPage"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -438,27 +479,33 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 70
 theme_override_constants/margin_bottom = 20
 
-[node name="TitleLabel" type="Label" parent="CamRig/MainMenuUI/LevelSelectPage/MarginContainer"]
+[node name="TitleLabel" type="Label" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Level Select"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/LevelSelectPage/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("12_75kmq")
 alignment = 1
 
-[node name="BackButton" type="Button" parent="CamRig/MainMenuUI/LevelSelectPage/MarginContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Back"
 
 [connection signal="change_menu_layer" from="CamRig/MainMenuUI/MainMenuPanel" to="CamRig" method="_on_menu_panel_change_menu_layer"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton" to="CamRig" method="_on_play_button_pressed"]
-[connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/LevelButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_level_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/OptionsButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_options_button_pressed"]
+[connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/CreditsButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_level_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/QuitButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_quit_button_pressed"]
 [connection signal="change_menu_layer" from="CamRig/MainMenuUI/SettingsPage" to="CamRig" method="_on_menu_panel_change_menu_layer"]
+[connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume/MusicLeftButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_music_left_button_pressed"]
+[connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume/MusicRightButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_music_right_button_pressed"]
+[connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume/SFXLeftButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_sfx_left_button_pressed"]
+[connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/SFXVolume/SFXRightButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_sfx_right_button_pressed"]
+[connection signal="value_changed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/CamSensitivity/CamSensitivitySlider" to="CamRig/MainMenuUI/SettingsPage" method="_on_cam_sensitivity_slider_value_changed"]
+[connection signal="toggled" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/ReducedMotion/ReducedMotionBox" to="CamRig/MainMenuUI/SettingsPage" method="_on_reduced_motion_box_toggled"]
 [connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/BackButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_back_button_pressed"]
-[connection signal="change_menu_layer" from="CamRig/MainMenuUI/LevelSelectPage" to="CamRig" method="_on_menu_panel_change_menu_layer"]
-[connection signal="pressed" from="CamRig/MainMenuUI/LevelSelectPage/MarginContainer/VBoxContainer/BackButton" to="CamRig/MainMenuUI/LevelSelectPage" method="_on_back_button_pressed"]
+[connection signal="change_menu_layer" from="CamRig/MainMenuUI/CreditsPage" to="CamRig" method="_on_menu_panel_change_menu_layer"]
+[connection signal="pressed" from="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer/BackButton" to="CamRig/MainMenuUI/CreditsPage" method="_on_back_button_pressed"]

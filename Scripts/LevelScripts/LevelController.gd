@@ -29,7 +29,7 @@ func _ready():
 			p.starting_player_start_animation()
 			(p as Player).finished_start_animation.connect(func(): paused = false)
 	
-	level_data = get_node("/root/DataLoaderAutoload").level_data[level_index]
+	level_data = get_node("/root/DataLoaderAutoload").save_data.level_data[level_index]
 
 
 func _process(delta):
