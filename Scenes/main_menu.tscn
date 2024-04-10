@@ -433,6 +433,8 @@ min_value = 50.0
 max_value = 1000.0
 value = 50.0
 scrollable = false
+tick_count = 8
+ticks_on_borders = true
 
 [node name="ReducedMotion" type="HBoxContainer" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer"]
 layout_mode = 2

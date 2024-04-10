@@ -40,6 +40,7 @@ var last_safe_pos: Vector3
 var last_step: Vector3
 
 var dist_travelled: float = 0.0
+var _reduced_movement: bool = false
 
 signal body_swapped
 signal finished_start_animation
@@ -65,6 +66,11 @@ func _ready():
 	$EdgeRaycasts/FrontCast.position.z = edge_margin * -1.0
 	
 	last_step = global_position
+	
+	#Import settings from Dataloader
+	var settings_data = get_node("/root/DataLoaderAutoload").save_data.settings
+	_mouse_sensitivity = settings_data.mouse_sense
+	_reduced_movement = settings_data.reduced_motion
 	
 	if _starting_player:
 		%MainCam.update_cull_mask(_vis_layer_id)
