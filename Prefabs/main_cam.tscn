@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://diry562y362eu"]
+[gd_scene load_steps=13 format=3 uid="uid://diry562y362eu"]
 
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
 [ext_resource type="Environment" uid="uid://e3i1ntpju1jv" path="res://Prefabs/World_Environment.tres" id="1_ep4qw"]
@@ -6,7 +6,9 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="3_8ce8t"]
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="4_gt4h6"]
 [ext_resource type="Texture2D" uid="uid://cdwhcs8moy4m4" path="res://Assets/Sprites/CollectibleUnfound.png" id="6_2ecb4"]
+[ext_resource type="Texture2D" uid="uid://dsi7b0qap8dhw" path="res://Assets/Sprites/Pausegradient.png" id="6_h6xw2"]
 [ext_resource type="AudioStream" uid="uid://dcrx5kogdc21e" path="res://Assets/Audio/SFX/Paper2.ogg" id="6_th20f"]
+[ext_resource type="Script" path="res://Scripts/MenuScripts/PauseMenu.gd" id="7_1yis2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
 render_priority = 0
@@ -21,8 +23,8 @@ size = Vector2(2, 2)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7yoyx"]
 shader = ExtResource("3_8ce8t")
 shader_parameter/lid_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
-shader_parameter/lid_transparency = 1.0
-shader_parameter/close_amount = 0.0
+shader_parameter/lid_transparency = 0.0
+shader_parameter/close_amount = 1.0
 shader_parameter/lid_width = 0.3
 
 [node name="MainCam" type="Camera3D"]
@@ -68,29 +70,83 @@ texture = ExtResource("4_gt4h6")
 stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseMenu" type="TextureRect" parent="UI"]
-custom_minimum_size = Vector2(700, 250)
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PauseMenu" type="Container" parent="UI"]
+process_mode = 2
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_1yis2")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/PauseMenu"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/PauseMenu/MarginContainer"]
+[node name="PauseFade" type="TextureRect" parent="UI/PauseMenu"]
 layout_mode = 2
+texture = ExtResource("6_h6xw2")
+stretch_mode = 2
 
-[node name="Label" type="Label" parent="UI/PauseMenu/MarginContainer/HBoxContainer"]
+[node name="TopPanelContainer" type="Container" parent="UI/PauseMenu/PauseFade"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PauseMenu/PauseFade/TopPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PauseMenu/PauseFade/TopPanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="LevelNameLabel" type="Label" parent="UI/PauseMenu/PauseFade/TopPanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Level 0"
 
-[node name="TextureRect" type="TextureRect" parent="UI/PauseMenu/MarginContainer/HBoxContainer"]
+[node name="CollectibleFoundLabel" type="TextureRect" parent="UI/PauseMenu/PauseFade/TopPanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("6_2ecb4")
 expand_mode = 2
+stretch_mode = 4
+
+[node name="BottomPanelContainer" type="Container" parent="UI/PauseMenu/PauseFade"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PauseMenu/PauseFade/BottomPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PauseMenu/PauseFade/BottomPanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 25
+
+[node name="Button" type="Button" parent="UI/PauseMenu/PauseFade/BottomPanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="UI/PauseMenu/PauseFade/BottomPanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Restart Level
+"
+
+[node name="MainMenuButton" type="Button" parent="UI/PauseMenu/PauseFade/BottomPanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true

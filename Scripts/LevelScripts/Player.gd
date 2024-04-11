@@ -80,8 +80,8 @@ func _ready():
 func _process(delta):
 	
 	#Quit button NEEDS MOVING
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+	if Input.is_action_just_pressed("quit") and not _disabled:
+		player_cam.pause_game()
 	
 	#get each input relative to mouse
 	var dir = Vector3()

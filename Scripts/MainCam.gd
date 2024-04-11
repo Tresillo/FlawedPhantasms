@@ -9,6 +9,8 @@ var lens_shader_material: ShaderMaterial:
 var cam_eyelids_node: ColorRect
 var view_fogged:bool = false
 
+var pause_menu_node
+
 func _ready():
 	for i in range(1,21):
 		set_cull_mask_value(i, false)
@@ -17,6 +19,8 @@ func _ready():
 	_cur_mask_id = 1
 	cam_eyelids_node = $UI/CamEyelids
 	$UI/CameraFog.visible = false
+	
+	pause_menu_node = $UI/PauseMenu
 
 
 func fog_cam_view(fog: bool):
@@ -35,3 +39,7 @@ func update_cull_mask(new_id: int):
 		_cur_mask_id = new_id
 	else:
 		push_error("Visibility cull mask for main cam is set out of range (" + str(new_id) + ")")
+
+
+func pause_game():
+	$UI/PauseMenu.pause_game(cam_eyelids_node.material)
