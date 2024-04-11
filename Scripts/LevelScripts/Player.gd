@@ -172,10 +172,10 @@ func _physics_process(delta):
 		if ray_result:
 			print("Hit " + str(ray_result.collider) + " at position " + str(ray_result.position))
 			if ray_result.collider is Player:
-				_transfer_main_cam(ray_result.collider as Player)
+				_transfer_main_cam(ray_result.collider as Player, _reduced_movement)
 			elif ray_result.collider is LevelGoal:
 				print("hit end level")
-				_transfer_main_cam(ray_result.collider as LevelGoal)
+				_transfer_main_cam(ray_result.collider as LevelGoal, _reduced_movement)
 		else:
 			print("No object hit")
 	
@@ -271,13 +271,24 @@ func _setup_crouch_tween(target):
 	)
 
 
-func _transfer_main_cam(target):
+func _transfer_main_cam(target, reduced_move: bool):
 	#Target variables for the animation
 	var target_cam_marker:Marker3D = target.get_node("CameraMarker")
-	var target_pos = target_cam_marker.global_position
-	var target_rot = target_cam_marker.global_rotation
 	var transition_mat = player_cam.cam_eyelids_node.material
 	var transition_sound = player_cam.get_node("AudioStreams/PlayerChange")
+	
+	#implement target position and rotation for reduced movement
+	var target_pos
+	var target_rot
+	if not reduced_move:
+		target_pos = target_cam_marker.global_position
+		target_rot = target_cam_marker.global_rotation
+	else:
+		var my_cam_marker: Marker3D = ($CameraMarker as Marker3D)
+		var target_pos_offset = (my_cam_marker.global_basis.z).normalized() * -2
+		
+		target_pos = my_cam_marker.global_position + target_pos_offset
+		target_rot = my_cam_marker.global_rotation
 	
 	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	transfer_tween.tween_callback(func():
