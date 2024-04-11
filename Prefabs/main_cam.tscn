@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://diry562y362eu"]
+[gd_scene load_steps=11 format=3 uid="uid://diry562y362eu"]
 
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
 [ext_resource type="Environment" uid="uid://e3i1ntpju1jv" path="res://Prefabs/World_Environment.tres" id="1_ep4qw"]
 [ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/CameraLensTemplate.gdshader" id="2_itnd6"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="3_8ce8t"]
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="4_gt4h6"]
+[ext_resource type="Texture2D" uid="uid://cdwhcs8moy4m4" path="res://Assets/Sprites/CollectibleUnfound.png" id="6_2ecb4"]
 [ext_resource type="AudioStream" uid="uid://dcrx5kogdc21e" path="res://Assets/Audio/SFX/Paper2.ogg" id="6_th20f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
@@ -66,6 +67,30 @@ grow_vertical = 2
 texture = ExtResource("4_gt4h6")
 stretch_mode = 3
 metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" type="TextureRect" parent="UI"]
+custom_minimum_size = Vector2(700, 250)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PauseMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PauseMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/PauseMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Level 0"
+
+[node name="TextureRect" type="TextureRect" parent="UI/PauseMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_2ecb4")
+expand_mode = 2
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true

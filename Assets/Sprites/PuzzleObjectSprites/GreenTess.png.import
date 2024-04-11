@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baou4adm5b8li"
-path.s3tc="res://.godot/imported/PurpleTess.png-83114de9afe76fc1dfaf7678347442f2.s3tc.ctex"
+uid="uid://bkhfsoa22coip"
+path.s3tc="res://.godot/imported/GreenTess.png-b5b8417397536755506581d317b15dd0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Sprites/PurpleTess.png"
-dest_files=["res://.godot/imported/PurpleTess.png-83114de9afe76fc1dfaf7678347442f2.s3tc.ctex"]
+source_file="res://Assets/Sprites/PuzzleObjectSprites/GreenTess.png"
+dest_files=["res://.godot/imported/GreenTess.png-b5b8417397536755506581d317b15dd0.s3tc.ctex"]
 
 [params]
 

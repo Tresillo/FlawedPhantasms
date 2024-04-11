@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3hbhjjj3cmvi"
-path.s3tc="res://.godot/imported/GreenSngl.png-1f74014e11467cc06d7d4d43f3c139c5.s3tc.ctex"
+uid="uid://b4jjrjq7g65tx"
+path.s3tc="res://.godot/imported/TealTess.png-c3f31c62366d5ab324d6bb8509927f1e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Sprites/GreenSngl.png"
-dest_files=["res://.godot/imported/GreenSngl.png-1f74014e11467cc06d7d4d43f3c139c5.s3tc.ctex"]
+source_file="res://Assets/Sprites/PuzzleObjectSprites/TealTess.png"
+dest_files=["res://.godot/imported/TealTess.png-c3f31c62366d5ab324d6bb8509927f1e.s3tc.ctex"]
 
 [params]
 

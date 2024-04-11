@@ -238,6 +238,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="MainMenuPanel" type="ColorRect" parent="CamRig/MainMenuUI"]
+visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -446,6 +447,7 @@ text = "Reduced Motion:"
 
 [node name="ReducedMotionBox" type="CheckBox" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/ReducedMotion"]
 layout_mode = 2
+size_flags_horizontal = 6
 
 [node name="BackButton" type="Button" parent="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -453,7 +455,6 @@ size_flags_vertical = 8
 text = "Back"
 
 [node name="CreditsPage" type="ColorRect" parent="CamRig/MainMenuUI"]
-visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -481,16 +482,21 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 70
 theme_override_constants/margin_bottom = 20
 
-[node name="TitleLabel" type="Label" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Level Select"
-horizontal_alignment = 1
-
 [node name="VBoxContainer" type="VBoxContainer" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("12_75kmq")
 alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Lorem Ipsum"
 
 [node name="BackButton" type="Button" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
