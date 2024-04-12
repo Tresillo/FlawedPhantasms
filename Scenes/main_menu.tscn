@@ -238,7 +238,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="MainMenuPanel" type="ColorRect" parent="CamRig/MainMenuUI"]
-visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -455,6 +454,7 @@ size_flags_vertical = 8
 text = "Back"
 
 [node name="CreditsPage" type="ColorRect" parent="CamRig/MainMenuUI"]
+visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1

@@ -48,7 +48,6 @@ signal finished_start_animation
 
 func _ready():
 	disable_control(not _starting_player)
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	_crouching = false
 	player_cam = null
 	

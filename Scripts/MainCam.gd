@@ -12,6 +12,8 @@ var view_fogged:bool = false
 var pause_menu_node
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	
 	for i in range(1,21):
 		set_cull_mask_value(i, false)
 	
@@ -42,4 +44,6 @@ func update_cull_mask(new_id: int):
 
 
 func pause_game():
+	print("mainCam")
+	get_tree().paused = true
 	$UI/PauseMenu.pause_game(cam_eyelids_node.material)

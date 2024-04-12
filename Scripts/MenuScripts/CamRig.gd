@@ -87,7 +87,7 @@ func _on_play_button_pressed():
 	var transfer_tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_SINE)
 	transfer_tween.tween_callback(func():
 			#Disable Came movement
-			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			#Put cam on the same parent-child heirarchy as all of ther player objects
 			
 			print("TODO: Make Sound")

@@ -3,10 +3,12 @@ extends Node
 class_name LevelLoader
 
 var current_scene = null
+var current_scene_path
 
 func _ready():
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
+	current_scene_path = "res://Scenes/main_menu.tscn"
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
@@ -30,6 +32,7 @@ func _deferred_goto_scene(path):
 
 	# Instance the new scene.
 	current_scene = s.instantiate()
+	current_scene_path = path
 
 	# Add it to the active scene, as child of root.
 	get_tree().root.add_child(current_scene)
