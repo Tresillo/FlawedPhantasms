@@ -8,7 +8,7 @@ extends StaticBody3D
 		button_material = val
 		if get_node("ButtonMesh") != null and Engine.is_editor_hint():
 			$ButtonMesh.mesh.material = val
-@export_range(1.0,3.0,0.2) var button_size: float = 2.0:
+@export_range(1.0,3.0,0.1) var button_size: float = 2.0:
 	set(val):
 		button_size = val
 		update_button_size()
@@ -33,8 +33,13 @@ func _ready():
 		($ButtonMesh as MeshInstance3D).mesh.material = button_material
 		
 		#Chain signals through from button activation area
-		($Activation as Area3D).body_entered.connect(func(body): manage_button(true, body))
-		($Activation as Area3D).body_exited.connect(func(body): manage_button(false, body))
+		($Activation as Area3D).body_entered.connect(func(body):
+				if body is Player:
+					manage_button(true, body)
+		)
+		($Activation as Area3D).body_exited.connect(func(body):
+				manage_button(false, body)
+		)
 		
 		collision_layer = visibility_flags
 		set_collision_layer_value(1,true)
@@ -69,15 +74,25 @@ func manage_button(activate:bool, body: Node3D):
 		$PressAudio.play()
 		
 		button_activated.emit()
-	elif not activate and _pressed and not $Activation.has_overlapping_bodies():
-		_pressed = false
+	elif not activate and _pressed:
 		
-		if $PressAudio.playing:
-			$PressAudio.stop()
-		$PressAudio.pitch_scale = 1.0 - pitch_shift
-		$PressAudio.play()
+		var has_player = false
+		if $Activation.has_overlapping_bodies():
+			var bodies = $Activation.get_overlapping_bodies()
+			
+			for b in bodies:
+				if b is Player:
+					has_player = true
 		
-		button_deactivated.emit()
+		if not has_player:
+			_pressed = false
+			
+			if $PressAudio.playing:
+				$PressAudio.stop()
+			$PressAudio.pitch_scale = 1.0 - pitch_shift
+			$PressAudio.play()
+			
+			button_deactivated.emit()
 
 
 func update_button_size():
