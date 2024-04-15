@@ -10,6 +10,7 @@ extends Node3D
 @onready var paused: bool = true
 
 var level_data: LevelData
+var level_cam: Camera3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,9 +28,11 @@ func _ready():
 		(p as Player).body_swapped.connect(func(): num_times_swapped += 1)
 		if p._starting_player:
 			p.starting_player_start_animation()
+			level_cam = p.player_cam
 			(p as Player).finished_start_animation.connect(func(): paused = false)
 	
 	level_data = get_node("/root/DataLoaderAutoload").save_data.level_data[level_index]
+	level_cam.pause_menu_node.update_collectible_icon(level_data.collectible_found)
 
 
 func _process(delta):
@@ -39,7 +42,18 @@ func _process(delta):
 
 func col_fnd():
 	collectible_found = true
+	level_cam.pause_menu_node.update_collectible_icon(true)
 
 
 func level_finished():
 	paused = true
+	
+	#update level data
+	level_data.collectible_found = collectible_found
+	level_data.completed = true
+	level_data.runs.append({
+		"time": time_taken,
+		"swaps": num_times_swapped
+	})
+	get_node("/root/DataLoaderAutoload").save_data.level_data[level_index] = level_data
+	

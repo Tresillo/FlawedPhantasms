@@ -1,5 +1,5 @@
 @tool
-extends StaticBody3D
+extends AnimatableBody3D
 
 @export var connected_objects: Array[Door]
 @export_flags_3d_render var visibility_flags

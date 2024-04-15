@@ -1,7 +1,11 @@
 extends Container
 
+@export var col_found_texture: CompressedTexture2D
+@export var col_unfound_texture: CompressedTexture2D
+
 @onready var top_info_node = $PauseFade/TopPanelContainer
 @onready var bottom_info_node = $PauseFade/BottomPanelContainer
+@onready var collectible_icon = $PauseFade/TopPanelContainer/MarginContainer/HBoxContainer/CollectibleFoundLabel
 
 var panel_dist: float = 100
 var transition_mat
@@ -99,3 +103,9 @@ func _on_main_menu_button_pressed():
 			self.visible = false
 	)
 
+
+func update_collectible_icon(found: bool):
+	if found:
+		collectible_icon.texture = col_found_texture
+	else:
+		collectible_icon.texture = col_unfound_texture

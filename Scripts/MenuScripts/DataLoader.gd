@@ -2,7 +2,7 @@ extends Node
 
 class_name DataLoader
 
-const number_of_levels: int = 3
+const number_of_levels: int = 6
 var save_data: SaveData
 
 func _ready():
