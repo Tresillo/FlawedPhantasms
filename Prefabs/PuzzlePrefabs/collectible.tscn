@@ -9,10 +9,9 @@ size = Vector3(1.1355, 0.544678, 1)
 
 [node name="Collectible" type="Area3D"]
 collision_layer = 16
-collision_mask = 16
 script = ExtResource("1_k8a5k")
 
-[node name="OMG_SUSHIII(1)" parent="." instance=ExtResource("1_p5xep")]
+[node name="CollectibleModel" parent="." instance=ExtResource("1_p5xep")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
