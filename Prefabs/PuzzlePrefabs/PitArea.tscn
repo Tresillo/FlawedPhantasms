@@ -17,7 +17,7 @@ noise = SubResource("FastNoiseLite_eucv3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2m0am"]
 resource_local_to_scene = true
-render_priority = 2
+render_priority = 1
 shader = ExtResource("1_lgujx")
 shader_parameter/scroll_speed = 0.7
 shader_parameter/noise_alpha_weight = 0.3
