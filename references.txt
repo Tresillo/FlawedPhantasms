@@ -1,0 +1,8 @@
+Player Model:
+https://skfb.ly/op79S
+
+Post Processing Shader Template:
+https://youtu.be/gqe0InyIk4U?si=fWPijiPY79zPtgmk
+
+Player Outline:
+https://godotshaders.com/shader/pixel-perfect-outline-shader/
