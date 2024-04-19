@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://o04ao5b7484q"]
+
+[ext_resource type="FontFile" uid="uid://b0su1i2ie1vnp" path="res://Assets/FontsAndThemes/monofonto rg.otf" id="1_pq5ft"]
+
+[resource]
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_pq5ft")
+Label/font_sizes/font_size = 50
+Label/fonts/font = ExtResource("1_pq5ft")
+VBoxContainer/constants/separation = 16
