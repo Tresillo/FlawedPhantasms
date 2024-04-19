@@ -17,6 +17,7 @@ extends AnimatableBody3D
 		margin_size = val
 		update_button_size()
 @export var pitch_shift: float = 0.2
+@export var disable_collision: bool = false
 
 var _pressed: bool
 
@@ -43,6 +44,8 @@ func _ready():
 		
 		collision_layer = visibility_flags
 		set_collision_layer_value(1,true)
+		
+		$ButtonCollision.disabled = disable_collision
 		
 		#Waits for the scene root to finish running before continuing
 		await owner.ready
