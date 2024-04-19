@@ -30,6 +30,16 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
+"materials": {
+"Beta_HighLimbsGeoSG3": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Mat/Models/mixamo_limbs.tres"
+},
+"Beta_Joints_MAT1": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Mat/Models/mixamo_joints.tres"
+}
+},
 "nodes": {
 "PATH:AnimationPlayer": {
 "import/skip_import": true
