@@ -172,6 +172,10 @@ func _physics_process(delta):
 			print("Hit " + str(ray_result.collider) + " at position " + str(ray_result.position))
 			if ray_result.collider is Player:
 				_transfer_main_cam(ray_result.collider as Player, _reduced_movement)
+			elif ray_result.collider.is_in_group("PlayerInteractionBox"):
+				var player_object:Player = ray_result.collider.get_parent() as Player
+				print(ray_result.collider.get_parent().name)
+				_transfer_main_cam(player_object, _reduced_movement)
 			elif ray_result.collider is LevelGoal:
 				print("hit end level")
 				_transfer_main_cam(ray_result.collider as LevelGoal, _reduced_movement)

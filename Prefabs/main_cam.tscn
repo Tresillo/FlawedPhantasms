@@ -159,7 +159,7 @@ current = true
 
 [node name="PlayerChange" type="AudioStreamPlayer" parent="AudioStreams"]
 stream = ExtResource("6_th20f")
-volume_db = -5.0
+volume_db = -56.402
 bus = &"SFX"
 
 [connection signal="pressed" from="UI/PauseMenu/PauseFade/BottomPanelContainer/MarginContainer/HBoxContainer/ResumeButton" to="UI/PauseMenu" method="_on_resume_button_pressed"]
