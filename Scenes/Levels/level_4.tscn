@@ -3270,6 +3270,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25, 1.5, 17)
 
 [node name="LevelGoal" parent="LevelGeometry/Interactables" instance=ExtResource("7_6vscd")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -62.75, 19, 16.75)
+next_level_path = "res://Scenes/Levels/level_5.tscn"
 
 [node name="StartPuzzleObjects" type="Node3D" parent="LevelGeometry/Interactables"]
 
