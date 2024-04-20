@@ -6,6 +6,7 @@ extends Container
 @onready var top_info_node = $PauseFade/TopPanelContainer
 @onready var bottom_info_node = $PauseFade/BottomPanelContainer
 @onready var collectible_icon = $PauseFade/TopPanelContainer/MarginContainer/HBoxContainer/CollectibleFoundLabel
+@onready var level_title_node = $PauseFade/TopPanelContainer/MarginContainer/HBoxContainer/LevelNameLabel
 
 var panel_dist: float = 100
 var transition_mat
@@ -66,6 +67,11 @@ func resume_game(eyelids_mat):
 	)
 
 
+func _unhandled_input(event):
+	if event.is_action_pressed("quit"):
+		_on_resume_button_pressed()
+
+
 func _on_resume_button_pressed():
 	resume_game(transition_mat)
 
@@ -109,3 +115,11 @@ func update_collectible_icon(found: bool):
 		collectible_icon.texture = col_found_texture
 	else:
 		collectible_icon.texture = col_unfound_texture
+
+
+func update_level_title(name: String):
+	if name != "":
+		level_title_node.text = name
+	else:
+		level_title_node.text = "Unnamed Level"
+	
