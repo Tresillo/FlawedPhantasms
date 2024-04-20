@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var level_index: int
+@export_file var level_path: String
 @export var level_name: String
 
 @onready var collectible_found: bool = false
@@ -33,6 +34,7 @@ func _ready():
 	
 	level_data = get_node("/root/DataLoaderAutoload").save_data.level_data[level_index]
 	level_cam.pause_menu_node.update_collectible_icon(level_data.collectible_found)
+	level_cam.pause_menu_node.update_level_title(level_name)
 
 
 func _process(delta):

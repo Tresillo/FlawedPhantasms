@@ -676,6 +676,7 @@ shader = ExtResource("13_32wit")
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_h3nn0")
+level_path = "res://Scenes/Levels/level_1.tscn"
 level_name = "Tutorial"
 
 [node name="LevelGeometry" type="Node3D" parent="."]
@@ -905,7 +906,6 @@ final_offset = Vector3(0, 0, 5)
 
 [node name="LevelGoal" parent="LevelGeometry/Interactables" instance=ExtResource("7_hv7np")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 44, 2, -34)
-next_level_path = "res://Scenes/Levels/level_2.tscn"
 
 [node name="Players" type="Node3D" parent="."]
 

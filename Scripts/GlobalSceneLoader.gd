@@ -5,10 +5,27 @@ class_name LevelLoader
 var current_scene = null
 var current_scene_path
 
+const level_paths = [
+	"res://Scenes/Levels/level_1.tscn",
+	"res://Scenes/Levels/level_2.tscn",
+	"res://Scenes/Levels/level_4.tscn",
+	"res://Scenes/Levels/level_3.tscn",
+	"res://Scenes/Levels/level_5.tscn"
+]
+
 func _ready():
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 	current_scene_path = "res://Scenes/main_menu.tscn"
+
+
+func goto_next_level():
+	var scene_idx: int = level_paths.find(current_scene_path)
+	if scene_idx >= 0 and scene_idx + 1 < level_paths.size():
+		goto_scene(level_paths[scene_idx + 1])
+	else:
+		goto_scene("res://Scenes/main_menu.tscn")
+
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,

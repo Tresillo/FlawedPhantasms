@@ -1853,6 +1853,7 @@ face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 [node name="level_3" type="Node3D"]
 script = ExtResource("1_rrgyg")
 level_index = 2
+level_path = "res://Scenes/Levels/level_3.tscn"
 level_name = "The Dollhouse"
 
 [node name="LevelGeometry" type="Node3D" parent="."]

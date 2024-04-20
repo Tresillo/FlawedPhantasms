@@ -2788,6 +2788,8 @@ face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 [node name="level_5" type="Node3D"]
 script = ExtResource("1_mtgqh")
 level_index = 4
+level_path = "res://Scenes/Levels/level_5.tscn"
+level_name = "The Ferryman"
 
 [node name="LevelGeometry" type="Node3D" parent="."]
 script = ExtResource("2_twlq1")

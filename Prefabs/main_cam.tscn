@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://diry562y362eu"]
+[gd_scene load_steps=15 format=3 uid="uid://diry562y362eu"]
 
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
 [ext_resource type="Environment" uid="uid://e3i1ntpju1jv" path="res://Prefabs/World_Environment.tres" id="1_ep4qw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="4_gt4h6"]
 [ext_resource type="Texture2D" uid="uid://cdwhcs8moy4m4" path="res://Assets/Sprites/CollectibleUnfound.png" id="6_2ecb4"]
 [ext_resource type="Texture2D" uid="uid://dsi7b0qap8dhw" path="res://Assets/Sprites/Pausegradient.png" id="6_h6xw2"]
+[ext_resource type="Theme" uid="uid://dyxe87h5jexdr" path="res://Assets/FontsAndThemes/Settings_Theme.tres" id="6_pvmk4"]
 [ext_resource type="AudioStream" uid="uid://dcrx5kogdc21e" path="res://Assets/Audio/SFX/Paper2.ogg" id="6_th20f"]
 [ext_resource type="Script" path="res://Scripts/MenuScripts/PauseMenu.gd" id="7_1yis2"]
 [ext_resource type="Texture2D" uid="uid://d8dtuw4jfjga" path="res://Assets/Sprites/CollectibleFound.png" id="7_2dgm2"]
@@ -80,6 +81,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_pvmk4")
 script = ExtResource("7_1yis2")
 col_found_texture = ExtResource("7_2dgm2")
 col_unfound_texture = ExtResource("6_2ecb4")
@@ -110,6 +112,7 @@ theme_override_constants/separation = 20
 
 [node name="LevelNameLabel" type="Label" parent="UI/PauseMenu/PauseFade/TopPanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Level 0"
 
 [node name="CollectibleFoundLabel" type="TextureRect" parent="UI/PauseMenu/PauseFade/TopPanelContainer/MarginContainer/HBoxContainer"]
@@ -141,16 +144,15 @@ theme_override_constants/separation = 25
 
 [node name="ResumeButton" type="Button" parent="UI/PauseMenu/PauseFade/BottomPanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "Resume"
+text = "   Resume   "
 
 [node name="RestartButton" type="Button" parent="UI/PauseMenu/PauseFade/BottomPanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "Restart Level
-"
+text = "   Restart Level   "
 
 [node name="MainMenuButton" type="Button" parent="UI/PauseMenu/PauseFade/BottomPanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "Main Menu"
+text = "   Main Menu   "
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true
