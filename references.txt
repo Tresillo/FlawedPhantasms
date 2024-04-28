@@ -1,8 +1,11 @@
-# Models
+Models
+
 Player Model:
 https://skfb.ly/op79S
 
-# Shaders
+
+Shaders
+
 Post Processing Shader Template:
 https://youtu.be/gqe0InyIk4U?si=fWPijiPY79zPtgmk
 
@@ -30,5 +33,20 @@ https://godotshaders.com/shader/just-chromatic-aberration/
 VSH distortion Effect:
 https://godotshaders.com/shader/vhs-shader-distortion/
 
-#Fonts
+
+Audio and Sound
+
+https://freesound.org/people/Black%20Snow/sounds/109416/
+https://freesound.org/people/Department64/sounds/718807/
+https://freesound.org/people/Andromadax24/sounds/170721/
+https://freesound.org/people/aarrnnoo/sounds/516190/
+Additional sounds from Pixabay
+
+Alternate phantasm sounds
+https://freesound.org/people/Benboncan/sounds/62260/
+Additional royalty-free sounds from Pixabay
+
+
+Fonts
+
 https://www.dafont.com/monofonto.font?fpp=200&l[]=10&l[]=1

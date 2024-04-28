@@ -282,6 +282,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="MainMenuPanel" type="ColorRect" parent="CamRig/MainMenuUI"]
+visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -504,7 +505,6 @@ size_flags_vertical = 8
 text = "Back"
 
 [node name="CreditsPage" type="ColorRect" parent="CamRig/MainMenuUI"]
-visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -546,7 +546,59 @@ horizontal_alignment = 1
 [node name="RichTextLabel" type="RichTextLabel" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Lorem Ipsum"
+text = "Models
+
+Player Model:
+https://skfb.ly/op79S
+
+
+Shaders
+
+Post Processing Shader Template:
+https://youtu.be/gqe0InyIk4U?si=fWPijiPY79zPtgmk
+
+Player Outline:
+https://godotshaders.com/shader/pixel-perfect-outline-shader/
+
+Vingette Effect:
+https://godotshaders.com/shader/vignette/
+
+Simple Blur:
+https://godotshaders.com/shader/blur-vignette-post-processing-colorrect-godot-4-2-1/
+
+Pixelation:
+https://godotshaders.com/shader/3d-pixelation-filter/
+
+Sobel Edge Detection:
+https://godotshaders.com/shader/normal-based-edge-detection-with-sobel-operator-screenspace/
+
+Bayer Dithering:
+https://godotshaders.com/shader/bayer-dithering/
+
+Chromic Abberation Effect:
+https://godotshaders.com/shader/just-chromatic-aberration/
+
+VSH distortion Effect:
+https://godotshaders.com/shader/vhs-shader-distortion/
+
+
+Audio and Sound
+
+https://freesound.org/people/Black%20Snow/sounds/109416/
+https://freesound.org/people/Department64/sounds/718807/
+https://freesound.org/people/Andromadax24/sounds/170721/
+https://freesound.org/people/aarrnnoo/sounds/516190/
+Additional sounds from Pixabay
+
+Alternate phantasm sounds
+https://freesound.org/people/Benboncan/sounds/62260/
+Additional royalty-free sounds from Pixabay
+
+
+Fonts
+
+https://www.dafont.com/monofonto.font?fpp=200&l[]=10&l[]=1
+"
 
 [node name="BackButton" type="Button" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
