@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://4ndigpixild7"]
+[gd_scene load_steps=33 format=3 uid="uid://4ndigpixild7"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_ie8h4"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_w2pkc"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://Scripts/MenuScripts/MainMenuPanels/LevelSelectPanel.gd" id="16_e8shy"]
 [ext_resource type="Material" uid="uid://4rkcncgl3f6x" path="res://Assets/Mat/window_tex_mat.tres" id="17_8ovrh"]
 [ext_resource type="Material" uid="uid://chk35svqp2s6x" path="res://Assets/Mat/PuzzleObjects/GreenTileMat.tres" id="18_yf2vm"]
+[ext_resource type="AudioStream" uid="uid://cmn0cikkn4ctt" path="res://Assets/Audio/SFX/analog-appliance-button-15-186961.mp3" id="22_pqh88"]
 
 [sub_resource type="Resource" id="Resource_p5x60"]
 script = ExtResource("2_w2pkc")
@@ -551,11 +552,20 @@ text = "Lorem Ipsum"
 layout_mode = 2
 text = "Back"
 
+[node name="ButtonSFX" type="AudioStreamPlayer3D" parent="CamRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, -6, -1)
+stream = ExtResource("22_pqh88")
+volume_db = -5.0
+bus = &"SFX"
+
+[connection signal="button_clicked" from="CamRig/MainMenuUI/MainMenuPanel" to="CamRig" method="_on_main_menu_panel_button_clicked"]
 [connection signal="change_menu_layer" from="CamRig/MainMenuUI/MainMenuPanel" to="CamRig" method="_on_menu_panel_change_menu_layer"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton" to="CamRig" method="_on_play_button_pressed"]
+[connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_play_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/OptionsButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_options_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/CreditsButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_level_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/MainMenuPanel/MarginContainer/VBoxContainer/QuitButton" to="CamRig/MainMenuUI/MainMenuPanel" method="_on_quit_button_pressed"]
+[connection signal="button_clicked" from="CamRig/MainMenuUI/SettingsPage" to="CamRig" method="_on_settings_page_button_clicked"]
 [connection signal="change_menu_layer" from="CamRig/MainMenuUI/SettingsPage" to="CamRig" method="_on_menu_panel_change_menu_layer"]
 [connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume/MusicLeftButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_music_left_button_pressed"]
 [connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/MusicVolume/MusicRightButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_music_right_button_pressed"]
@@ -564,5 +574,6 @@ text = "Back"
 [connection signal="value_changed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/CamSensitivity/CamSensitivitySlider" to="CamRig/MainMenuUI/SettingsPage" method="_on_cam_sensitivity_slider_value_changed"]
 [connection signal="toggled" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/Scroll/VBoxContainer/ReducedMotion/ReducedMotionBox" to="CamRig/MainMenuUI/SettingsPage" method="_on_reduced_motion_box_toggled"]
 [connection signal="pressed" from="CamRig/MainMenuUI/SettingsPage/MarginContainer/VBoxContainer/BackButton" to="CamRig/MainMenuUI/SettingsPage" method="_on_back_button_pressed"]
+[connection signal="button_clicked" from="CamRig/MainMenuUI/CreditsPage" to="CamRig" method="_on_credits_page_button_clicked"]
 [connection signal="change_menu_layer" from="CamRig/MainMenuUI/CreditsPage" to="CamRig" method="_on_menu_panel_change_menu_layer"]
 [connection signal="pressed" from="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer/BackButton" to="CamRig/MainMenuUI/CreditsPage" method="_on_back_button_pressed"]

@@ -102,3 +102,24 @@ func _on_play_button_pressed():
 			_level_loader.goto_scene("res://Scenes/Levels/level_1.tscn")
 	)
 
+
+
+func _on_main_menu_panel_button_clicked():
+	print("main menu button clicked")
+	var button_sfx = $ButtonSFX
+	if not button_sfx.playing:
+		button_sfx.play()
+
+
+func _on_settings_page_button_clicked():
+	print("settings button clicked")
+	var button_sfx = $ButtonSFX
+	if not button_sfx.playing:
+		button_sfx.play()
+
+
+func _on_credits_page_button_clicked():
+	print("credits button clicked")
+	var button_sfx = $ButtonSFX
+	if not button_sfx.playing:
+		button_sfx.play()

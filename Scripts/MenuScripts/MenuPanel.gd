@@ -5,6 +5,7 @@ class_name MenuPanel
 var menu_input_objects: Array[BaseButton]
 
 signal change_menu_layer(layer_index: int)
+signal button_clicked
 
 func _ready():
 	for c in get_children(true):

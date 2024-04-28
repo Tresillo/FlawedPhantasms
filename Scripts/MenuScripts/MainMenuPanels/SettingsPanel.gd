@@ -23,6 +23,7 @@ func _ready():
 
 func _on_back_button_pressed():
 	change_menu_layer.emit(0)
+	button_clicked.emit()
 
 #region Sound Settings
 
@@ -30,24 +31,28 @@ func _on_sfx_left_button_pressed():
 	sfx_vol = clampi(sfx_vol - 1, 0, 10)
 	_set_audio_bus_volume(AudioServer.get_bus_index("SFX"), sfx_vol)
 	_update_display()
+	button_clicked.emit()
 
 
 func _on_sfx_right_button_pressed():
 	sfx_vol = clampi(sfx_vol + 1, 0, 10)
 	_set_audio_bus_volume(AudioServer.get_bus_index("SFX"), sfx_vol)
 	_update_display()
+	button_clicked.emit()
 
 
 func _on_music_left_button_pressed():
 	music_vol = clampi(music_vol - 1, 0, 10)
 	_set_audio_bus_volume(AudioServer.get_bus_index("Music"), music_vol)
 	_update_display()
+	button_clicked.emit()
 
 
 func _on_music_right_button_pressed():
 	music_vol = clampi(music_vol + 1, 0, 10)
 	_set_audio_bus_volume(AudioServer.get_bus_index("Music"), music_vol)
 	_update_display()
+	button_clicked.emit()
 
 
 func _map_volume_to_audio_bus_level(value: int) -> float:
