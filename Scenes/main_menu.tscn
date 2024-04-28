@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://4ndigpixild7"]
+[gd_scene load_steps=34 format=3 uid="uid://4ndigpixild7"]
 
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="1_ie8h4"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/convex_block_data.gd" id="2_w2pkc"]
@@ -22,6 +22,7 @@
 [ext_resource type="Material" uid="uid://4rkcncgl3f6x" path="res://Assets/Mat/window_tex_mat.tres" id="17_8ovrh"]
 [ext_resource type="Material" uid="uid://chk35svqp2s6x" path="res://Assets/Mat/PuzzleObjects/GreenTileMat.tres" id="18_yf2vm"]
 [ext_resource type="AudioStream" uid="uid://cmn0cikkn4ctt" path="res://Assets/Audio/SFX/analog-appliance-button-15-186961.mp3" id="22_pqh88"]
+[ext_resource type="Texture2D" uid="uid://b8c8h0pqrlccq" path="res://Assets/Sprites/TutorialPanel.png" id="22_sb3qg"]
 
 [sub_resource type="Resource" id="Resource_p5x60"]
 script = ExtResource("2_w2pkc")
@@ -282,7 +283,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="MainMenuPanel" type="ColorRect" parent="CamRig/MainMenuUI"]
-visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -505,6 +505,7 @@ size_flags_vertical = 8
 text = "Back"
 
 [node name="CreditsPage" type="ColorRect" parent="CamRig/MainMenuUI"]
+visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = -1
@@ -603,6 +604,14 @@ https://www.dafont.com/monofonto.font?fpp=200&l[]=10&l[]=1
 [node name="BackButton" type="Button" parent="CamRig/MainMenuUI/CreditsPage/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Back"
+
+[node name="TutorialPanel" type="TextureRect" parent="CamRig/MainMenuUI"]
+layout_mode = 0
+offset_left = 751.0
+offset_top = 573.0
+offset_right = 1263.0
+offset_bottom = 701.0
+texture = ExtResource("22_sb3qg")
 
 [node name="ButtonSFX" type="AudioStreamPlayer3D" parent="CamRig"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, -6, -1)
