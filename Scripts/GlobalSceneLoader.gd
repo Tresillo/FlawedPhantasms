@@ -10,7 +10,8 @@ const level_paths = [
 	"res://Scenes/Levels/level_2.tscn",
 	"res://Scenes/Levels/level_4.tscn",
 	"res://Scenes/Levels/level_3.tscn",
-	"res://Scenes/Levels/level_5.tscn"
+	"res://Scenes/Levels/level_5.tscn",
+	"res://Scenes/ThanksForPlaying.tscn"
 ]
 
 func _ready():
