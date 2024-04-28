@@ -1,7 +1,7 @@
 extends Camera3D
 
 var _cur_mask_id: int = 1
-var lens_shader_material: ShaderMaterial:
+@export var lens_shader_material: ShaderMaterial:
 	set(val):
 		lens_shader_material = val
 		if get_node("CamLens") != null:

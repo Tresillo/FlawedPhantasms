@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://cjh7mh5t3irn7"]
+[gd_scene load_steps=111 format=3 uid="uid://cjh7mh5t3irn7"]
 
 [ext_resource type="Script" path="res://Scripts/LevelScripts/LevelController.gd" id="1_rrgyg"]
 [ext_resource type="Script" path="res://Scripts/GeometryManager.gd" id="2_cqpqv"]
@@ -24,6 +24,9 @@
 [ext_resource type="Material" uid="uid://cm0s4hba0oxml" path="res://Assets/Mat/PuzzleObjects/PurpleSingleMat.tres" id="15_fj5v3"]
 [ext_resource type="PackedScene" uid="uid://dlqltd5o1hhpr" path="res://Prefabs/PuzzlePrefabs/collectible.tscn" id="20_yf8p7"]
 [ext_resource type="PackedScene" uid="uid://dpmygljbgpk3o" path="res://Prefabs/PuzzlePrefabs/Rect_Wall.tscn" id="21_egvok"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/ColoredFogLens.gdshader" id="24_1xr4m"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/VarColorAmountLens.gdshader" id="24_s2881"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/Pixelate.gdshader" id="24_tfrla"]
 [ext_resource type="PackedScene" uid="uid://dyxgu75j1khsg" path="res://Prefabs/defaultIndoorLight.tscn" id="25_7vkj8"]
 
 [sub_resource type="Resource" id="Resource_yekyy"]
@@ -1850,6 +1853,46 @@ face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
 active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1rp6h"]
+render_priority = 0
+shader = ExtResource("24_tfrla")
+shader_parameter/pixel_size = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3v341"]
+render_priority = 0
+shader = ExtResource("24_1xr4m")
+shader_parameter/depth_range = 44.4
+shader_parameter/fog_color = Color(0.811765, 0.329412, 0.0745098, 1)
+shader_parameter/fog_mix_amount = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j41nt"]
+render_priority = 0
+shader = ExtResource("24_1xr4m")
+shader_parameter/depth_range = 34.8
+shader_parameter/fog_color = Color(0.0862745, 0.4, 0.0392157, 1)
+shader_parameter/fog_mix_amount = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ubli"]
+render_priority = 0
+shader = ExtResource("24_1xr4m")
+shader_parameter/depth_range = 33.0
+shader_parameter/fog_color = Color(0.470588, 0.184314, 0.470588, 1)
+shader_parameter/fog_mix_amount = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vegdp"]
+render_priority = 0
+shader = ExtResource("24_1xr4m")
+shader_parameter/depth_range = 33.6
+shader_parameter/fog_color = Color(0.0431373, 0.439216, 0.329412, 1)
+shader_parameter/fog_mix_amount = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvxd6"]
+render_priority = 0
+shader = ExtResource("24_s2881")
+shader_parameter/red_amount = 0.5
+shader_parameter/green_amount = 0.1
+shader_parameter/blue_amount = 0.1
+
 [node name="level_3" type="Node3D"]
 script = ExtResource("1_rrgyg")
 level_index = 2
@@ -2515,6 +2558,7 @@ button_material = ExtResource("15_fj5v3")
 [node name="Player11" parent="Players" instance=ExtResource("5_tubk0")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.5, 11, 16)
 _starting_player = true
+_cam_material = SubResource("ShaderMaterial_1rp6h")
 
 [node name="MainCam" parent="Players/Player11" instance=ExtResource("5_ruvns")]
 unique_name_in_owner = true
@@ -2522,22 +2566,27 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -16, -
 
 [node name="Player12" parent="Players" instance=ExtResource("5_tubk0")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.5, 11, 2)
+_cam_material = SubResource("ShaderMaterial_3v341")
 _vis_layer_id = 12
 
 [node name="Player13" parent="Players" instance=ExtResource("5_tubk0")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 20, 12, 1)
+_cam_material = SubResource("ShaderMaterial_j41nt")
 _vis_layer_id = 13
 
 [node name="Player14" parent="Players" instance=ExtResource("5_tubk0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 17, 0, 2.5)
+_cam_material = SubResource("ShaderMaterial_7ubli")
 _vis_layer_id = 14
 
 [node name="Player15" parent="Players" instance=ExtResource("5_tubk0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 11, 0, 2)
+_cam_material = SubResource("ShaderMaterial_vegdp")
 _vis_layer_id = 15
 
 [node name="SecretPlayer" parent="Players" instance=ExtResource("5_tubk0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10.5, 22, -0.5)
+_cam_material = SubResource("ShaderMaterial_jvxd6")
 _vis_layer_id = 16
 
 [node name="Lighting" type="Node3D" parent="."]

@@ -9,5 +9,20 @@ https://youtu.be/gqe0InyIk4U?si=fWPijiPY79zPtgmk
 Player Outline:
 https://godotshaders.com/shader/pixel-perfect-outline-shader/
 
+Vingette Effect:
+https://godotshaders.com/shader/vignette/
+
+Simple Blur:
+https://godotshaders.com/shader/blur-vignette-post-processing-colorrect-godot-4-2-1/
+
+Pixelation:
+https://godotshaders.com/shader/3d-pixelation-filter/
+
+Sobel Edge Detection:
+https://godotshaders.com/shader/normal-based-edge-detection-with-sobel-operator-screenspace/
+
+Bayer Dithering:
+https://godotshaders.com/shader/bayer-dithering/
+
 #Fonts
 https://www.dafont.com/monofonto.font?fpp=200&l[]=10&l[]=1

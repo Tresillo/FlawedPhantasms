@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://bk0j7cdf203es"]
+[gd_scene load_steps=100 format=3 uid="uid://bk0j7cdf203es"]
 
 [ext_resource type="Script" path="res://Scripts/LevelScripts/LevelController.gd" id="1_nmryy"]
 [ext_resource type="PackedScene" uid="uid://bm16un4wgox6r" path="res://Prefabs/PuzzlePrefabs/LevelBookend.tscn" id="2_ewhyk"]
@@ -21,6 +21,9 @@
 [ext_resource type="Material" uid="uid://dba8nj7bqrwtb" path="res://Assets/Mat/PuzzleObjects/GreenSingleMat.tres" id="16_odwm0"]
 [ext_resource type="PackedScene" uid="uid://diry562y362eu" path="res://Prefabs/main_cam.tscn" id="19_5haon"]
 [ext_resource type="PackedScene" uid="uid://dlqltd5o1hhpr" path="res://Prefabs/PuzzlePrefabs/collectible.tscn" id="21_8rxqr"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/VignetteLens.gdshader" id="22_3p6bg"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/ScreenMixtoNormalLens.gdshader" id="22_07n0f"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/VarColorAmountLens.gdshader" id="22_l7b34"]
 [ext_resource type="PackedScene" uid="uid://dyxgu75j1khsg" path="res://Prefabs/defaultIndoorLight.tscn" id="22_o3e32"]
 [ext_resource type="PackedScene" uid="uid://ovvq3mxuty4v" path="res://Prefabs/PuzzlePrefabs/LevelGoal.tscn" id="23_7p12u"]
 
@@ -1680,6 +1683,32 @@ face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
 active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c6anf"]
+render_priority = 0
+shader = ExtResource("22_l7b34")
+shader_parameter/red_amount = 1.0
+shader_parameter/green_amount = 0.7
+shader_parameter/blue_amount = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgm2i"]
+render_priority = 0
+shader = ExtResource("22_3p6bg")
+shader_parameter/vingette_color = Color(0, 0, 0, 1)
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 1.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5w05c"]
+render_priority = 0
+shader = ExtResource("22_07n0f")
+shader_parameter/depth_range = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hbgjy"]
+render_priority = 0
+shader = ExtResource("22_l7b34")
+shader_parameter/red_amount = 1.0
+shader_parameter/green_amount = 0.2
+shader_parameter/blue_amount = 0.1
+
 [node name="level_2" type="Node3D"]
 script = ExtResource("1_nmryy")
 level_index = 1
@@ -2255,20 +2284,24 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -60, 8
 [node name="Player" parent="Players" instance=ExtResource("3_ka852")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 1, 0)
 _starting_player = true
+_cam_material = SubResource("ShaderMaterial_c6anf")
 
 [node name="MainCam" parent="Players/Player" instance=ExtResource("19_5haon")]
 unique_name_in_owner = true
 
 [node name="Player2" parent="Players" instance=ExtResource("3_ka852")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2923, 5.15237, 31.3419)
+_cam_material = SubResource("ShaderMaterial_kgm2i")
 _vis_layer_id = 12
 
 [node name="Player3" parent="Players" instance=ExtResource("3_ka852")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -16, 5, -35.5)
+_cam_material = SubResource("ShaderMaterial_5w05c")
 _vis_layer_id = 13
 
 [node name="Player4" parent="Players" instance=ExtResource("3_ka852")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 8, -33.5)
+_cam_material = SubResource("ShaderMaterial_hbgjy")
 _vis_layer_id = 14
 
 [node name="Lighting" type="Node3D" parent="."]

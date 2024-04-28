@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=3 uid="uid://wyukmmyvjmvm"]
+[gd_scene load_steps=145 format=3 uid="uid://wyukmmyvjmvm"]
 
 [ext_resource type="Script" path="res://Scripts/LevelScripts/LevelController.gd" id="1_t76rh"]
 [ext_resource type="Script" path="res://Scripts/GeometryManager.gd" id="2_gadi2"]
@@ -21,7 +21,13 @@
 [ext_resource type="Material" uid="uid://bmkwwak1psb1t" path="res://Assets/Mat/PuzzleObjects/TealSingleMat.tres" id="15_njdt4"]
 [ext_resource type="Material" uid="uid://chk35svqp2s6x" path="res://Assets/Mat/PuzzleObjects/GreenTileMat.tres" id="17_7mtwh"]
 [ext_resource type="Material" uid="uid://dba8nj7bqrwtb" path="res://Assets/Mat/PuzzleObjects/GreenSingleMat.tres" id="18_cvocs"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/BayerDitheringLens.gdshader" id="21_31xy0"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/BlurLens.gdshader" id="21_sx0kp"]
 [ext_resource type="PackedScene" uid="uid://dyxgu75j1khsg" path="res://Prefabs/defaultIndoorLight.tscn" id="22_d0f1m"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/Pixelate.gdshader" id="23_gxjaj"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/VignetteLens.gdshader" id="23_psebo"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/ScreenMixtoNorma2lLens.gdshader" id="25_cd2r8"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/ScreenMixtoNormal3Lens.gdshader" id="26_fc5lc"]
 
 [sub_resource type="Resource" id="Resource_my233"]
 script = ExtResource("4_dacsf")
@@ -2591,6 +2597,60 @@ face_selected = PackedByteArray(0, 0, 0, 0, 0, 0)
 active_face = -1
 face_ids = PackedInt32Array(0, 1, 2, 3, 4, 5)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xkedu"]
+render_priority = 0
+shader = ExtResource("21_sx0kp")
+shader_parameter/blur_amount = 1.5
+shader_parameter/mix_amount = 0.0
+shader_parameter/color_over = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prp2o"]
+render_priority = 0
+shader = ExtResource("21_sx0kp")
+shader_parameter/blur_amount = 1.5
+shader_parameter/mix_amount = 0.5
+shader_parameter/color_over = Color(0.247059, 0.2, 0.65098, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2apqm"]
+render_priority = 0
+shader = ExtResource("21_sx0kp")
+shader_parameter/blur_amount = 1.7
+shader_parameter/mix_amount = 0.513
+shader_parameter/color_over = Color(0.266667, 0.678431, 0.294118, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8rs0q"]
+render_priority = 0
+shader = ExtResource("23_psebo")
+shader_parameter/vingette_color = Color(1, 1, 1, 1)
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_11hjq"]
+render_priority = 0
+shader = ExtResource("23_psebo")
+shader_parameter/vingette_color = Color(0.196078, 0.721569, 0.721569, 1)
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fu7xv"]
+render_priority = 8
+shader = ExtResource("23_gxjaj")
+shader_parameter/pixel_size = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3ibu"]
+render_priority = 0
+shader = ExtResource("25_cd2r8")
+shader_parameter/depth_range = 42.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_amq4u"]
+render_priority = 0
+shader = ExtResource("26_fc5lc")
+shader_parameter/depth_range = 43.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cnl3g"]
+render_priority = 0
+shader = ExtResource("21_31xy0")
+
 [node name="level_4" type="Node3D"]
 script = ExtResource("1_t76rh")
 level_index = 3
@@ -3360,6 +3420,7 @@ speed = 0.7
 [node name="Player11" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19, 2, 6)
 _starting_player = true
+_cam_material = SubResource("ShaderMaterial_xkedu")
 
 [node name="MainCam" parent="Players/Player11" instance=ExtResource("5_t20u5")]
 unique_name_in_owner = true
@@ -3367,34 +3428,42 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.5, 
 
 [node name="Player12" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25, 2, 12.75)
+_cam_material = SubResource("ShaderMaterial_prp2o")
 _vis_layer_id = 12
 
 [node name="Player13" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.25, 2, 12.75)
+_cam_material = SubResource("ShaderMaterial_2apqm")
 _vis_layer_id = 13
 
 [node name="Player14" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.99667, 13, 16.4789)
+_cam_material = SubResource("ShaderMaterial_8rs0q")
 _vis_layer_id = 14
 
 [node name="Player15" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 20, 18)
+_cam_material = SubResource("ShaderMaterial_11hjq")
 _vis_layer_id = 15
 
 [node name="Player16" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 21, 7)
+_cam_material = SubResource("ShaderMaterial_fu7xv")
 _vis_layer_id = 16
 
 [node name="Player17" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 13, 13.5)
+_cam_material = SubResource("ShaderMaterial_j3ibu")
 _vis_layer_id = 17
 
 [node name="Player18" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 13, 19.5)
+_cam_material = SubResource("ShaderMaterial_amq4u")
 _vis_layer_id = 18
 
 [node name="Player19" parent="Players" instance=ExtResource("6_qgogw")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 16.5, 14, -4.5)
+_cam_material = SubResource("ShaderMaterial_cnl3g")
 _vis_layer_id = 19
 
 [node name="Lighting" type="Node3D" parent="."]

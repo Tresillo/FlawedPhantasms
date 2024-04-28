@@ -2,20 +2,22 @@
 
 [ext_resource type="Script" path="res://Scripts/MainCam.gd" id="1_1iapf"]
 [ext_resource type="Environment" uid="uid://e3i1ntpju1jv" path="res://Prefabs/World_Environment.tres" id="1_ep4qw"]
-[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/CameraLensTemplate.gdshader" id="2_itnd6"]
+[ext_resource type="Shader" path="res://Assets/Shaders/PlayerVisionPostProcessing/VarColorAmountLens.gdshader" id="2_itnd6"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Eyelid.gdshader" id="3_8ce8t"]
 [ext_resource type="Texture2D" uid="uid://cwsokwbvoqao" path="res://Assets/Sprites/crosshair.png" id="4_gt4h6"]
 [ext_resource type="Texture2D" uid="uid://cdwhcs8moy4m4" path="res://Assets/Sprites/CollectibleUnfound.png" id="6_2ecb4"]
 [ext_resource type="Texture2D" uid="uid://dsi7b0qap8dhw" path="res://Assets/Sprites/Pausegradient.png" id="6_h6xw2"]
 [ext_resource type="Theme" uid="uid://dyxe87h5jexdr" path="res://Assets/FontsAndThemes/Settings_Theme.tres" id="6_pvmk4"]
-[ext_resource type="AudioStream" uid="uid://dcrx5kogdc21e" path="res://Assets/Audio/SFX/Paper2.ogg" id="6_th20f"]
 [ext_resource type="Script" path="res://Scripts/MenuScripts/PauseMenu.gd" id="7_1yis2"]
 [ext_resource type="Texture2D" uid="uid://d8dtuw4jfjga" path="res://Assets/Sprites/CollectibleFound.png" id="7_2dgm2"]
+[ext_resource type="AudioStream" uid="uid://nav6axmblkw2" path="res://Assets/Audio/SFX/AudioSwapsfx.wav" id="11_dvp73"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_twcwy"]
 render_priority = 0
 shader = ExtResource("2_itnd6")
-shader_parameter/depth_range = null
+shader_parameter/red_amount = 1.0
+shader_parameter/green_amount = 1.0
+shader_parameter/blue_amount = 1.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_1idc1"]
 material = SubResource("ShaderMaterial_twcwy")
@@ -160,7 +162,7 @@ current = true
 [node name="AudioStreams" type="Node3D" parent="."]
 
 [node name="PlayerChange" type="AudioStreamPlayer" parent="AudioStreams"]
-stream = ExtResource("6_th20f")
+stream = ExtResource("11_dvp73")
 volume_db = -56.402
 bus = &"SFX"
 
